@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../widgets/news.dart';
+import '../widgets/comment.dart';
 
 class HomeScreen extends StatelessWidget {
   @override
@@ -11,9 +12,8 @@ class HomeScreen extends StatelessWidget {
       body: SingleChildScrollView(
         child: Column(
           children: <Widget>[
-
             News(),
-
+            // Comment(),
           ],
         ),
       ),
