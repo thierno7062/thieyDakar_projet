@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
 
 class Comment extends StatelessWidget {
+  bool isDark = false;
+
   @override
   Widget build(BuildContext context) {
+    isDark = Theme.of(context).brightness == Brightness.dark;
+
     return Container(
       margin: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
       padding: EdgeInsets.fromLTRB(10, 10, 10, 20),

@@ -2,11 +2,13 @@ import 'package:flutter/material.dart';
 
 class News extends StatelessWidget {
   final bool horizontal;
+  bool isDark = false;
 
   News({this.horizontal = true});
 
   @override
   Widget build(BuildContext context) {
+    isDark = Theme.of(context).brightness == Brightness.dark;
     return horizontal ? _getHorizontalLayout() : _getVerticalLayout();
   }
 
@@ -25,7 +27,7 @@ class News extends StatelessWidget {
             offset: Offset(0, 0),
           ),
         ],
-        color: Colors.white,
+        color: isDark ? Colors.black : Colors.white,
       ),
       child: Row(
         children: <Widget>[
@@ -81,7 +83,7 @@ class News extends StatelessWidget {
                         children: <Widget>[
                           Icon(
                             Icons.access_time,
-                            color: Color(0xffCCCBDA),
+                            color: isDark ? Colors.blue : Color(0xffCCCBDA),
                             size: 20,
                           ),
                           Padding(
