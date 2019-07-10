@@ -14,7 +14,7 @@ class News extends StatelessWidget {
 
   Widget _getHorizontalLayout() {
     return Container(
-      margin: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+      // margin: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
       padding: EdgeInsets.all(5),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.all(
@@ -83,7 +83,7 @@ class News extends StatelessWidget {
                         children: <Widget>[
                           Icon(
                             Icons.access_time,
-                            color: isDark ? Colors.blue : Color(0xffCCCBDA),
+                            color: Color(0xffCCCBDA),
                             size: 20,
                           ),
                           Padding(
@@ -119,8 +119,9 @@ class News extends StatelessWidget {
       //margin: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
       //padding: EdgeInsets.all(5),
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.all(
-          Radius.circular(3),
+        borderRadius: BorderRadius.vertical(
+          top: Radius.circular(3.0),
+          bottom: Radius.zero,
         ),
         boxShadow: [
           BoxShadow(
@@ -129,15 +130,16 @@ class News extends StatelessWidget {
             offset: Offset(0, 0),
           ),
         ],
-        color: Colors.white,
+        color: isDark ? Color(0xFF1B1E28) : Color(0xFFFFFFFF),
       ),
       child: Column(
         children: <Widget>[
           Container(
             height: 120,
             decoration: BoxDecoration(
-              borderRadius: BorderRadius.all(
-                Radius.circular(3),
+              borderRadius: BorderRadius.vertical(
+                top: Radius.circular(3.0),
+                bottom: Radius.zero,
               ),
               image: DecorationImage(
                 image: AssetImage('images/newBack.png'),
@@ -206,7 +208,8 @@ class News extends StatelessWidget {
       text,
       style: TextStyle(
         fontSize: 14,
-        color: Color(0xff1B1E28),
+        color: isDark ? Colors.white : Color(0xff1B1E28),
+        // color: Color(0xff1B1E28),
       ),
       maxLines: 3,
       overflow: TextOverflow.ellipsis,

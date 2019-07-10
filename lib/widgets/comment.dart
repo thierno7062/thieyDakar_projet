@@ -8,7 +8,7 @@ class Comment extends StatelessWidget {
     isDark = Theme.of(context).brightness == Brightness.dark;
 
     return Container(
-      margin: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+      // margin: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
       padding: EdgeInsets.fromLTRB(10, 10, 10, 20),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.all(

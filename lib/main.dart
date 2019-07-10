@@ -4,6 +4,11 @@ import 'screens/home.dart';
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
+  // Dark
+  final brightness = Brightness.dark;
+  // Light
+//  final brightness = Brightness.light;
+
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
@@ -20,7 +25,13 @@ class MyApp extends StatelessWidget {
         // Notice that the counter didn't reset back to zero; the application
         // is not restarted.
         primarySwatch: Colors.blue,
-        // brightness: Brightness.dark,
+        brightness: brightness,
+        canvasColor: brightness == Brightness.dark
+            ? Color(0xFF282C39)
+            : Color(0xFFFAFAFA),
+        primaryColor: brightness == Brightness.dark
+            ? Color(0xFF1B1E28)
+            : Color(0xFFFFFFFF),
       ),
       home: HomeScreen(),
     );

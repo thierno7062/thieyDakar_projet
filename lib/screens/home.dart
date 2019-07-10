@@ -1,34 +1,30 @@
 import 'package:flutter/material.dart';
 import '../widgets/news.dart';
 import '../widgets/comment.dart';
+import '../widgets/slider_news.dart';
 
 class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('This is home'),
+        title: Text(
+          'Deco News'.toUpperCase(),
+          style: TextStyle(
+            fontSize: 14.0,
+            fontWeight: FontWeight.w500,
+          ),
+        ),
       ),
-      body: GridView.count(
+      body: Container(
         padding: EdgeInsets.all(10.0),
-        crossAxisCount: 2,
-        crossAxisSpacing: 10,
-        mainAxisSpacing: 10,
-        //childAspectRatio: 0.77, // height of grid item
-        children: <Widget>[
-          News(
-            horizontal: false,
-          ),
-          News(
-            horizontal: false,
-          ),
-          News(
-            horizontal: false,
-          ),
-          News(
-            horizontal: false,
-          ),
-        ],
+        child: Column(
+          children: <Widget>[
+            // Comment(),
+            // News(),
+            SliderNews(),
+          ],
+        ),
       ),
     );
   }
