@@ -9,13 +9,26 @@ class HomeScreen extends StatelessWidget {
       appBar: AppBar(
         title: Text('This is home'),
       ),
-      body: SingleChildScrollView(
-        child: Column(
-          children: <Widget>[
-            News(),
-            // Comment(),
-          ],
-        ),
+      body: GridView.count(
+        padding: EdgeInsets.all(10.0),
+        crossAxisCount: 2,
+        crossAxisSpacing: 10,
+        mainAxisSpacing: 10,
+        //childAspectRatio: 0.77, // height of grid item
+        children: <Widget>[
+          News(
+            horizontal: false,
+          ),
+          News(
+            horizontal: false,
+          ),
+          News(
+            horizontal: false,
+          ),
+          News(
+            horizontal: false,
+          ),
+        ],
       ),
     );
   }
