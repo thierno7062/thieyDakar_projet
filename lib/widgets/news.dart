@@ -116,6 +116,7 @@ class News extends StatelessWidget {
 
   Widget _getVerticalLayout() {
     return Container(
+      height: 220.0,
       //margin: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
       //padding: EdgeInsets.all(5),
       decoration: BoxDecoration(

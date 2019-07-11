@@ -21,7 +21,7 @@ class HomeScreen extends StatelessWidget {
           ),
         ),
       ),
-      body: AboutApp(),
+      body: Comment(),
       drawer: Drawer(
           child: Column(
         children: <Widget>[
