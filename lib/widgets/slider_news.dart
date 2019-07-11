@@ -23,7 +23,6 @@ class SliderNews extends StatelessWidget {
                 colors: [
                   Colors.black,
                   Color.fromRGBO(0, 0, 0, 0.0),
-                  // Color(0x00000000),
                 ],
               ),
             ),
