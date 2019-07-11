@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import '../widgets/news.dart';
 import '../widgets/comment.dart';
 import '../widgets/slider_news.dart';
+import '../widgets/categories.dart';
+import '../widgets/no_data.dart';
 
 class HomeScreen extends StatelessWidget {
   @override
@@ -18,13 +20,7 @@ class HomeScreen extends StatelessWidget {
       ),
       body: Container(
         padding: EdgeInsets.all(10.0),
-        child: Column(
-          children: <Widget>[
-            // Comment(),
-            // News(),
-            // SliderNews(),
-          ],
-        ),
+        child: NoData(),
       ),
     );
   }
