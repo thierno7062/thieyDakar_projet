@@ -7,8 +7,10 @@ import '../widgets/no_data.dart';
 import '../widgets/about_app.dart';
 
 class HomeScreen extends StatelessWidget {
+  bool isDark = false;
   @override
   Widget build(BuildContext context) {
+    isDark = Theme.of(context).brightness == Brightness.dark;
     // return _tabs();
 
     return Scaffold(
@@ -23,44 +25,70 @@ class HomeScreen extends StatelessWidget {
       ),
       body: Comment(),
       drawer: Drawer(
-          child: Column(
-        children: <Widget>[
-          DrawerHeader(
-            child: Text('Header'),
-          ),
-          ListView(
-            shrinkWrap: true,
-            children: <Widget>[
-              ListTile(
-                title: Text('Asdf'),
-              )
-            ],
-          )
-        ],
-      )),
+        child: Column(
+          children: <Widget>[
+//            DrawerHeader(
+//              child: Image.asset('images/deco_logo.png'),
+//            ),
+            Container(
+              padding: EdgeInsets.only(top: 60.0, bottom: 120.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  Container(
+                    margin: EdgeInsets.only(right: 15.0),
+                    width: 60.0,
+                    child: Image.asset('images/deco_logo.png'),
+                  ),
+                  Column(
+                    children: <Widget>[
+                      Text('Deco News'),
+                      Text('WP + Ionic App'),
+                    ],
+                  ),
+                ],
+              ),
+            ),
+            ListView(
+              shrinkWrap: true,
+              children: <Widget>[
+                ListTile(
+                  title: Text('Asdf'),
+                )
+              ],
+            )
+          ],
+        ),
+      ),
     );
   }
 
   _tabs() {
     return DefaultTabController(
-      length: 3,
+      length: 5,
       child: Scaffold(
         appBar: AppBar(
           title: Text('Title'),
           bottom: TabBar(
+            labelPadding: EdgeInsets.symmetric(horizontal: 20),
+            labelColor: isDark ? Colors.white : Color(0xFF1B1E28),
+            indicatorColor: isDark ? Colors.white : Color(0xFF1B1E28),
             isScrollable: true,
             tabs: <Widget>[
               Tab(
-                text: 'Long Name 1',
+                text: 'Home',
               ),
               Tab(
-                text: 'Long Name 2',
+                text: 'Technology',
               ),
               Tab(
-                text: 'Long Name 3',
+                text: 'Sport',
               ),
               Tab(
-                text: 'Long Name 4',
+                text: 'Travel',
+              ),
+              Tab(
+                text: 'Style',
               ),
             ],
           ),
@@ -71,6 +99,7 @@ class HomeScreen extends StatelessWidget {
             Icon(Icons.check),
             Icon(Icons.check_box_outline_blank),
             Icon(Icons.chat_bubble),
+            Icon(Icons.timer),
           ],
         ),
       ),
