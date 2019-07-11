@@ -22,7 +22,7 @@ class HomeScreen extends StatelessWidget {
           children: <Widget>[
             // Comment(),
             // News(),
-            SliderNews(),
+            // SliderNews(),
           ],
         ),
       ),
