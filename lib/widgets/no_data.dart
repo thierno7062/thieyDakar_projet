@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class NoData extends StatelessWidget {
-  bool isDark = true;
+  bool isDark = false;
 
   @override
   Widget build(BuildContext context) {

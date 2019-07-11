@@ -4,6 +4,7 @@ import '../widgets/comment.dart';
 import '../widgets/slider_news.dart';
 import '../widgets/categories.dart';
 import '../widgets/no_data.dart';
+import '../widgets/about_app.dart';
 
 class HomeScreen extends StatelessWidget {
   @override
@@ -18,10 +19,7 @@ class HomeScreen extends StatelessWidget {
           ),
         ),
       ),
-      body: Container(
-        padding: EdgeInsets.all(10.0),
-        child: NoData(),
-      ),
+      body: AboutApp(),
     );
   }
 }

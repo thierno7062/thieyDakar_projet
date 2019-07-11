@@ -5,9 +5,9 @@ void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
   // Dark
-  final brightness = Brightness.dark;
+//  final brightness = Brightness.dark;
   // Light
-//  final brightness = Brightness.light;
+  final brightness = Brightness.light;
 
   // This widget is the root of your application.
   @override
