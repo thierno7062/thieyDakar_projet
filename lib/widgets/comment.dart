@@ -1,331 +1,95 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_html/flutter_html.dart';
+import '../models/comment_model.dart';
 
 class Comment extends StatelessWidget {
-  bool isDark = false;
+  final CommentModel comment;
+
+  Comment(this.comment);
 
   @override
   Widget build(BuildContext context) {
-    isDark = Theme.of(context).brightness == Brightness.dark;
+    bool isDark = Theme.of(context).brightness == Brightness.dark;
 
-    return ListView(
-      children: <Widget>[
-        // This is Comment Container
-        Container(
-          margin: EdgeInsets.fromLTRB(10.0, 10.0, 10.0, 0.0),
-          // padding: EdgeInsets.fromLTRB(10, 10, 10, 20),
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.all(
-              Radius.circular(3),
-            ),
-            boxShadow: [
-              BoxShadow(
-                color: Color.fromRGBO(0, 0, 0, 0.15),
-                blurRadius: 5,
-                offset: Offset(0, 0),
-              ),
-            ],
-            color: Colors.white,
+    return Container(
+      margin: EdgeInsets.only(bottom: 10.0),
+      // padding: EdgeInsets.fromLTRB(10, 10, 10, 20),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.all(
+          Radius.circular(3),
+        ),
+        boxShadow: [
+          BoxShadow(
+            color: Color.fromRGBO(0, 0, 0, 0.15),
+            blurRadius: 5,
+            offset: Offset(0, 0),
           ),
-          child: Padding(
-            padding: const EdgeInsets.fromLTRB(10, 10, 10, 20),
-            child: Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                Container(
-                  height: 50,
-                  width: 50,
-                  child: CircleAvatar(
-                    backgroundImage: AssetImage('images/hulk.png'),
-                  ),
-                ),
-                Expanded(
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: <Widget>[
-                      Container(
-                        padding: EdgeInsets.only(left: 10),
-                        height: 30,
-                        child: Row(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: <Widget>[
-                            Padding(
-                              child: Text(
-                                'John Doe',
-                                style: TextStyle(
-                                  fontSize: 14,
-                                  color: Color(0xFF1B1E28),
-                                ),
-                                // textAlign: TextAlign.start,
-                              ),
-                              padding: EdgeInsets.only(right: 10),
+        ],
+        color: isDark ? Color(0xFF1B1E28) : Colors.white,
+      ),
+      child: Padding(
+        padding: const EdgeInsets.fromLTRB(10, 10, 10, 20),
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            Container(
+              height: 50,
+              width: 50,
+              child: CircleAvatar(
+                backgroundImage: comment.authorAvatar,
+              ),
+            ),
+            Expanded(
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  Container(
+                    padding: EdgeInsets.only(left: 10),
+                    height: 30,
+                    child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: <Widget>[
+                        Padding(
+                          child: Text(
+                            comment.authorName,
+                            style: TextStyle(
+                              fontSize: 14,
+                              color: isDark ? Colors.white : Color(0xFF1B1E28),
                             ),
-                            Text(
-                              '12 Maj 2019.',
-                              style: TextStyle(
-                                fontSize: 14,
-                                color: Color(0xFF7F7E96),
-                              ),
-                            ),
-                          ],
+                            // textAlign: TextAlign.start,
+                          ),
+                          padding: EdgeInsets.only(right: 10),
                         ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(left: 10),
-                        child: Text(
-                          'Chatting with the barrista at my favourite Crouch End café this morning stirred a thought. Nigel Slater\'s dumbing-down of cookery means he rarely uses any of the interesting ingredients in my local deli. The left needs to unite and stop letting the neo-fascists talk down to us.',
+                        Text(
+                          comment.date,
                           style: TextStyle(
                             fontSize: 14,
                             color: Color(0xFF7F7E96),
                           ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
-                ),
-              ],
-            ),
-          ),
-        ),
-        // This is Comment Container
-        Container(
-          margin: EdgeInsets.fromLTRB(10.0, 10.0, 10.0, 0.0),
-          // padding: EdgeInsets.fromLTRB(10, 10, 10, 20),
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.all(
-              Radius.circular(3),
-            ),
-            boxShadow: [
-              BoxShadow(
-                color: Color.fromRGBO(0, 0, 0, 0.15),
-                blurRadius: 5,
-                offset: Offset(0, 0),
+                  Padding(
+                    padding: const EdgeInsets.only(left: 10),
+                    child: Html(
+                      blockSpacing: 8.0,
+                      data: comment.content,
+                      defaultTextStyle: TextStyle(
+                        color: Color(0xFF7F7E96),
+                        fontSize: 14.0,
+                        // height: 16.0 / 14.0
+                      ),
+                    ),
+                  ),
+                ],
               ),
-            ],
-            color: Colors.white,
-          ),
-          child: Padding(
-            padding: const EdgeInsets.fromLTRB(10, 10, 10, 20),
-            child: Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                Container(
-                  height: 50,
-                  width: 50,
-                  child: CircleAvatar(
-                    backgroundImage: AssetImage('images/hulk.png'),
-                  ),
-                ),
-                Expanded(
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: <Widget>[
-                      Container(
-                        padding: EdgeInsets.only(left: 10),
-                        height: 30,
-                        child: Row(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: <Widget>[
-                            Padding(
-                              child: Text(
-                                'John Doe',
-                                style: TextStyle(
-                                  fontSize: 14,
-                                  color: Color(0xFF1B1E28),
-                                ),
-                                // textAlign: TextAlign.start,
-                              ),
-                              padding: EdgeInsets.only(right: 10),
-                            ),
-                            Text(
-                              '12 Maj 2019.',
-                              style: TextStyle(
-                                fontSize: 14,
-                                color: Color(0xFF7F7E96),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(left: 10),
-                        child: Text(
-                          'Chatting with the barrista at my favourite Crouch End café this morning stirred a thought. Nigel Slater\'s dumbing-down of cookery means he rarely uses any of the interesting ingredients in my local deli. The left needs to unite and stop letting the neo-fascists talk down to us.',
-                          style: TextStyle(
-                            fontSize: 14,
-                            color: Color(0xFF7F7E96),
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ],
             ),
-          ),
+          ],
         ),
-        // This is Comment Container
-        Container(
-          margin: EdgeInsets.fromLTRB(10.0, 10.0, 10.0, 0.0),
-          // padding: EdgeInsets.fromLTRB(10, 10, 10, 20),
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.all(
-              Radius.circular(3),
-            ),
-            boxShadow: [
-              BoxShadow(
-                color: Color.fromRGBO(0, 0, 0, 0.15),
-                blurRadius: 5,
-                offset: Offset(0, 0),
-              ),
-            ],
-            color: Colors.white,
-          ),
-          child: Padding(
-            padding: const EdgeInsets.fromLTRB(10, 10, 10, 20),
-            child: Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                Container(
-                  height: 50,
-                  width: 50,
-                  child: CircleAvatar(
-                    backgroundImage: AssetImage('images/hulk.png'),
-                  ),
-                ),
-                Expanded(
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: <Widget>[
-                      Container(
-                        padding: EdgeInsets.only(left: 10),
-                        height: 30,
-                        child: Row(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: <Widget>[
-                            Padding(
-                              child: Text(
-                                'John Doe',
-                                style: TextStyle(
-                                  fontSize: 14,
-                                  color: Color(0xFF1B1E28),
-                                ),
-                                // textAlign: TextAlign.start,
-                              ),
-                              padding: EdgeInsets.only(right: 10),
-                            ),
-                            Text(
-                              '12 Maj 2019.',
-                              style: TextStyle(
-                                fontSize: 14,
-                                color: Color(0xFF7F7E96),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(left: 10),
-                        child: Text(
-                          'Chatting with the barrista at my favourite Crouch End café this morning stirred a thought. Nigel Slater\'s dumbing-down of cookery means he rarely uses any of the interesting ingredients in my local deli. The left needs to unite and stop letting the neo-fascists talk down to us.',
-                          style: TextStyle(
-                            fontSize: 14,
-                            color: Color(0xFF7F7E96),
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ),
-        // This is Comment Container
-        Container(
-          margin: EdgeInsets.fromLTRB(10.0, 10.0, 10.0, 0.0),
-          // padding: EdgeInsets.fromLTRB(10, 10, 10, 20),
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.all(
-              Radius.circular(3),
-            ),
-            boxShadow: [
-              BoxShadow(
-                color: Color.fromRGBO(0, 0, 0, 0.15),
-                blurRadius: 5,
-                offset: Offset(0, 0),
-              ),
-            ],
-            color: Colors.white,
-          ),
-          child: Padding(
-            padding: const EdgeInsets.fromLTRB(10, 10, 10, 20),
-            child: Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                Container(
-                  height: 50,
-                  width: 50,
-                  child: CircleAvatar(
-                    backgroundImage: AssetImage('images/hulk.png'),
-                  ),
-                ),
-                Expanded(
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: <Widget>[
-                      Container(
-                        padding: EdgeInsets.only(left: 10),
-                        height: 30,
-                        child: Row(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: <Widget>[
-                            Padding(
-                              child: Text(
-                                'John Doe',
-                                style: TextStyle(
-                                  fontSize: 14,
-                                  color: Color(0xFF1B1E28),
-                                ),
-                                // textAlign: TextAlign.start,
-                              ),
-                              padding: EdgeInsets.only(right: 10),
-                            ),
-                            Text(
-                              '12 Maj 2019.',
-                              style: TextStyle(
-                                fontSize: 14,
-                                color: Color(0xFF7F7E96),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(left: 10),
-                        child: Text(
-                          'Chatting with the barrista at my favourite Crouch End café this morning stirred a thought. Nigel Slater\'s dumbing-down of cookery means he rarely uses any of the interesting ingredients in my local deli. The left needs to unite and stop letting the neo-fascists talk down to us.',
-                          style: TextStyle(
-                            fontSize: 14,
-                            color: Color(0xFF7F7E96),
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ),
-      ],
+      ),
     );
   }
 }

@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
 
 class NoData extends StatelessWidget {
-  bool isDark = false;
+  final String message;
+
+  NoData(this.message);
 
   @override
   Widget build(BuildContext context) {
+    bool isDark = Theme.of(context).brightness == Brightness.dark;
+
     return Center(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -26,7 +30,7 @@ class NoData extends StatelessWidget {
           Container(
             width: 220.0,
             child: Text(
-              'Add something to bookmarks by taping on bookmark icon',
+              message,
               style: TextStyle(
                 color: Color(0xFF7F7E96),
                 fontSize: 14.0,
