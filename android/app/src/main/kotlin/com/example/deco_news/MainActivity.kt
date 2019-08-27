@@ -1,4 +1,4 @@
-package com.example.deco_news
+package ui.deco.com.flutterdeconews
 
 import android.os.Bundle
 

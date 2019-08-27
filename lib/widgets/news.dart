@@ -1,21 +1,32 @@
 import 'package:flutter/material.dart';
+import '../helpers/wordpress.dart';
+import '../models/post_model.dart';
+import '../deco_news_icons.dart';
 
-class News extends StatelessWidget {
+class News extends StatefulWidget {
+  final PostModel post;
   final bool horizontal;
-  bool isDark = false;
+  final VoidCallback onTap;
 
-  News({this.horizontal = true});
+  News(this.post, {this.horizontal = true, this.onTap});
+
+  @override
+  _NewsState createState() => _NewsState();
+}
+
+class _NewsState extends State<News> {
+  bool isDark = false;
 
   @override
   Widget build(BuildContext context) {
     isDark = Theme.of(context).brightness == Brightness.dark;
-    return horizontal ? _getHorizontalLayout() : _getVerticalLayout();
+    return widget.horizontal ? _getHorizontalLayout() : _getVerticalLayout();
   }
 
+  /// Builds widget horizontal layout
   Widget _getHorizontalLayout() {
     return Container(
-      // margin: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
-      padding: EdgeInsets.all(5),
+      margin: EdgeInsets.only(bottom: 10.0),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.all(
           Radius.circular(3),
@@ -29,101 +40,63 @@ class News extends StatelessWidget {
         ],
         color: isDark ? Colors.black : Colors.white,
       ),
-      child: Row(
-        children: <Widget>[
-          Container(
-            width: 120,
-            height: 120,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.all(
-                Radius.circular(3),
-              ),
-              image: DecorationImage(
-                image: AssetImage('images/newBack.png'),
-                fit: BoxFit.cover,
-              ),
-            ),
-            alignment: Alignment.topLeft,
-            child: Container(
-              padding: EdgeInsets.all(6.0),
-              margin: EdgeInsets.all(10),
-              decoration: BoxDecoration(
-                color: Color(0xffCB0000),
-                borderRadius: BorderRadius.all(
-                  Radius.circular(3),
-                ),
-              ),
-              child: Text(
-                'Politics'.toUpperCase(),
-                style: TextStyle(
-                  fontSize: 10,
-                  color: Colors.white,
-                ),
-              ),
-            ),
+      child: Material(
+        color: Colors.transparent,
+        child: InkWell(
+          onTap: this.widget.onTap,
+          borderRadius: BorderRadius.all(
+            Radius.circular(3),
           ),
-          Expanded(
-            child: Container(
-              height: 120,
-              padding: EdgeInsets.all(10),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: <Widget>[
-                  Expanded(
-                    child: Container(
-                      padding: EdgeInsets.only(bottom: 10.0),
-                      child: _getTitle(
-                          'Aides quietly stunned by Trump\'s respectful handling of Kavanaugh accuser'),
+          child: Padding(
+            padding: EdgeInsets.all(5),
+            child: Row(
+              children: <Widget>[
+                Stack(
+                  children: <Widget>[
+                    _getImage(),
+                    _getCategory(),
+                  ],
+                ),
+                Expanded(
+                  child: Container(
+                    height: 120,
+                    padding: EdgeInsets.all(10),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: <Widget>[
+                        Expanded(
+                          child: Container(
+                            padding: EdgeInsets.only(bottom: 10.0),
+                            child: _getTitle(),
+                          ),
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: <Widget>[
+                            _getDate(),
+                            _getBookmark(),
+                          ],
+                        ),
+                      ],
                     ),
                   ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: <Widget>[
-                      Row(
-                        children: <Widget>[
-                          Icon(
-                            Icons.access_time,
-                            color: Color(0xffCCCBDA),
-                            size: 20,
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(left: 5.0),
-                            child: Text(
-                              '12 May 2019',
-                              style: TextStyle(
-                                color: Color(0xff7F7E96),
-                                fontSize: 14,
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                      Icon(
-                        Icons.bookmark,
-                        color: Color(0xffCCCBDA),
-                        size: 20,
-                      ),
-                    ],
-                  ),
-                ],
-              ),
+                ),
+              ],
             ),
           ),
-        ],
+        ),
       ),
     );
   }
 
+  /// Builds widget horizontal layout
   Widget _getVerticalLayout() {
     return Container(
       height: 220.0,
-      //margin: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
-      //padding: EdgeInsets.all(5),
+      margin: EdgeInsets.only(bottom: 10),
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.vertical(
-          top: Radius.circular(3.0),
-          bottom: Radius.zero,
-        ),
+        borderRadius: BorderRadius.all(Radius.circular(3.0)),
         boxShadow: [
           BoxShadow(
             color: Color.fromRGBO(0, 0, 0, 0.15),
@@ -133,87 +106,136 @@ class News extends StatelessWidget {
         ],
         color: isDark ? Color(0xFF1B1E28) : Color(0xFFFFFFFF),
       ),
-      child: Column(
-        children: <Widget>[
-          Container(
-            height: 120,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.vertical(
-                top: Radius.circular(3.0),
-                bottom: Radius.zero,
-              ),
-              image: DecorationImage(
-                image: AssetImage('images/newBack.png'),
-                fit: BoxFit.cover,
-              ),
-            ),
-            alignment: Alignment.bottomLeft,
-            child: Container(
-              padding: EdgeInsets.all(6.0),
-              margin: EdgeInsets.all(10),
-              decoration: BoxDecoration(
-                color: Color(0xffCB0000),
-                borderRadius: BorderRadius.all(
-                  Radius.circular(3),
-                ),
-              ),
-              child: Text(
-                'Politics'.toUpperCase(),
-                style: TextStyle(
-                  fontSize: 10,
-                  color: Colors.white,
-                ),
-              ),
-            ),
-          ),
-          Expanded(
-            child: Container(
-              height: 120.0,
-              padding: EdgeInsets.all(10.0),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                crossAxisAlignment: CrossAxisAlignment.start,
+      child: Material(
+        color: Colors.transparent,
+        child: InkWell(
+          onTap: this.widget.onTap,
+          child: Column(
+            children: <Widget>[
+
+              Stack(
+                alignment: Alignment.bottomLeft,
                 children: <Widget>[
-                  _getTitle(
-                      'Aides quietly stunned by Trump\'s respectful handling of Kavanaugh accuser'),
-                  Row(
-                    children: <Widget>[
-                      Icon(
-                        Icons.access_time,
-                        color: Color(0xffCCCBDA),
-                        size: 20,
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(left: 5.0),
-                        child: Text(
-                          '12 Maj 2019',
-                          style: TextStyle(
-                            fontSize: 14.0,
-                            color: Color(0xff7F7E96),
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
+                  _getImage(width: double.infinity),
+                  _getCategory(),
                 ],
               ),
-            ),
+
+              Expanded(
+                child: Container(
+                  height: 120.0,
+                  padding: EdgeInsets.all(10.0),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      _getTitle(),
+                      _getDate(),
+                    ],
+                  ),
+                ),
+              ),
+            ],
           ),
-        ],
+        ),
       ),
     );
   }
 
-  Widget _getTitle(text) {
+  /// Returns widget title
+  Widget _getTitle() {
     return Text(
-      text,
+      this.widget.post.title,
       style: TextStyle(
         fontSize: 14,
         color: isDark ? Colors.white : Color(0xff1B1E28),
-        // color: Color(0xff1B1E28),
       ),
       maxLines: 3,
       overflow: TextOverflow.ellipsis,
+    );
+  }
+
+  /// Returns category name
+  Widget _getCategory() {
+    return Container(
+      width: 120,
+      padding: EdgeInsets.all(10),
+
+      child: Align(
+        alignment: Alignment.topLeft,
+        child: Container(
+          padding: EdgeInsets.all(6.0),
+          decoration: BoxDecoration(
+            color: Color(0xffCB0000),
+            borderRadius: BorderRadius.all(
+              Radius.circular(3),
+            ),
+          ),
+          child: Text(
+            this.widget.post.category.name.toUpperCase(),
+            style: TextStyle(fontSize: 10, color: Colors.white,),
+            maxLines: 1,
+            overflow: TextOverflow.ellipsis,
+          ),
+        ),
+      ),
+    );
+  }
+
+  /// Returns widget date
+  Widget _getDate() {
+    return Row(
+      children: <Widget>[
+        Icon(
+          DecoNewsIcons.date,
+          color: Color(0xffCCCBDA),
+          size: 20,
+        ),
+        Padding(
+          padding: const EdgeInsets.only(left: 5.0),
+          child: Text(
+            this.widget.post.date,
+            style: TextStyle(
+              color: Color(0xff7F7E96),
+              fontSize: 14,
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+
+  /// Returns widget image
+  Widget _getImage({ double width: 120.0 }) {
+    return Hero(
+      tag: 'news-image-' + this.widget.post.id.toString(),
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(3),
+        child: FadeInImage(
+          placeholder: AssetImage('images/image_placeholder.png'),
+          image: this.widget.post.image,
+          width: width,
+          height: 120.0,
+          fit: BoxFit.cover,
+        ),
+      ),
+    );
+  }
+
+  /// Returns bookmark button
+  Widget _getBookmark() {
+    return InkWell(
+      onTap: () {
+        setState(() {
+          this.widget.post.bookmarked = !this.widget.post.bookmarked;
+          WordPress.updateBookmarks(this.widget.post.id);
+        });
+      },
+      child: Icon(
+        DecoNewsIcons.add_to_bookmark,
+        color: this.widget.post.bookmarked ? Color(0xFFdc3446) : Color(0xffCCCBDA),
+        size: 20,
+      ),
     );
   }
 }

@@ -1,13 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
+import '../widgets/deco_appbar.dart';
+import '../widgets/deco_news_drawer.dart';
 
-class AboutApp extends StatelessWidget {
-  bool isDark = false;
-
+class AboutScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: double.infinity,
-      child: SingleChildScrollView(
+    bool isDark = Theme.of(context).brightness == Brightness.dark;
+
+    return Scaffold(
+      appBar: DecoNewsAppBar(),
+      drawer: DecoNewsDrawer(),
+      body: SingleChildScrollView(
         child: Column(
           children: <Widget>[
             Padding(
@@ -30,7 +34,7 @@ class AboutApp extends StatelessWidget {
                 bottom: 60.0,
               ),
               child: Text(
-                'WordPress to Ionic 3 News App',
+                'WordPress to Flutter News App',
                 style: TextStyle(
                   color: Color(0xFF7F7E96),
                   fontSize: 14.0,
@@ -59,13 +63,15 @@ class AboutApp extends StatelessWidget {
                 children: <Widget>[
                   Row(
                     children: <Widget>[
-                      Text(
-                        'Amazing list of features',
-                        style: TextStyle(
-                          color: isDark ? Colors.white : Color(0xFF1B1E28),
-                          fontSize: 16.0,
+                      Expanded(
+                        child: Text(
+                          'Amazing list of features',
+                          style: TextStyle(
+                            color: isDark ? Colors.white : Color(0xFF1B1E28),
+                            fontSize: 16.0,
+                          ),
                         ),
-                      )
+                      ),
                     ],
                   ),
                   Padding(
@@ -79,10 +85,12 @@ class AboutApp extends StatelessWidget {
                         SizedBox(
                           width: 10.0,
                         ),
-                        Text(
-                          'No need for development skills',
-                          style: TextStyle(
-                            color: isDark ? Colors.white : Color(0xFF1B1E28),
+                        Expanded(
+                          child: Text(
+                            'No need for development skills',
+                            style: TextStyle(
+                              color: isDark ? Colors.white : Color(0xFF1B1E28),
+                            ),
                           ),
                         ),
                       ],
@@ -99,10 +107,12 @@ class AboutApp extends StatelessWidget {
                         SizedBox(
                           width: 10.0,
                         ),
-                        Text(
-                          'Wordpress as Backend',
-                          style: TextStyle(
-                            color: isDark ? Colors.white : Color(0xFF1B1E28),
+                        Expanded(
+                          child: Text(
+                            'Wordpress as Backend',
+                            style: TextStyle(
+                              color: isDark ? Colors.white : Color(0xFF1B1E28),
+                            ),
                           ),
                         ),
                       ],
@@ -119,10 +129,12 @@ class AboutApp extends StatelessWidget {
                         SizedBox(
                           width: 10.0,
                         ),
-                        Text(
-                          'Amazing Documentation & Support',
-                          style: TextStyle(
-                            color: isDark ? Colors.white : Color(0xFF1B1E28),
+                        Expanded(
+                          child: Text(
+                            'Amazing Documentation & Support',
+                            style: TextStyle(
+                              color: isDark ? Colors.white : Color(0xFF1B1E28),
+                            ),
                           ),
                         ),
                       ],
@@ -139,10 +151,12 @@ class AboutApp extends StatelessWidget {
                         SizedBox(
                           width: 10.0,
                         ),
-                        Text(
-                          'Firebased Push Notifications',
-                          style: TextStyle(
-                            color: isDark ? Colors.white : Color(0xFF1B1E28),
+                        Expanded(
+                          child: Text(
+                            'Firebased Push Notifications',
+                            style: TextStyle(
+                              color: isDark ? Colors.white : Color(0xFF1B1E28),
+                            ),
                           ),
                         ),
                       ],
@@ -159,10 +173,12 @@ class AboutApp extends StatelessWidget {
                         SizedBox(
                           width: 10.0,
                         ),
-                        Text(
-                          'AdMob Integration',
-                          style: TextStyle(
-                            color: isDark ? Colors.white : Color(0xFF1B1E28),
+                        Expanded(
+                          child: Text(
+                            'AdMob Integration',
+                            style: TextStyle(
+                              color: isDark ? Colors.white : Color(0xFF1B1E28),
+                            ),
                           ),
                         ),
                       ],
@@ -179,10 +195,12 @@ class AboutApp extends StatelessWidget {
                         SizedBox(
                           width: 10.0,
                         ),
-                        Text(
-                          'Light & Dark theme',
-                          style: TextStyle(
-                            color: isDark ? Colors.white : Color(0xFF1B1E28),
+                        Expanded(
+                          child: Text(
+                            'Light & Dark theme',
+                            style: TextStyle(
+                              color: isDark ? Colors.white : Color(0xFF1B1E28),
+                            ),
                           ),
                         ),
                       ],
@@ -199,10 +217,12 @@ class AboutApp extends StatelessWidget {
                         SizedBox(
                           width: 10.0,
                         ),
-                        Text(
-                          'Design files (Sketch, Adobe Xd & Photoshop)',
-                          style: TextStyle(
-                            color: isDark ? Colors.white : Color(0xFF1B1E28),
+                        Expanded(
+                          child: Text(
+                            'Design files (Sketch, Adobe Xd & Photoshop)',
+                            style: TextStyle(
+                              color: isDark ? Colors.white : Color(0xFF1B1E28),
+                            ),
                           ),
                         ),
                       ],
@@ -219,10 +239,12 @@ class AboutApp extends StatelessWidget {
                         SizedBox(
                           width: 10.0,
                         ),
-                        Text(
-                          'Ionic 3, Sass & Angular 6',
-                          style: TextStyle(
-                            color: isDark ? Colors.white : Color(0xFF1B1E28),
+                        Expanded(
+                          child: Text(
+                            'Flutter 1.7',
+                            style: TextStyle(
+                              color: isDark ? Colors.white : Color(0xFF1B1E28),
+                            ),
                           ),
                         ),
                       ],
@@ -239,10 +261,12 @@ class AboutApp extends StatelessWidget {
                         SizedBox(
                           width: 10.0,
                         ),
-                        Text(
-                          'Compatible with Android & iOS',
-                          style: TextStyle(
-                            color: isDark ? Colors.white : Color(0xFF1B1E28),
+                        Expanded(
+                          child: Text(
+                            'Compatible with Android & iOS',
+                            style: TextStyle(
+                              color: isDark ? Colors.white : Color(0xFF1B1E28),
+                            ),
                           ),
                         ),
                       ],
@@ -251,21 +275,30 @@ class AboutApp extends StatelessWidget {
                 ],
               ),
             ),
-            Container(
-              width: double.infinity,
-              height: 55.0,
-              margin: EdgeInsets.fromLTRB(10.0, 0, 10.0, 10.0),
-              child: RaisedButton(
-                onPressed: () {},
-                padding: EdgeInsets.all(0),
-                color: isDark ? Colors.white : Color(0xFF1B1E28),
-                textColor: isDark ? Color(0xFF1B1E28) : Colors.white,
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(3.0)),
-                child: Text('Purchase Now'),
-              ),
-            ),
           ],
+        ),
+      ),
+      bottomNavigationBar: SafeArea(
+        child: Container(
+          width: double.infinity,
+          height: 55.0,
+          margin: EdgeInsets.fromLTRB(10.0, 0, 10.0, 10.0),
+          child: RaisedButton(
+            onPressed: () async {
+              const url = 'https://devspush.com/';
+              if (await canLaunch(url)) {
+                await launch(url);
+              } else {
+              throw 'Could not launch $url';
+              }
+            },
+            padding: EdgeInsets.all(0),
+            color: isDark ? Colors.white : Color(0xFF1B1E28),
+            textColor: isDark ? Color(0xFF1B1E28) : Colors.white,
+            shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(3.0)),
+            child: Text('Purchase Now'),
+          ),
         ),
       ),
     );
