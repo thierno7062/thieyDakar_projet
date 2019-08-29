@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart';
 import '../helpers/wordpress.dart';
+import '../helpers/search.dart';
 import '../widgets/deco_appbar.dart';
 import '../models/category_model.dart';
 import '../widgets/loading.dart';
@@ -14,6 +15,7 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  final SearchDemoSearchDelegate _searchDelegate = SearchDemoSearchDelegate();
   bool isLoading = true;
   List<CategoryModel> categories = [];
 
@@ -47,6 +49,14 @@ class _HomeScreenState extends State<HomeScreen> {
             indicatorColor: isDark ? Colors.white : Color(0xFF1B1E28),
             tabs: categories.map((category) => Tab(text: category.name)).toList(),
           ),
+          actions: <Widget>[
+            IconButton(
+              onPressed: () async {
+                await showSearch<int>(context: context, delegate: _searchDelegate);
+              },
+              icon: Icon(Icons.search, color: Color(0xFFb3bbbf),),
+            )
+          ],
         ),
         body: TabBarView(
           children: categories.map((category) => SingleCategorySliderScreen(category)).toList()

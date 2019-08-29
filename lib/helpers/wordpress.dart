@@ -8,8 +8,9 @@ import '../config.dart';
 class WordPress {
 
   /// Fetch category by id
-  static Future fetchCategory(int categoryID) {
-    String url = '${Config.apiEndpoint}/categories/$categoryID?_embed';
+  static Future fetchCategory(String categoryID) {
+    print(categoryID);
+    String url = '${Config.apiEndpoint}/categories?include=$categoryID';
     return http.get(url);
   }
 
@@ -107,5 +108,11 @@ class WordPress {
   static clearBookmarks() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     await prefs.setString('bookmarks', null);
+  }
+
+  /// Posts search
+  static search(String query) async {
+    String url = '${Config.apiEndpoint}/posts?search=$query&_embed';
+    return http.get(url);
   }
 }

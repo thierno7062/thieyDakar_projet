@@ -22,8 +22,7 @@ class SingleCategorySliderScreen extends StatefulWidget {
       _SingleCategorySliderScreenState();
 }
 
-class _SingleCategorySliderScreenState
-    extends State<SingleCategorySliderScreen> {
+class _SingleCategorySliderScreenState extends State<SingleCategorySliderScreen> {
   bool isLoading = true;
   bool loadingMore = false;
   bool canLoadMore = true;

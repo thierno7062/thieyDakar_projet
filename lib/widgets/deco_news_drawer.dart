@@ -19,10 +19,8 @@ class DecoNewsDrawer extends StatelessWidget {
   /// This is the list of items that will be shown in drawer
   static final List<DrawerItem> drawerItems = [
     DrawerItem('Home', DecoNewsIcons.home_icon, () => HomeScreen()),
-    DrawerItem(
-        'Categories', DecoNewsIcons.categories_icon, () => CategoriesScreen()),
-    DrawerItem(
-        'Bookmarks', DecoNewsIcons.add_to_bookmark, () => BookmarksScreen()),
+    DrawerItem('Categories', DecoNewsIcons.categories_icon, () => CategoriesScreen()),
+    DrawerItem('Bookmarks', DecoNewsIcons.add_to_bookmark, () => BookmarksScreen()),
     DrawerItem('About app', DecoNewsIcons.about_icon, () => AboutScreen()),
     DrawerItem('Settings', Icons.settings, () => SettingsScreen()),
   ];

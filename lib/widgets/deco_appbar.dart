@@ -5,13 +5,15 @@ class DecoNewsAppBar extends StatelessWidget implements PreferredSizeWidget {
   final bool centerTitle;
   final double elevation;
   final PreferredSizeWidget bottom;
+  final List<Widget> actions;
 
   DecoNewsAppBar({
     Key key,
     this.title = 'DECO NEWS',
     this.centerTitle = true,
     this.elevation = 2.0,
-    this.bottom
+    this.bottom,
+    this.actions
   })
     : preferredSize = Size.fromHeight(kToolbarHeight + (bottom?.preferredSize?.height ?? 0.0)),
       super(key: key);
@@ -33,6 +35,7 @@ class DecoNewsAppBar extends StatelessWidget implements PreferredSizeWidget {
         ),
       ),
       bottom: bottom,
+      actions: actions
     );
   }
 }

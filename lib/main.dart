@@ -156,7 +156,7 @@ class _DecoNewsState extends State<DecoNews> {
 
       // get category data
       var categoryID = postData['categories'][0];
-      Response categoryResponse = await WordPress.fetchCategory(categoryID);
+      Response categoryResponse = await WordPress.fetchCategory(categoryID.toString());
       var categoryData = jsonDecode(categoryResponse.body);
 
       CategoryModel category = CategoryModel.fromJson(categoryData);

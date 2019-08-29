@@ -71,37 +71,38 @@ class _SingleCategoryScreenState extends State<SingleCategoryScreen> {
               Row(
                 children: <Widget>[
                   Padding(
-                    padding: const EdgeInsets.symmetric(
-                        vertical: 10.0, horizontal: 15),
+                    padding: const EdgeInsets.symmetric(vertical: 10.0, horizontal: 15),
                     child: Text(
                       'Recent News',
                       style: TextStyle(
-                          fontSize: 18.0,
-                          color: isDark ? Colors.white : Color(0xFF1B1E28)),
+                        fontSize: 18.0,
+                        color: isDark ? Colors.white : Color(0xFF1B1E28)
+                      ),
                     ),
                   ),
                 ],
               ),
               ListView.builder(
-                  physics: NeverScrollableScrollPhysics(),
-                  shrinkWrap: true,
-                  itemCount: posts.length + 1,
-                  itemBuilder: (BuildContext context, int index) {
-                    /// loading at bottom of the list
-                    if (index == posts.length) {
-                      return LoadingInfinite(canLoadMore);
-                    }
+                physics: NeverScrollableScrollPhysics(),
+                shrinkWrap: true,
+                itemCount: posts.length + 1,
+                itemBuilder: (BuildContext context, int index) {
+                  /// loading at bottom of the list
+                  if (index == posts.length) {
+                    return LoadingInfinite(canLoadMore);
+                  }
 
-                    /// return news widget
-                    return News(
-                      posts[index],
-                      onTap: () {
-                        Navigator.of(context).push(MaterialPageRoute(
-                          builder: (context) => SinglePost(posts[index]),
-                        ));
-                      },
-                    );
-                  }),
+                  /// return news widget
+                  return News(
+                    posts[index],
+                    onTap: () {
+                      Navigator.of(context).push(MaterialPageRoute(
+                        builder: (context) => SinglePost(posts[index]),
+                      ));
+                    },
+                  );
+                }
+              ),
             ],
           ),
         ),
