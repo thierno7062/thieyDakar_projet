@@ -1,3 +1,5 @@
+import 'package:html_unescape/html_unescape.dart';
+
 class CategoryModel {
   final int count;
   final String description;
@@ -23,9 +25,15 @@ class CategoryModel {
       json['description'],
       int.parse(json['id'].toString()),
       json['link'],
-      json['name'],
+      _getTitle(json['name']),
       int.parse(json['parent'].toString()),
       json['slug']
     );
+  }
+
+  /// Unescape title
+  static String _getTitle(String title) {
+    var unescape = new HtmlUnescape();
+    return unescape.convert(title);
   }
 }
