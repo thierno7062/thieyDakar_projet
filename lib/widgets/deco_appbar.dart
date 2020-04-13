@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../config.dart';
+
 class DecoNewsAppBar extends StatelessWidget implements PreferredSizeWidget {
   final String title;
   final bool centerTitle;
@@ -9,7 +11,7 @@ class DecoNewsAppBar extends StatelessWidget implements PreferredSizeWidget {
 
   DecoNewsAppBar({
     Key key,
-    this.title = 'DECO NEWS',
+    this.title = Config.appTitle,
     this.centerTitle = true,
     this.elevation = 2.0,
     this.bottom,

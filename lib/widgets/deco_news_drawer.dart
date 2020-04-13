@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../config.dart';
 import '../screens/home_screen.dart';
 import '../screens/categories_screen.dart';
 import '../screens/bookmarks_screen.dart';
@@ -49,7 +50,7 @@ class DecoNewsDrawer extends StatelessWidget {
                   Column(
                     children: <Widget>[
                       Text(
-                        'Deco News',
+                        Config.appTitle,
                         style: TextStyle(color: Colors.white, fontSize: 16.0),
                       ),
                       Text(

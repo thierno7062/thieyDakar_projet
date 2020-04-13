@@ -18,8 +18,7 @@ void main() => runApp(DecoNews());
 class DecoNews extends StatefulWidget {
   static final navKey = new GlobalKey<NavigatorState>();
   static final scaffoldKey = new GlobalKey<ScaffoldState>();
-  static _DecoNewsState of(BuildContext context) =>
-      context.ancestorStateOfType(const TypeMatcher<_DecoNewsState>());
+  static _DecoNewsState of(BuildContext context) => context.findAncestorStateOfType<_DecoNewsState>();
   const DecoNews({Key navKey}) : super(key: navKey);
 
   @override
@@ -54,7 +53,7 @@ class _DecoNewsState extends State<DecoNews> {
   Widget build(BuildContext context) {
     return MaterialApp(
       navigatorKey: DecoNews.navKey,
-      title: 'Deco News',
+      title: Config.appTitle,
       theme: ThemeData(
         primarySwatch: Colors.blue,
         brightness: _brightness,
