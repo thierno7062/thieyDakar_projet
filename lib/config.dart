@@ -2,6 +2,9 @@ import 'package:firebase_admob/firebase_admob.dart';
 
 class Config {
 
+  ///Define your app title here
+  static const appTitle = 'Deco News';
+
   /// Define your WordPress API url here
   static final apiEndpoint = 'https://deconews.decouikit.com/wp-json/wp/v2';
 
