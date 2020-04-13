@@ -174,7 +174,8 @@ class _DecoNewsState extends State<DecoNews> {
     });
 
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    await prefs.setString('brightness', brightness == Brightness.dark ? 'dark' : 'light');
+    await prefs.setString(
+        'brightness', brightness == Brightness.dark ? 'dark' : 'light');
   }
 
   /// Change the app padding if adMob ad loads
@@ -230,7 +231,7 @@ class _DecoNewsState extends State<DecoNews> {
     }
 
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    firebaseMessaging.getToken().then((token){
+    firebaseMessaging.getToken().then((token) {
       if (prefs.getBool('isPushNotificationEnabled') ?? true) {
         setSubscription(true);
       }
@@ -260,7 +261,8 @@ class _DecoNewsState extends State<DecoNews> {
 
       // get category data
       var categoryID = postData['categories'][0];
-      Response categoryResponse = await WordPress.fetchCategory(categoryID.toString());
+      Response categoryResponse =
+          await WordPress.fetchCategory(categoryID.toString());
       var categoryData = jsonDecode(categoryResponse.body);
 
       CategoryModel category = CategoryModel.fromJson(categoryData);
@@ -268,28 +270,24 @@ class _DecoNewsState extends State<DecoNews> {
 
       // close dialog and open article
       Navigator.of(context, rootNavigator: true).pop('dialog');
-      Navigator.of(context).push(
-        MaterialPageRoute(
-          builder: (context) => SinglePost(post),
-        )
-      );
-    } catch(exception) {
+      Navigator.of(context).push(MaterialPageRoute(
+        builder: (context) => SinglePost(post),
+      ));
+    } catch (exception) {
       Navigator.of(context, rootNavigator: true).pop('dialog');
-      DecoNews.scaffoldKey.currentState.showSnackBar(
-        SnackBar(
-          content: Text('An error occured loading post data!'),
-          duration: Duration(seconds: 5),
-        )
-      );
+      DecoNews.scaffoldKey.currentState.showSnackBar(SnackBar(
+        content: Text('An error occured loading post data!'),
+        duration: Duration(seconds: 5),
+      ));
     }
   }
 
   /// ask for permission on iOS
   void iOSPermission() {
     firebaseMessaging.requestNotificationPermissions(
-      const IosNotificationSettings(sound: true, badge: true, alert: true)
-    );
-    firebaseMessaging.onIosSettingsRegistered.listen((IosNotificationSettings settings) {
+        const IosNotificationSettings(sound: true, badge: true, alert: true));
+    firebaseMessaging.onIosSettingsRegistered
+        .listen((IosNotificationSettings settings) {
       print("Settings registered: $settings");
     });
   }
@@ -320,8 +318,7 @@ class _DecoNewsState extends State<DecoNews> {
 
     bool isIOS = Theme.of(context).platform == TargetPlatform.iOS;
     FirebaseAdMob.instance.initialize(
-      appId: isIOS ? Config.adMobiOSAppID : Config.adMobAndroidID
-    );
+        appId: isIOS ? Config.adMobiOSAppID : Config.adMobAndroidID);
 
     BannerAd myBanner = BannerAd(
       // Replace the testAdUnitId with an ad unit id from the AdMob dash.
@@ -344,6 +341,9 @@ class _DecoNewsState extends State<DecoNews> {
     /// load banner
     myBanner
       ..load()
-      ..show(anchorType: Config.adMobPosition != 'top' ? AnchorType.bottom : AnchorType.top);
+      ..show(
+          anchorType: Config.adMobPosition != 'top'
+              ? AnchorType.bottom
+              : AnchorType.top);
   }
 }
