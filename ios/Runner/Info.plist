@@ -43,5 +43,7 @@
 	<false/>
 	<key>GADApplicationIdentifier</key>
     <string>ca-app-pub-7868270859526221~2024798504</string>
+    <key>io.flutter.embedded_views_preview</key>
+    <true/>
 </dict>
 </plist>
