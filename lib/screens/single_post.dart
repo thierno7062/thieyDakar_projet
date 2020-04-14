@@ -169,6 +169,8 @@ class _SinglePostState extends State<SinglePost> {
 
                 deviceWidth < 360 ? _getSmallDate() : _getDate(),
 
+
+                ///
                 /// post content (HTML)
                 Html(
                   blockSpacing: 8.0,

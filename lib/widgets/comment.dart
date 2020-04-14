@@ -51,16 +51,19 @@ class Comment extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: <Widget>[
-                        Padding(
-                          child: Text(
-                            comment.authorName,
-                            style: TextStyle(
-                              fontSize: 14,
-                              color: isDark ? Colors.white : Color(0xFF1B1E28),
+                        Expanded(
+                          child: Padding(
+                            child: Text(
+                              comment.authorName,
+                              style: TextStyle(
+                                fontSize: 14,
+                                color: isDark ? Colors.white : Color(0xFF1B1E28),
+                              ),
+                              // textAlign: TextAlign.start,
+                              overflow: TextOverflow.ellipsis,
                             ),
-                            // textAlign: TextAlign.start,
+                            padding: EdgeInsets.only(right: 10),
                           ),
-                          padding: EdgeInsets.only(right: 10),
                         ),
                         Text(
                           comment.date,
