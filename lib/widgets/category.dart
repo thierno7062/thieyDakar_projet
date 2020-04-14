@@ -1,3 +1,4 @@
+import 'package:deco_news/helpers/deco_localizations.dart';
 import 'package:flutter/material.dart';
 import '../models/category_model.dart';
 
@@ -47,7 +48,7 @@ class Category extends StatelessWidget {
                   height: 10.0,
                 ),
                 Text(
-                  cat.count.toString() + ' Posts',
+                  cat.count.toString() + DecoLocalizations.of(context).localizedString("category_posts_num"),
                   style: TextStyle(
                     color: Color(0xFF7F7E96),
                   ),

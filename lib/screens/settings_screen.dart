@@ -1,3 +1,4 @@
+import 'package:deco_news/helpers/deco_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../widgets/deco_appbar.dart';
@@ -42,7 +43,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
 
-                  Text('Enable push notifications'),
+                  Text(DecoLocalizations.of(context).localizedString("enable_push_notifications")),
 
                   Switch(
                     onChanged: (bool enabled) {
@@ -64,7 +65,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   DecoNews.of(context).setBrightness(Brightness.light);
                 },
 
-                child: Text('Light Mode', style: TextStyle(color: Colors.blue),),
+                child: Text(DecoLocalizations.of(context).localizedString("light_mode"), style: TextStyle(color: Colors.blue),),
                 borderSide: BorderSide(
                   color: Colors.blue
                 ),
@@ -78,7 +79,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   DecoNews.of(context).setBrightness(Brightness.dark);
                 },
 
-                child: Text('Dark Mode', style: TextStyle(color: Colors.blue),),
+                child: Text(DecoLocalizations.of(context).localizedString("dark_mode"), style: TextStyle(color: Colors.blue),),
                 borderSide: BorderSide(
                   color: Colors.blue
                 ),

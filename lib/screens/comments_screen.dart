@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:deco_news/helpers/deco_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart';
 import '../helpers/wordpress.dart';
@@ -88,7 +89,7 @@ class _CommentsScreenState extends State<CommentsScreen> {
             return false;
           },
           child: comments.length == 0
-              ? NoData('Sorry no comments here')
+              ? NoData(DecoLocalizations.of(context).localizedString("comments_sorry_no_comments"))
               : SingleChildScrollView(
                   padding: EdgeInsets.fromLTRB(10, 10, 10, 0),
                   child: Column(
@@ -99,7 +100,7 @@ class _CommentsScreenState extends State<CommentsScreen> {
                             padding: const EdgeInsets.symmetric(
                                 vertical: 10, horizontal: 15),
                             child: Text(
-                              'Comments',
+                              DecoLocalizations.of(context).localizedString("comments"),
                               style: TextStyle(
                                   fontSize: 18.0,
                                   color: isDark

@@ -1,3 +1,4 @@
+import 'package:deco_news/helpers/deco_localizations.dart';
 import 'package:flutter/material.dart';
 
 class SearchError extends StatelessWidget {
@@ -24,7 +25,7 @@ class SearchError extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.only(bottom: 8),
           child: Text(
-            'Something went wrong.',
+            DecoLocalizations.of(context).localizedString("search_error_something_went_wrong"),
             style: TextStyle(
               fontSize: 14,
               color: isDark ? Colors.white : Color(0xff1B1E28),
@@ -33,7 +34,7 @@ class SearchError extends StatelessWidget {
         ),
 
         Text(
-          'Please try again',
+          DecoLocalizations.of(context).localizedString("search_error_please_try_again"),
           style: TextStyle(
             fontSize: 14,
             color: isDark ? Colors.white : Color(0xff1B1E28),

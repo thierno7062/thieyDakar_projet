@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:deco_news/helpers/deco_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:http/http.dart';
@@ -85,7 +86,7 @@ class _SingleCategorySliderScreenState extends State<SingleCategorySliderScreen>
                         Padding(
                           padding: const EdgeInsets.all(10.0),
                           child: Text(
-                            'Featured News',
+                            DecoLocalizations.of(context).localizedString("single_category_slider_screen_featured_news"),
                             style: TextStyle(
                                 fontSize: 18.0,
                                 color:

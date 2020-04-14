@@ -12,6 +12,27 @@ class Config {
   // static final defaultColor = 'dark';
   static final defaultColor = 'light';
 
+  ///Define your default locales
+  ///for each locale you need a separate json file with provided translations for each string
+  ///file needs to be placed in lib/locale/ folder
+  ///file needs to be named in the following format: i18n_{language_code}.json
+  ///for example: Arabian - i18n_ar.json
+  ///follow the instructions closely to ensure proper implementation
+  static final localeCodes = ['en', 'ar'];
+
+  ///Define your default locale
+  ///Default locale has to be among localeCodes
+  ///Default locale is used whenever the current locale on user's phone
+  ///is not present supported by the app
+  // static final defaultLocale = 'ar';
+  static final defaultLocale = 'en';
+
+  ///Force specific locale
+  ///Locale has to be among localeCodes
+  ///It is used every time when the app is started
+  //static final forcedLocale = 'en';
+  static const String forcedLocale = '';
+
   /// Define category IDs which you want to exclude
   // static final excludeCategories = [1, 4, 5];
   static final excludeCategories = [];

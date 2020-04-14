@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:deco_news/helpers/deco_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart';
 import '../helpers/wordpress.dart';
@@ -85,7 +86,7 @@ class _CommentsAddScreenState extends State<CommentsAddScreen> {
               children: <Widget>[
 
                 Input(
-                  hintText: 'Your Name',
+                  hintText: DecoLocalizations.of(context).localizedString("add_comment_name_hint"),
                   margin: EdgeInsets.only(bottom: 10),
                   focusNode: _nameFocus,
                   textInputAction: TextInputAction.next,
@@ -101,7 +102,7 @@ class _CommentsAddScreenState extends State<CommentsAddScreen> {
                 ),
 
                 Input(
-                  hintText: 'Your Email Address',
+                  hintText: DecoLocalizations.of(context).localizedString("add_comment_email_hint"),
                   margin: EdgeInsets.only(bottom: 10),
                   focusNode: _emailFocus,
                   textInputAction: TextInputAction.next,
@@ -117,7 +118,7 @@ class _CommentsAddScreenState extends State<CommentsAddScreen> {
                 ),
 
                 Input(
-                  hintText: 'Comment',
+                  hintText: DecoLocalizations.of(context).localizedString("add_comment_comment_hint"),
                   maxLines: 8,
                   focusNode: _contentFocus,
                   textInputAction: TextInputAction.done,
@@ -157,7 +158,7 @@ class _CommentsAddScreenState extends State<CommentsAddScreen> {
             textColor: isDark ? Color(0xFF1B1E28) : Colors.white,
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(3.0)),
-            child: Text('Post Comment'),
+            child: Text(DecoLocalizations.of(context).localizedString("add_comment_post")),
           ),
         ),
       ),

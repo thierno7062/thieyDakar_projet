@@ -7,6 +7,7 @@ import '../screens/about_screen.dart';
 import '../screens/settings_screen.dart';
 import '../deco_news_icons.dart';
 import '../main.dart';
+import '../helpers/deco_localizations.dart';
 
 class DrawerItem {
   final String title;
@@ -19,11 +20,17 @@ class DrawerItem {
 class DecoNewsDrawer extends StatelessWidget {
   /// This is the list of items that will be shown in drawer
   static final List<DrawerItem> drawerItems = [
+    /*
     DrawerItem('Home', DecoNewsIcons.home_icon, () => HomeScreen()),
     DrawerItem('Categories', DecoNewsIcons.categories_icon, () => CategoriesScreen()),
     DrawerItem('Bookmarks', DecoNewsIcons.add_to_bookmark, () => BookmarksScreen()),
     DrawerItem('About app', DecoNewsIcons.about_icon, () => AboutScreen()),
-    DrawerItem('Settings', Icons.settings, () => SettingsScreen()),
+    DrawerItem('Settings', Icons.settings, () => SettingsScreen()), */
+    DrawerItem('home', DecoNewsIcons.home_icon, () => HomeScreen()),
+    DrawerItem('categories', DecoNewsIcons.categories_icon, () => CategoriesScreen()),
+    DrawerItem('bookmarks', DecoNewsIcons.add_to_bookmark, () => BookmarksScreen()),
+    DrawerItem('about_app', DecoNewsIcons.about_icon, () => AboutScreen()),
+    DrawerItem('settings', Icons.settings, () => SettingsScreen()),
   ];
 
   @override
@@ -91,7 +98,8 @@ class DecoNewsDrawer extends StatelessWidget {
                               : Color(0xFF7F7E96),
                         ),
                         title: Text(
-                          item.title,
+                          //item.title,
+                          DecoLocalizations.of(context).localizedString(item.title),
                           style: TextStyle(
                             color: index == selectedIndex
                                 ? Colors.white

@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:deco_news/config.dart';
+import 'package:deco_news/helpers/deco_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:firebase_admob/firebase_admob.dart';
@@ -12,6 +13,7 @@ import 'models/category_model.dart';
 import 'helpers/helpers.dart';
 import 'screens/home_screen.dart';
 import 'screens/single_post.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 
 void main() => runApp(DecoNews());
 
@@ -64,8 +66,31 @@ class _DecoNewsState extends State<DecoNews> {
             ? Color(0xFF1B1E28)
             : Color(0xFFFFFFFF),
       ),
+      localizationsDelegates: <LocalizationsDelegate>[
+        //add custom localizations delegate
+        const DecoLocalizationsDelegate(),
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate
+      ],
+      supportedLocales: (Config.forcedLocale.isNotEmpty)
+          ?<Locale>[
+         Locale(Config.forcedLocale),
+      ]
+          : getLocalesFromLocaleCodes(),
       home: HomeScreen(),
     );
+  }
+
+  ///Turns localeCodes from Config.dart into a list of Locales
+  List<Locale> getLocalesFromLocaleCodes(){
+    List<Locale> locales = [];
+    locales.add(Locale(Config.defaultLocale));
+    for(String s in Config.localeCodes) {
+      if(s!=Config.defaultLocale)
+        locales.add(Locale(s));
+    }
+    return locales;
   }
 
   /// Returns index of selected item in drawer

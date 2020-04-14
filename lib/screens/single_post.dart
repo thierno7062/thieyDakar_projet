@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:deco_news/helpers/deco_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart';
 import 'package:flutter_html/flutter_html.dart';
@@ -85,7 +86,7 @@ class _SinglePostState extends State<SinglePost> {
             textColor: isDark ? Color(0xFF1B1E28) : Colors.white,
             shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(3.0)),
-            child: Text('View all Comments'),
+            child: Text(DecoLocalizations.of(context).localizedString("single_post_view_all_comments")),
           ),
         ),
       ),
@@ -195,7 +196,7 @@ class _SinglePostState extends State<SinglePost> {
                       Padding(
                         padding: const EdgeInsets.symmetric(vertical: 10.0),
                         child: Text(
-                          'Related News',
+                          DecoLocalizations.of(context).localizedString("single_post_related_posts"),
                           style: TextStyle(
                               fontSize: 18.0,
                               color: isDark ? Colors.white : Color(0xFF1B1E28)),
@@ -263,7 +264,8 @@ class _SinglePostState extends State<SinglePost> {
                 Padding(
                   padding: EdgeInsets.only(left: 8.0),
                   child: Text(
-                    'Comments',
+
+                    DecoLocalizations.of(context).localizedString("comments"),
                     style: TextStyle(
                       color: Color(0xFF7F7E96),
                     ),
@@ -310,7 +312,7 @@ class _SinglePostState extends State<SinglePost> {
                 Padding(
                   padding: EdgeInsets.only(left: 8.0),
                   child: Text(
-                    'Comments',
+                    DecoLocalizations.of(context).localizedString("comments"),
                     style: TextStyle(
                       color: Color(0xFF7F7E96),
                     ),

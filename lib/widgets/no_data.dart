@@ -1,3 +1,4 @@
+import 'package:deco_news/helpers/deco_localizations.dart';
 import 'package:flutter/material.dart';
 
 class NoData extends StatelessWidget {
@@ -20,7 +21,7 @@ class NoData extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.only(bottom: 5.0),
             child: Text(
-              'Uups, no data!',
+              DecoLocalizations.of(context).localizedString("no_data"),
               style: TextStyle(
                 color: isDark ? Colors.white : Color(0xFF1B1E28),
                 fontSize: 20.0,
