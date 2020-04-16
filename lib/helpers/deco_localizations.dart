@@ -22,7 +22,8 @@ class DecoLocalizations{
   String get currentLanguage => locale.languageCode;
 
   String localizedString(String key) {
-    return _localizedValues[key] ?? '** $key not found';
+    if(_localizedValues!=null)return _localizedValues[key] ?? '** $key not found';
+    else return "";
   }
 
   static Future<DecoLocalizations> load(Locale locale) async {
@@ -38,11 +39,34 @@ class DecoLocalizationsDelegate extends LocalizationsDelegate<DecoLocalizations>
   const DecoLocalizationsDelegate();
 
   @override
-  bool isSupported(Locale locale) => Config.localeCodes.contains(locale.languageCode);
+  bool isSupported(Locale locale) =>
+      Config.localeCodes.contains(locale.languageCode);
 
   @override
-  Future<DecoLocalizations> load(Locale locale) => DecoLocalizations.load(locale);
+  Future<DecoLocalizations> load(Locale locale) {
+  print("locale ${locale.languageCode}");
+  return DecoLocalizations.load(locale);
+}
 
   @override
   bool shouldReload(DecoLocalizationsDelegate old) => false;
+}
+
+class DecoOverrideLocalizationsDelegate extends LocalizationsDelegate<DecoLocalizations> {
+
+  final Locale overriddenLocale;
+  const DecoOverrideLocalizationsDelegate(this.overriddenLocale);
+
+  @override
+  bool isSupported(Locale locale) => overriddenLocale!=null;
+
+  @override
+  Future<DecoLocalizations> load(Locale locale) {
+    print("override ${overriddenLocale.languageCode}");
+    return DecoLocalizations.load(overriddenLocale);
+  }
+
+  @override
+  bool shouldReload(DecoOverrideLocalizationsDelegate old) => true;
+
 }

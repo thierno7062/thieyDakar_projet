@@ -35,5 +35,6 @@
   "single_post_view_all_comments": "View all Comments",
   "single_post_related_posts": "Related Posts",
   "category_posts_num": " Posts",
-  "search_results": "Results"
+  "search_results": "Results",
+  "enable_right_to_left": "Enable RTL"
 }

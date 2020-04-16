@@ -1,6 +1,8 @@
 import 'package:deco_news/helpers/deco_localizations.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl_standalone.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import '../config.dart';
 import '../widgets/deco_appbar.dart';
 import '../widgets/deco_news_drawer.dart';
 import '../main.dart';
@@ -12,12 +14,14 @@ class SettingsScreen extends StatefulWidget {
 
 class _SettingsScreenState extends State<SettingsScreen> {
   bool _notificationsEnabled = true;
+  bool _rtlEnabled = true;
 
   @override
   void initState() {
     super.initState();
 
     _areNotificationsEnabled();
+    _isRTLEnabled();
   }
 
   @override
@@ -53,6 +57,37 @@ class _SettingsScreenState extends State<SettingsScreen> {
                       });
                     },
                     value: _notificationsEnabled,
+                  ),
+                ],
+              ),
+            ),
+
+            Container(
+              margin: EdgeInsets.only(bottom: 20),
+              decoration: BoxDecoration(
+                  border: Border(
+                      bottom: BorderSide(
+                          color: Colors.black.withOpacity(0.13)
+                      )
+                  )
+              ),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: <Widget>[
+
+                  Text(DecoLocalizations.of(context).localizedString("enable_right_to_left")),
+
+                  Switch(
+                    onChanged: (bool enabled) async{
+                      String systemLocale = await findSystemLocale();
+                      setState(() {
+                        if(Config.forcedLocale!='ar' || (!Config.localeCodes.contains(systemLocale) && Config.defaultLocale!='ar')) {
+                          _rtlEnabled = enabled;
+                          _updateRTL(enabled);
+                        }
+                      });
+                    },
+                    value: _rtlEnabled,
                   ),
                 ],
               ),
@@ -103,5 +138,22 @@ class _SettingsScreenState extends State<SettingsScreen> {
   /// Enables or disables notifications
   Future<void> _updateNotifications(bool enabled) async {
     DecoNews.of(context).setSubscription(enabled);
+  }
+
+  /// Checks is RTL enabled
+  Future<void> _isRTLEnabled() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+
+    setState(() {
+      _rtlEnabled = prefs.getBool('isRTLEnabled');
+      if(_rtlEnabled==null){
+        _rtlEnabled = Config.forcedLocale!=''?(Config.forcedLocale=='ar'):(Config.defaultLocale=='ar');
+      }
+    });
+  }
+
+  /// Enables or disables right to left locale support
+  Future<void> _updateRTL(bool enabled) async {
+    DecoNews.of(context).setRTLSettings(enabled);
   }
 }

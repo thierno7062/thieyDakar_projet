@@ -34,8 +34,13 @@ class _DecoNewsState extends State<DecoNews> {
   /// Theme brightness
   Brightness _brightness;
 
+  /// Right to left language support
+  bool _rtlEnabled;
+
   /// Firebase messaging
   static FirebaseMessaging firebaseMessaging = new FirebaseMessaging();
+
+  DecoOverrideLocalizationsDelegate _overrideLocalizationsDelegate = DecoOverrideLocalizationsDelegate(null);
 
   @override
   void initState() {
@@ -44,15 +49,21 @@ class _DecoNewsState extends State<DecoNews> {
     /// set default app theme
     _setDefaultBrightness();
 
+    ///init runtime RTL support
+    _setDefaultRTLSupport();
+
     /// init push notifications
     _initPushNotifications();
 
     /// init AdMob
     _initAdMob();
+
+
   }
 
   @override
   Widget build(BuildContext context) {
+
     return MaterialApp(
       navigatorKey: DecoNews.navKey,
       title: Config.appTitle,
@@ -68,21 +79,37 @@ class _DecoNewsState extends State<DecoNews> {
       ),
       localizationsDelegates: <LocalizationsDelegate>[
         //add custom localizations delegate
+        _overrideLocalizationsDelegate,
         const DecoLocalizationsDelegate(),
         GlobalMaterialLocalizations.delegate,
         GlobalWidgetsLocalizations.delegate,
         GlobalCupertinoLocalizations.delegate
       ],
-      supportedLocales: (Config.forcedLocale.isNotEmpty)
-          ?<Locale>[
-         Locale(Config.forcedLocale),
-      ]
-          : getLocalesFromLocaleCodes(),
+      supportedLocales: getSupportedLocales(),
       home: HomeScreen(),
+      builder: (context, child) {
+      return Directionality(
+        textDirection: ((_rtlEnabled!=null && _rtlEnabled) || Config.forcedLocale=='ar')?TextDirection.rtl:TextDirection.ltr,
+        child: child,
+      );
+    },
     );
   }
 
-  ///Turns localeCodes from Config.dart into a list of Locales
+  /// Determines which locales to support
+  List<Locale> getSupportedLocales(){
+    if(_rtlEnabled!=null && _rtlEnabled){
+      return <Locale>[Locale('ar')];
+    } else {
+      return (Config.forcedLocale.isNotEmpty)
+          ? <Locale>[
+        Locale(Config.forcedLocale),
+      ]
+          : getLocalesFromLocaleCodes();
+    }
+  }
+
+  /// Turns localeCodes from Config.dart into a list of Locales
   List<Locale> getLocalesFromLocaleCodes(){
     List<Locale> locales = [];
     locales.add(Locale(Config.defaultLocale));
@@ -123,6 +150,34 @@ class _DecoNewsState extends State<DecoNews> {
 
     SharedPreferences prefs = await SharedPreferences.getInstance();
     await prefs.setString('brightness', brightness == Brightness.dark ? 'dark' : 'light');
+  }
+
+  /// On app launch set correct text and screen direction support
+  void _setDefaultRTLSupport() async{
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    bool isRTLEnabled = (prefs.getBool('isRTLEnabled') ?? null);
+
+    if (isRTLEnabled==null) {
+      isRTLEnabled = Config.forcedLocale!=''? (Config.forcedLocale=='ar') : (Config.defaultLocale=='ar');
+    }
+
+    setRTLSettings(isRTLEnabled);
+  }
+
+  /// Change right to left support settings
+  Future<void> setRTLSettings(bool enabled) async {
+    setState(() {
+      _rtlEnabled = enabled;
+      if(_rtlEnabled)
+        _overrideLocalizationsDelegate = DecoOverrideLocalizationsDelegate(Locale('ar'));
+      else
+        _overrideLocalizationsDelegate = DecoOverrideLocalizationsDelegate(null);
+
+      print("rtl $_rtlEnabled");
+    });
+
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.setBool('isRTLEnabled', enabled);
   }
 
   /// init push notifications
@@ -259,4 +314,5 @@ class _DecoNewsState extends State<DecoNews> {
       ..load()
       ..show(anchorType: Config.adMobPosition != 'top' ? AnchorType.bottom : AnchorType.top);
   }
+
 }
