@@ -76,7 +76,8 @@ class _SinglePostState extends State<SinglePost> {
         child: Container(
           width: double.infinity,
           height: 55.0,
-          margin: EdgeInsets.fromLTRB(10.0, 0, 10.0, 10.0),
+          //margin: EdgeInsets.fromLTRB(10.0, 0, 10.0, 10.0),
+          margin: EdgeInsetsDirectional.fromSTEB(10.0, 0.0, 10.0, 10.0),
           child: RaisedButton(
             onPressed: () => Navigator.of(context).push(MaterialPageRoute(
               builder: (context) => CommentsScreen(this.widget.post.id),
@@ -242,7 +243,8 @@ class _SinglePostState extends State<SinglePost> {
                 color: Color(0xFFCCCBDA),
               ),
               Padding(
-                padding: EdgeInsets.only(left: 8.0),
+                //padding: EdgeInsets.only(left: 8.0),
+                padding: EdgeInsetsDirectional.fromSTEB(8.0, 0.0, 0.0, 0.0),
                 child: Text(
                   widget.post.date,
                   style: TextStyle(
@@ -264,7 +266,8 @@ class _SinglePostState extends State<SinglePost> {
                   color: Color(0xFFCCCBDA),
                 ),
                 Padding(
-                  padding: EdgeInsets.only(left: 8.0),
+                  //padding: EdgeInsets.only(left: 8.0),
+                  padding: EdgeInsetsDirectional.fromSTEB(8.0, 0.0, 0.0, 0.0),
                   child: Text(
 
                     DecoLocalizations.of(context).localizedString("comments"),
@@ -293,7 +296,8 @@ class _SinglePostState extends State<SinglePost> {
             color: Color(0xFFCCCBDA),
           ),
           Padding(
-            padding: EdgeInsets.only(left: 8.0, right: 15.0),
+            //padding: EdgeInsets.only(left: 8.0, right: 15.0),
+            padding: EdgeInsetsDirectional.fromSTEB(8.0, 0.0, 15.0, 0.0),
             child: Text(
               widget.post.date,
               style: TextStyle(
@@ -312,7 +316,8 @@ class _SinglePostState extends State<SinglePost> {
                   color: Color(0xFFCCCBDA),
                 ),
                 Padding(
-                  padding: EdgeInsets.only(left: 8.0),
+                  //padding: EdgeInsets.only(left: 8.0),
+                  padding: EdgeInsetsDirectional.fromSTEB(8.0, 0.0, 0.0, 0.0),
                   child: Text(
                     DecoLocalizations.of(context).localizedString("comments"),
                     style: TextStyle(

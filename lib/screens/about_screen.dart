@@ -283,7 +283,8 @@ class AboutScreen extends StatelessWidget {
         child: Container(
           width: double.infinity,
           height: 55.0,
-          margin: EdgeInsets.fromLTRB(10.0, 0, 10.0, 10.0),
+          //margin: EdgeInsets.fromLTRB(10.0, 0, 10.0, 10.0),
+          margin: EdgeInsetsDirectional.fromSTEB(10.0, 0.0, 10.0, 10.0),
           child: RaisedButton(
             onPressed: () async {
               const url = 'https://devspush.com/';

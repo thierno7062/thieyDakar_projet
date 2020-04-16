@@ -45,7 +45,8 @@ class _CommentsScreenState extends State<CommentsScreen> {
         child: Container(
           width: double.infinity,
           height: 55.0,
-          margin: EdgeInsets.fromLTRB(10.0, 0, 10.0, 10.0),
+          //margin: EdgeInsets.fromLTRB(10.0, 0, 10.0, 10.0),
+          margin: EdgeInsetsDirectional.fromSTEB(10.0, 0.0, 10.0, 10.0),
           child: RaisedButton(
             onPressed: () => Navigator.of(context).push(MaterialPageRoute(
                   builder: (context) => CommentsAddScreen(this.widget.postID),
@@ -55,7 +56,7 @@ class _CommentsScreenState extends State<CommentsScreen> {
             textColor: isDark ? Color(0xFF1B1E28) : Colors.white,
             shape:
                 RoundedRectangleBorder(borderRadius: BorderRadius.circular(3.0)),
-            child: Text('Write a Comment'),
+            child: Text(DecoLocalizations.of(context).localizedString("comments_write_a_comment")),
           ),
         ),
       ),
@@ -91,7 +92,8 @@ class _CommentsScreenState extends State<CommentsScreen> {
           child: comments.length == 0
               ? NoData(DecoLocalizations.of(context).localizedString("comments_sorry_no_comments"))
               : SingleChildScrollView(
-                  padding: EdgeInsets.fromLTRB(10, 10, 10, 0),
+                  //padding: EdgeInsets.fromLTRB(10, 10, 10, 0),
+                  padding: EdgeInsetsDirectional.fromSTEB(10.0, 10.0, 10.0, 0.0),
                   child: Column(
                     children: <Widget>[
                       Row(

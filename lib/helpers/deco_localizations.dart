@@ -23,7 +23,7 @@ class DecoLocalizations{
 
   String localizedString(String key) {
     if(_localizedValues!=null)return _localizedValues[key] ?? '** $key not found';
-    else return "";
+    else return "*****";
   }
 
   static Future<DecoLocalizations> load(Locale locale) async {
@@ -39,8 +39,9 @@ class DecoLocalizationsDelegate extends LocalizationsDelegate<DecoLocalizations>
   const DecoLocalizationsDelegate();
 
   @override
-  bool isSupported(Locale locale) =>
-      Config.localeCodes.contains(locale.languageCode);
+  bool isSupported(Locale locale) {
+    return Config.localeCodes.contains(locale.languageCode);
+  }
 
   @override
   Future<DecoLocalizations> load(Locale locale) {
@@ -50,6 +51,8 @@ class DecoLocalizationsDelegate extends LocalizationsDelegate<DecoLocalizations>
 
   @override
   bool shouldReload(DecoLocalizationsDelegate old) => false;
+
+
 }
 
 class DecoOverrideLocalizationsDelegate extends LocalizationsDelegate<DecoLocalizations> {

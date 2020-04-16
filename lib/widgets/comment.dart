@@ -28,7 +28,8 @@ class Comment extends StatelessWidget {
         color: isDark ? Color(0xFF1B1E28) : Colors.white,
       ),
       child: Padding(
-        padding: const EdgeInsets.fromLTRB(10, 10, 10, 20),
+        //padding: const EdgeInsets.fromLTRB(10, 10, 10, 20),
+        padding: const EdgeInsetsDirectional.fromSTEB(10.0, 10.0, 10.0, 20.0),
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
@@ -45,7 +46,8 @@ class Comment extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
                   Container(
-                    padding: EdgeInsets.only(left: 10),
+                    //padding: EdgeInsets.only(left: 10),
+                    padding: EdgeInsetsDirectional.fromSTEB(10.0, 0.0, 0.0, 0.0),
                     height: 30,
                     child: Row(
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -76,7 +78,8 @@ class Comment extends StatelessWidget {
                     ),
                   ),
                   Padding(
-                    padding: const EdgeInsets.only(left: 10),
+                    //padding: const EdgeInsets.only(left: 10),
+                    padding: const EdgeInsetsDirectional.fromSTEB(10.0, 0.0, 0.0, 0.0),
                     child: Html(
                       blockSpacing: 8.0,
                       data: comment.content,

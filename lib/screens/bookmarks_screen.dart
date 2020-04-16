@@ -51,7 +51,8 @@ class _BookmarksScreenState extends State<BookmarksScreen> {
 
     /// list of posts
     return SingleChildScrollView(
-      padding: EdgeInsets.only(left: 10, top: 10, right: 10),
+      //padding: EdgeInsets.only(left: 10, top: 10, right: 10),
+      padding: EdgeInsetsDirectional.fromSTEB(10.0, 10.0, 10.0, 0.0),
       child: Column(
         children: <Widget>[
           Row(

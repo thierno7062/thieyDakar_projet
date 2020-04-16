@@ -36,7 +36,7 @@ class _DecoNewsState extends State<DecoNews> {
 
   /// Right to left language support
   bool _rtlEnabled;
-
+  TextDirection textDirection;
   /// Firebase messaging
   static FirebaseMessaging firebaseMessaging = new FirebaseMessaging();
 
@@ -89,7 +89,7 @@ class _DecoNewsState extends State<DecoNews> {
       home: HomeScreen(),
       builder: (context, child) {
       return Directionality(
-        textDirection: ((_rtlEnabled!=null && _rtlEnabled) || Config.forcedLocale=='ar')?TextDirection.rtl:TextDirection.ltr,
+        textDirection: ((_rtlEnabled!=null && _rtlEnabled) || Config.forcedLocale=='ar' || textDirection!=null)?TextDirection.rtl:TextDirection.ltr,
         child: child,
       );
     },
@@ -101,11 +101,12 @@ class _DecoNewsState extends State<DecoNews> {
     if(_rtlEnabled!=null && _rtlEnabled){
       return <Locale>[Locale('ar')];
     } else {
-      return (Config.forcedLocale.isNotEmpty)
-          ? <Locale>[
-        Locale(Config.forcedLocale),
-      ]
-          : getLocalesFromLocaleCodes();
+      if(Config.forcedLocale.isNotEmpty){
+        return <Locale>[Locale(Config.forcedLocale)];
+      }
+      else{
+        return getLocalesFromLocaleCodes();
+      }
     }
   }
 
@@ -168,11 +169,16 @@ class _DecoNewsState extends State<DecoNews> {
   Future<void> setRTLSettings(bool enabled) async {
     setState(() {
       _rtlEnabled = enabled;
-      if(_rtlEnabled)
-        _overrideLocalizationsDelegate = DecoOverrideLocalizationsDelegate(Locale('ar'));
-      else
-        _overrideLocalizationsDelegate = DecoOverrideLocalizationsDelegate(null);
-
+      if(_rtlEnabled) {
+        _overrideLocalizationsDelegate =
+            DecoOverrideLocalizationsDelegate(Locale('ar'));
+        textDirection = TextDirection.rtl;
+      }
+      else {
+        _overrideLocalizationsDelegate =
+            DecoOverrideLocalizationsDelegate(null);
+        textDirection = null;
+      }
       print("rtl $_rtlEnabled");
     });
 

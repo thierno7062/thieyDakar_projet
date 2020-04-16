@@ -122,8 +122,9 @@ class _SingleCategorySliderScreenState extends State<SingleCategorySliderScreen>
               Row(
                 children: <Widget>[
                   Padding(
-                    padding:
-                        const EdgeInsets.only(top: 20, bottom: 10, left: 10),
+                    //padding:
+                    //    const EdgeInsets.only(top: 20, bottom: 10, left: 10),
+                    padding: EdgeInsetsDirectional.fromSTEB(10.0, 20.0, 0.0, 10.0),
                     child: Text(
                       this.widget.category.name,
                       style: TextStyle(

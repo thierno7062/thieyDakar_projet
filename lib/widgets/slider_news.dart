@@ -134,10 +134,11 @@ class _SliderNewsState extends State<SliderNews> {
                                 size: 20,
                               ),
                               Padding(
-                                padding: const EdgeInsets.only(
+                                /*padding: const EdgeInsets.only(
                                   left: 5.0,
                                   right: 15.0,
-                                ),
+                                ), */
+                                padding: const EdgeInsetsDirectional.fromSTEB(5.0, 0.0, 15.0, 0.0),
                                 child: Text(
                                   this.widget.post.date,
                                   style: TextStyle(
