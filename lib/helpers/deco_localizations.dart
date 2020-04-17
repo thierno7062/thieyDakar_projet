@@ -55,21 +55,3 @@ class DecoLocalizationsDelegate extends LocalizationsDelegate<DecoLocalizations>
 
 }
 
-class DecoOverrideLocalizationsDelegate extends LocalizationsDelegate<DecoLocalizations> {
-
-  final Locale overriddenLocale;
-  const DecoOverrideLocalizationsDelegate(this.overriddenLocale);
-
-  @override
-  bool isSupported(Locale locale) => overriddenLocale!=null;
-
-  @override
-  Future<DecoLocalizations> load(Locale locale) {
-    print("override ${overriddenLocale.languageCode}");
-    return DecoLocalizations.load(overriddenLocale);
-  }
-
-  @override
-  bool shouldReload(DecoOverrideLocalizationsDelegate old) => true;
-
-}

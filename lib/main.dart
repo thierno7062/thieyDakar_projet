@@ -40,8 +40,6 @@ class _DecoNewsState extends State<DecoNews> {
   /// Firebase messaging
   static FirebaseMessaging firebaseMessaging = new FirebaseMessaging();
 
-  DecoOverrideLocalizationsDelegate _overrideLocalizationsDelegate = DecoOverrideLocalizationsDelegate(null);
-
   @override
   void initState() {
     super.initState();
@@ -58,13 +56,13 @@ class _DecoNewsState extends State<DecoNews> {
     /// init AdMob
     _initAdMob();
 
-
   }
 
   @override
   Widget build(BuildContext context) {
 
     return MaterialApp(
+      locale: (_rtlEnabled!=null && _rtlEnabled)?Locale('ar'):(Config.forcedLocale!='')?Locale(Config.forcedLocale):null,
       navigatorKey: DecoNews.navKey,
       title: Config.appTitle,
       theme: ThemeData(
@@ -79,35 +77,14 @@ class _DecoNewsState extends State<DecoNews> {
       ),
       localizationsDelegates: <LocalizationsDelegate>[
         //add custom localizations delegate
-        _overrideLocalizationsDelegate,
         const DecoLocalizationsDelegate(),
         GlobalMaterialLocalizations.delegate,
         GlobalWidgetsLocalizations.delegate,
         GlobalCupertinoLocalizations.delegate
       ],
-      supportedLocales: getSupportedLocales(),
+      supportedLocales: getLocalesFromLocaleCodes(),
       home: HomeScreen(),
-      builder: (context, child) {
-      return Directionality(
-        textDirection: ((_rtlEnabled!=null && _rtlEnabled) || Config.forcedLocale=='ar' || textDirection!=null)?TextDirection.rtl:TextDirection.ltr,
-        child: child,
-      );
-    },
     );
-  }
-
-  /// Determines which locales to support
-  List<Locale> getSupportedLocales(){
-    if(_rtlEnabled!=null && _rtlEnabled){
-      return <Locale>[Locale('ar')];
-    } else {
-      if(Config.forcedLocale.isNotEmpty){
-        return <Locale>[Locale(Config.forcedLocale)];
-      }
-      else{
-        return getLocalesFromLocaleCodes();
-      }
-    }
   }
 
   /// Turns localeCodes from Config.dart into a list of Locales
@@ -169,16 +146,6 @@ class _DecoNewsState extends State<DecoNews> {
   Future<void> setRTLSettings(bool enabled) async {
     setState(() {
       _rtlEnabled = enabled;
-      if(_rtlEnabled) {
-        _overrideLocalizationsDelegate =
-            DecoOverrideLocalizationsDelegate(Locale('ar'));
-        textDirection = TextDirection.rtl;
-      }
-      else {
-        _overrideLocalizationsDelegate =
-            DecoOverrideLocalizationsDelegate(null);
-        textDirection = null;
-      }
       print("rtl $_rtlEnabled");
     });
 
