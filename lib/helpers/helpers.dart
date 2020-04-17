@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 /// Show loading message
 void showLoadingDialog(context) {
@@ -50,4 +51,10 @@ void showErrorDialog(context, String title, String message) {
       ],
     ),
   );
+}
+
+String localizedDate(context, String date){
+
+  return DateFormat("d MMM y", Localizations.localeOf(context).languageCode).format(DateTime.parse(date));
+
 }

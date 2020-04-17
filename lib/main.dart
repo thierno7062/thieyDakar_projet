@@ -14,6 +14,7 @@ import 'helpers/helpers.dart';
 import 'screens/home_screen.dart';
 import 'screens/single_post.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:intl/intl.dart';
 
 void main() => runApp(DecoNews());
 
@@ -37,6 +38,7 @@ class _DecoNewsState extends State<DecoNews> {
   /// Right to left language support
   bool _rtlEnabled;
   TextDirection textDirection;
+
   /// Firebase messaging
   static FirebaseMessaging firebaseMessaging = new FirebaseMessaging();
 

@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:deco_news/helpers/deco_localizations.dart';
+import 'package:deco_news/helpers/helpers.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart';
 import 'package:flutter_html/flutter_html.dart';
@@ -246,7 +247,7 @@ class _SinglePostState extends State<SinglePost> {
                 //padding: EdgeInsets.only(left: 8.0),
                 padding: EdgeInsetsDirectional.fromSTEB(8.0, 0.0, 0.0, 0.0),
                 child: Text(
-                  widget.post.date,
+                  localizedDate(context, widget.post.date),
                   style: TextStyle(
                     color: Color(0xFF7F7E96),
                   ),
@@ -299,7 +300,7 @@ class _SinglePostState extends State<SinglePost> {
             //padding: EdgeInsets.only(left: 8.0, right: 15.0),
             padding: EdgeInsetsDirectional.fromSTEB(8.0, 0.0, 15.0, 0.0),
             child: Text(
-              widget.post.date,
+              localizedDate(context,widget.post.date),
               style: TextStyle(
                 color: Color(0xFF7F7E96),
               ),

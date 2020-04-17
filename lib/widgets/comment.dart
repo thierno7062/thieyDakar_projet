@@ -1,3 +1,4 @@
+import 'package:deco_news/helpers/helpers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart';
 import '../models/comment_model.dart';
@@ -68,7 +69,8 @@ class Comment extends StatelessWidget {
                           ),
                         ),
                         Text(
-                          comment.date,
+                          localizedDate(context, comment.date),
+                          //comment.date
                           style: TextStyle(
                             fontSize: 14,
                             color: Color(0xFF7F7E96),
@@ -98,4 +100,5 @@ class Comment extends StatelessWidget {
       ),
     );
   }
+
 }

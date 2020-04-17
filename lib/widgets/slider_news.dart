@@ -1,3 +1,4 @@
+import 'package:deco_news/helpers/helpers.dart';
 import 'package:flutter/material.dart';
 import '../helpers/wordpress.dart';
 import '../models/post_model.dart';
@@ -140,7 +141,7 @@ class _SliderNewsState extends State<SliderNews> {
                                 ), */
                                 padding: const EdgeInsetsDirectional.fromSTEB(5.0, 0.0, 15.0, 0.0),
                                 child: Text(
-                                  this.widget.post.date,
+                                  localizedDate(context, this.widget.post.date),
                                   style: TextStyle(
                                     fontSize: 14,
                                     color: Colors.white,
