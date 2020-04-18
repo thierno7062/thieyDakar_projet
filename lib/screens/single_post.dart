@@ -184,6 +184,9 @@ class _SinglePostState extends State<SinglePost> {
                     fontWeight: FontWeight.normal,
                     height: 16.0 / 14.0,
                   ),
+                  customTextAlign: (node){
+                    return TextAlign.start;
+                  },
                   imageProperties: ImageProperties(
                       width: double.infinity,
                       fit: BoxFit.cover,

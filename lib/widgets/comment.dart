@@ -90,6 +90,9 @@ class Comment extends StatelessWidget {
                         fontSize: 14.0,
                         // height: 16.0 / 14.0
                       ),
+                        customTextAlign: (node){
+                          return TextAlign.start;
+                        }
                     ),
                   ),
                 ],
