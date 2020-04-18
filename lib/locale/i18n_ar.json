@@ -37,5 +37,7 @@
   "single_post_related_posts": "المنشورات ذات الصلة",
   "category_posts_num": " المقالة",
   "search_results": "النتائج",
-  "enable_right_to_left": "تمكين RTL"
+  "enable_right_to_left": "تمكين RTL",
+  "dialog_please_wait": "ارجوك انتظر...",
+  "dialog_ok": "حسنا"
 }

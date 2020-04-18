@@ -37,5 +37,7 @@
   "single_post_related_posts": "Related Posts",
   "category_posts_num": " Posts",
   "search_results": "Results",
-  "enable_right_to_left": "Enable RTL"
+  "enable_right_to_left": "Enable RTL",
+  "dialog_please_wait": "Please wait...",
+  "dialog_ok": "OK"
 }

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
+import 'deco_localizations.dart';
+
 /// Show loading message
 void showLoadingDialog(context) {
   bool isDark = Theme.of(context).brightness == Brightness.dark;
@@ -17,9 +19,10 @@ void showLoadingDialog(context) {
           ),
 
           Padding(
-            padding: EdgeInsets.only(left: 22.0),
+            //padding: EdgeInsets.only(left: 22.0),
+            padding: EdgeInsetsDirectional.fromSTEB(22.0, 0.0, 0.0, 0.0),
             child: Text(
-              'Please wait...',
+              DecoLocalizations.of(context).localizedString("dialog_please_wait"),
               style: TextStyle(
                 color: isDark ? Colors.white : Color(0xFF1B1E28),
                 fontSize: 14,
@@ -43,7 +46,7 @@ void showErrorDialog(context, String title, String message) {
       content: Text(message),
       actions: <Widget>[
         FlatButton(
-          child: Text('OK'),
+          child: Text(DecoLocalizations.of(context).localizedString("dialog_ok")),
           onPressed: () {
             Navigator.of(context).pop();
           },
