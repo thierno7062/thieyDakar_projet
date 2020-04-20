@@ -294,7 +294,6 @@ class _SinglePostState extends State<SinglePost> {
             color: Color(0xFFCCCBDA),
           ),
           Padding(
-            //padding: EdgeInsets.only(left: 8.0, right: 15.0),
             padding: EdgeInsetsDirectional.fromSTEB(8.0, 0.0, 15.0, 0.0),
             child: Text(
               localizedDate(context,widget.post.date),
@@ -314,7 +313,6 @@ class _SinglePostState extends State<SinglePost> {
                   color: Color(0xFFCCCBDA),
                 ),
                 Padding(
-                  //padding: EdgeInsets.only(left: 8.0),
                   padding: EdgeInsetsDirectional.fromSTEB(8.0, 0.0, 0.0, 0.0),
                   child: Text(
                     DecoLocalizations.of(context).localizedString("comments"),

@@ -18,7 +18,6 @@ void showLoadingDialog(context) {
           ),
 
           Padding(
-            //padding: EdgeInsets.only(left: 22.0),
             padding: EdgeInsetsDirectional.fromSTEB(22.0, 0.0, 0.0, 0.0),
             child: Text(
               DecoLocalizations.of(context).localizedString("dialog_please_wait"),
