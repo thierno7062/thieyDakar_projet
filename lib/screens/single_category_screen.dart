@@ -1,7 +1,7 @@
 import 'dart:convert';
-import 'package:deco_news/helpers/deco_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart';
+import '../helpers/deco_localizations.dart';
 import '../helpers/wordpress.dart';
 import '../models/category_model.dart';
 import '../models/post_model.dart';

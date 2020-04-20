@@ -1,7 +1,7 @@
-import 'package:deco_news/helpers/deco_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl_standalone.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import '../helpers/deco_localizations.dart';
 import '../config.dart';
 import '../widgets/deco_appbar.dart';
 import '../widgets/deco_news_drawer.dart';
@@ -81,7 +81,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                     onChanged: (bool enabled) async{
                       String systemLocale = await findSystemLocale();
                       setState(() {
-                        if(Config.forcedLocale!='ar' || (!Config.localeCodes.contains(systemLocale) && Config.defaultLocale!='ar')) {
+                        if(Config.forcedLocale != 'ar' || (!Config.localeCodes.contains(systemLocale) && Config.defaultLocale != 'ar')) {
                           _rtlEnabled = enabled;
                           _updateRTL(enabled);
                         }
@@ -146,8 +146,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
 
     setState(() {
       _rtlEnabled = prefs.getBool('isRTLEnabled');
-      if(_rtlEnabled==null){
-        _rtlEnabled = Config.forcedLocale!=''?(Config.forcedLocale=='ar'):(Config.defaultLocale=='ar');
+      if (_rtlEnabled == null) {
+        _rtlEnabled = Config.forcedLocale == 'ar' || Config.defaultLocale == 'ar';
       }
     });
   }

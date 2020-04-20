@@ -1,7 +1,7 @@
 import 'dart:convert';
-import 'package:deco_news/helpers/deco_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart';
+import '../helpers/deco_localizations.dart';
 import '../helpers/wordpress.dart';
 import '../models/category_model.dart';
 import '../models/post_model.dart';
@@ -51,7 +51,6 @@ class _BookmarksScreenState extends State<BookmarksScreen> {
 
     /// list of posts
     return SingleChildScrollView(
-      //padding: EdgeInsets.only(left: 10, top: 10, right: 10),
       padding: EdgeInsetsDirectional.fromSTEB(10.0, 10.0, 10.0, 0.0),
       child: Column(
         children: <Widget>[

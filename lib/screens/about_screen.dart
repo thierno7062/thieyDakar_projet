@@ -1,6 +1,6 @@
-import 'package:deco_news/helpers/deco_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
+import '../helpers/deco_localizations.dart';
 import '../widgets/deco_appbar.dart';
 import '../widgets/deco_news_drawer.dart';
 
@@ -35,7 +35,7 @@ class AboutScreen extends StatelessWidget {
                 bottom: 60.0,
               ),
               child: Text(
-                'Wordpress to Flutter News App',
+                'WordPress to Flutter News App',
                 style: TextStyle(
                   color: Color(0xFF7F7E96),
                   fontSize: 14.0,
@@ -283,7 +283,6 @@ class AboutScreen extends StatelessWidget {
         child: Container(
           width: double.infinity,
           height: 55.0,
-          //margin: EdgeInsets.fromLTRB(10.0, 0, 10.0, 10.0),
           margin: EdgeInsetsDirectional.fromSTEB(10.0, 0.0, 10.0, 10.0),
           child: RaisedButton(
             onPressed: () async {

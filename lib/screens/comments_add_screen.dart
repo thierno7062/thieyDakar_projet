@@ -1,7 +1,7 @@
 import 'dart:convert';
-import 'package:deco_news/helpers/deco_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart';
+import '../helpers/deco_localizations.dart';
 import '../helpers/wordpress.dart';
 import '../helpers/helpers.dart';
 import '../widgets/deco_appbar.dart';
@@ -142,7 +142,6 @@ class _CommentsAddScreenState extends State<CommentsAddScreen> {
         child: Container(
           width: double.infinity,
           height: 55.0,
-          //margin: EdgeInsets.fromLTRB(10.0, 0, 10.0, 10.0),
           margin: EdgeInsetsDirectional.fromSTEB(10.0, 0.0, 10.0, 10.0),
           child: RaisedButton(
             onPressed: () {

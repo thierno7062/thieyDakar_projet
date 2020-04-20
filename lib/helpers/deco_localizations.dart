@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import '../config.dart';
 
-class DecoLocalizations{
+class DecoLocalizations {
 
   DecoLocalizations(Locale locale){
     _localizedValues = null;
@@ -21,8 +21,11 @@ class DecoLocalizations{
   String get currentLanguage => locale.languageCode;
 
   String localizedString(String key) {
-    if(_localizedValues!=null)return _localizedValues[key] ?? '** $key not found';
-    else return "*****";
+    if (_localizedValues != null) {
+      return _localizedValues[key] ?? '** $key not found';
+    }
+
+    return "*****";
   }
 
   static Future<DecoLocalizations> load(Locale locale) async {
@@ -31,7 +34,6 @@ class DecoLocalizations{
     _localizedValues = json.decode(jsonContent);
     return translations;
   }
-
 }
 
 class DecoLocalizationsDelegate extends LocalizationsDelegate<DecoLocalizations> {
@@ -44,13 +46,10 @@ class DecoLocalizationsDelegate extends LocalizationsDelegate<DecoLocalizations>
 
   @override
   Future<DecoLocalizations> load(Locale locale) {
-  print("locale ${locale.languageCode}");
-  return DecoLocalizations.load(locale);
-}
+    return DecoLocalizations.load(locale);
+  }
 
   @override
   bool shouldReload(DecoLocalizationsDelegate old) => false;
-
-
 }
 

@@ -1,5 +1,5 @@
-import 'package:deco_news/helpers/deco_localizations.dart';
 import 'package:flutter/material.dart';
+import '../helpers/deco_localizations.dart';
 import '../models/post_model.dart';
 import 'news.dart';
 

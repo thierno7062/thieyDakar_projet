@@ -32,7 +32,6 @@ class PostModel {
       _getTitle(json['title']['rendered']),
       json['content']['rendered'],
       _getImage(json),
-      //DateFormat('d MMM y').format(DateTime.parse(json['date'])),
       json['date'],
       Uri.decodeFull(json['link'].toString()),
       bookmarks.indexOf(id) >= 0

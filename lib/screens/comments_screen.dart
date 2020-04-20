@@ -1,7 +1,7 @@
 import 'dart:convert';
-import 'package:deco_news/helpers/deco_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart';
+import '../helpers/deco_localizations.dart';
 import '../helpers/wordpress.dart';
 import '../models/comment_model.dart';
 import '../widgets/comment.dart';
@@ -45,7 +45,6 @@ class _CommentsScreenState extends State<CommentsScreen> {
         child: Container(
           width: double.infinity,
           height: 55.0,
-          //margin: EdgeInsets.fromLTRB(10.0, 0, 10.0, 10.0),
           margin: EdgeInsetsDirectional.fromSTEB(10.0, 0.0, 10.0, 10.0),
           child: RaisedButton(
             onPressed: () => Navigator.of(context).push(MaterialPageRoute(
@@ -92,7 +91,6 @@ class _CommentsScreenState extends State<CommentsScreen> {
           child: comments.length == 0
               ? NoData(DecoLocalizations.of(context).localizedString("comments_sorry_no_comments"))
               : SingleChildScrollView(
-                  //padding: EdgeInsets.fromLTRB(10, 10, 10, 0),
                   padding: EdgeInsetsDirectional.fromSTEB(10.0, 10.0, 10.0, 0.0),
                   child: Column(
                     children: <Widget>[

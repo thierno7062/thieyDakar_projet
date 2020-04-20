@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-
 import 'deco_localizations.dart';
 
 /// Show loading message
@@ -56,8 +55,7 @@ void showErrorDialog(context, String title, String message) {
   );
 }
 
-String localizedDate(context, String date){
-
-  return DateFormat("d MMM y", Localizations.localeOf(context).languageCode).format(DateTime.parse(date));
-
+String localizedDate(context, String date) {
+  return DateFormat("d MMM y", Localizations.localeOf(context).languageCode)
+      .format(DateTime.parse(date));
 }
