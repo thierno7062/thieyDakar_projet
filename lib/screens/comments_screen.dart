@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:deco_news/helpers/helpers.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart';
 import '../helpers/wordpress.dart';
@@ -37,27 +38,30 @@ class _CommentsScreenState extends State<CommentsScreen> {
   Widget build(BuildContext context) {
     bool isDark = Theme.of(context).brightness == Brightness.dark;
 
-    return Scaffold(
-      appBar: DecoNewsAppBar(),
-      body: _buildBody(),
-      bottomNavigationBar: SafeArea(
-        child: Container(
-          width: double.infinity,
-          height: 55.0,
-          margin: EdgeInsets.fromLTRB(10.0, 0, 10.0, 10.0),
-          child: RaisedButton(
-            onPressed: () => Navigator.of(context).push(MaterialPageRoute(
-                  builder: (context) => CommentsAddScreen(this.widget.postID),
-                )),
-            padding: EdgeInsets.all(0),
-            color: isDark ? Colors.white : Color(0xFF1B1E28),
-            textColor: isDark ? Color(0xFF1B1E28) : Colors.white,
-            shape:
-                RoundedRectangleBorder(borderRadius: BorderRadius.circular(3.0)),
-            child: Text('Write a Comment'),
+    return Padding(
+      child: Scaffold(
+        appBar: DecoNewsAppBar(),
+        body: _buildBody(),
+        bottomNavigationBar: SafeArea(
+          child: Container(
+            width: double.infinity,
+            height: 55.0,
+            margin: EdgeInsets.fromLTRB(10.0, 0, 10.0, 10.0),
+            child: RaisedButton(
+              onPressed: () => Navigator.of(context).push(MaterialPageRoute(
+                builder: (context) => CommentsAddScreen(this.widget.postID),
+              )),
+              padding: EdgeInsets.all(0),
+              color: isDark ? Colors.white : Color(0xFF1B1E28),
+              textColor: isDark ? Color(0xFF1B1E28) : Colors.white,
+              shape:
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(3.0)),
+              child: Text('Write a Comment'),
+            ),
           ),
         ),
       ),
+      padding: adPadding(context: context),
     );
   }
 
@@ -172,5 +176,8 @@ class _CommentsScreenState extends State<CommentsScreen> {
     } else {
       throw Exception('Failed to load data');
     }
+
+    //insertAdd(context);
+
   }
 }

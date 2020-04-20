@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:deco_news/helpers/helpers.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart';
 import 'package:flutter_html/flutter_html.dart';
@@ -46,49 +47,52 @@ class _SinglePostState extends State<SinglePost> {
 
     double size = deviceWidth / divider;
 
-    return Scaffold(
-      body: DecoScroll(
-        widget.post.id,
-        widget.post.image,
-        size,
-        [_content(context)],
-        appBar: AppBar(
-          backgroundColor: const Color(0xFF1B1E28).withOpacity(0.25),
-          elevation: 0.0,
-          iconTheme: IconThemeData(color: Colors.white),
+    return Padding(
+      child: Scaffold(
+        body: DecoScroll(
+          widget.post.id,
+          widget.post.image,
+          size,
+          [_content(context)],
+          appBar: AppBar(
+            backgroundColor: const Color(0xFF1B1E28).withOpacity(0.25),
+            elevation: 0.0,
+            iconTheme: IconThemeData(color: Colors.white),
 
-          /// share button
-          actions: <Widget>[
-            FlatButton(
-              onPressed: () {
-                Share.share(
-                    this.widget.post.title + ' ' + this.widget.post.link);
-              },
-              child: Icon(Icons.share, color: Colors.white),
-            )
-          ],
+            /// share button
+            actions: <Widget>[
+              FlatButton(
+                onPressed: () {
+                  Share.share(
+                      this.widget.post.title + ' ' + this.widget.post.link);
+                },
+                child: Icon(Icons.share, color: Colors.white),
+              )
+            ],
+          ),
+          padding: 10.0,
+          contentOffset: 30.0,
         ),
-        padding: 10.0,
-        contentOffset: 30.0,
-      ),
-      bottomNavigationBar: SafeArea(
-        child: Container(
-          width: double.infinity,
-          height: 55.0,
-          margin: EdgeInsets.fromLTRB(10.0, 0, 10.0, 10.0),
-          child: RaisedButton(
-            onPressed: () => Navigator.of(context).push(MaterialPageRoute(
-              builder: (context) => CommentsScreen(this.widget.post.id),
-            )),
-            padding: EdgeInsets.all(0),
-            color: isDark ? Colors.white : Color(0xFF1B1E28),
-            textColor: isDark ? Color(0xFF1B1E28) : Colors.white,
-            shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(3.0)),
-            child: Text('View all Comments'),
+        bottomNavigationBar: SafeArea(
+          child: Container(
+            width: double.infinity,
+            height: 55.0,
+            margin: EdgeInsets.fromLTRB(10.0, 0, 10.0, 10.0),
+            child: RaisedButton(
+              onPressed: () => Navigator.of(context).push(MaterialPageRoute(
+                builder: (context) => CommentsScreen(this.widget.post.id),
+              )),
+              padding: EdgeInsets.all(0),
+              color: isDark ? Colors.white : Color(0xFF1B1E28),
+              textColor: isDark ? Color(0xFF1B1E28) : Colors.white,
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(3.0)),
+              child: Text('View all Comments'),
+            ),
           ),
         ),
       ),
+      padding: adPadding(context: context),
     );
   }
 
@@ -355,5 +359,8 @@ class _SinglePostState extends State<SinglePost> {
     } else {
       throw Exception('Failed to load data');
     }
+
+    //insertAdd(context);
+
   }
 }

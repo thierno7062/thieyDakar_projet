@@ -1,4 +1,6 @@
 import 'dart:convert';
+import 'package:deco_news/helpers/helpers.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart';
 import '../helpers/wordpress.dart';
@@ -33,34 +35,40 @@ class _HomeScreenState extends State<HomeScreen> {
 
     /// show loading message
     if (isLoading) {
-      return Scaffold(appBar: DecoNewsAppBar(), body: Loading());
+      return Padding(
+        child: Scaffold(appBar: DecoNewsAppBar(), body: Loading()),
+        padding: adPadding(context: context),
+      );
     }
 
     /// show tabs
     return DefaultTabController(
       length: categories.length,
-      child: Scaffold(
-        drawer: DecoNewsDrawer(),
-        appBar: DecoNewsAppBar(
-          bottom: TabBar(
-            isScrollable: true,
-            labelPadding: EdgeInsets.symmetric(horizontal: 20),
-            labelColor: isDark ? Colors.white : Color(0xFF1B1E28),
-            indicatorColor: isDark ? Colors.white : Color(0xFF1B1E28),
-            tabs: categories.map((category) => Tab(text: category.name)).toList(),
+      child: Padding(
+        child: Scaffold(
+          drawer: DecoNewsDrawer(),
+          appBar: DecoNewsAppBar(
+            bottom: TabBar(
+              isScrollable: true,
+              labelPadding: EdgeInsets.symmetric(horizontal: 20),
+              labelColor: isDark ? Colors.white : Color(0xFF1B1E28),
+              indicatorColor: isDark ? Colors.white : Color(0xFF1B1E28),
+              tabs: categories.map((category) => Tab(text: category.name)).toList(),
+            ),
+            actions: <Widget>[
+              IconButton(
+                onPressed: () async {
+                  await showSearch<int>(context: context, delegate: _searchDelegate);
+                },
+                icon: Icon(Icons.search, color: Color(0xFFb3bbbf),),
+              )
+            ],
           ),
-          actions: <Widget>[
-            IconButton(
-              onPressed: () async {
-                await showSearch<int>(context: context, delegate: _searchDelegate);
-              },
-              icon: Icon(Icons.search, color: Color(0xFFb3bbbf),),
-            )
-          ],
+          body: TabBarView(
+              children: categories.map((category) => SingleCategorySliderScreen(category)).toList()
+          ),
         ),
-        body: TabBarView(
-          children: categories.map((category) => SingleCategorySliderScreen(category)).toList()
-        ),
+        padding: adPadding(context: context),
       ),
     );
   }
@@ -85,5 +93,7 @@ class _HomeScreenState extends State<HomeScreen> {
     } else {
       throw Exception('Failed to load data');
     }
+
+    addAdWidget(context: context);
   }
 }

@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:deco_news/config.dart';
+import 'package:facebook_audience_network/facebook_audience_network.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:firebase_admob/firebase_admob.dart';
@@ -35,6 +36,9 @@ class _DecoNewsState extends State<DecoNews> {
   /// Firebase messaging
   static FirebaseMessaging firebaseMessaging = new FirebaseMessaging();
 
+  /// Is adMob add loaded
+  static bool isAdMobLoaded = false;
+
   @override
   void initState() {
     super.initState();
@@ -47,25 +51,50 @@ class _DecoNewsState extends State<DecoNews> {
 
     /// init AdMob
     _initAdMob();
+
+    /// init FacebookAudienceNetwork
+    _initFacebookAudienceNetwork();
+
   }
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      navigatorKey: DecoNews.navKey,
-      title: Config.appTitle,
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-        brightness: _brightness,
-        canvasColor: _brightness == Brightness.dark
-            ? Color(0xFF282C39)
-            : Color(0xFFFAFAFA),
-        primaryColor: _brightness == Brightness.dark
-            ? Color(0xFF1B1E28)
-            : Color(0xFFFFFFFF),
+    return Padding(
+      child: MaterialApp(
+        navigatorKey: DecoNews.navKey,
+        title: Config.appTitle,
+        theme: ThemeData(
+          primarySwatch: Colors.blue,
+          brightness: _brightness,
+          canvasColor: _brightness == Brightness.dark
+              ? Color(0xFF282C39)
+              : Color(0xFFFAFAFA),
+          primaryColor: _brightness == Brightness.dark
+              ? Color(0xFF1B1E28)
+              : Color(0xFFFFFFFF),
+        ),
+        home: HomeScreen(),
       ),
-      home: HomeScreen(),
+      padding: appPadding(),
     );
+  }
+
+  /// Returns app padding depending on the type of ads and their position
+  EdgeInsets appPadding(){
+
+    EdgeInsets padding;
+
+    if(isAdMobLoaded){
+      if(Config.adMobPosition == 'bottom'){
+        padding = EdgeInsets.only(bottom: 100);
+      }else if(Config.adMobPosition == 'top'){
+        padding = EdgeInsets.only(top: 100);
+      }
+    }else {
+      padding = EdgeInsets.all(0);
+    }
+
+    return padding;
   }
 
   /// Returns index of selected item in drawer
@@ -98,6 +127,14 @@ class _DecoNewsState extends State<DecoNews> {
 
     SharedPreferences prefs = await SharedPreferences.getInstance();
     await prefs.setString('brightness', brightness == Brightness.dark ? 'dark' : 'light');
+  }
+
+  /// Change the app padding if adMob ad loads
+  void setAdMobLoaded(bool isLoaded) async{
+    if(isAdMobLoaded != isLoaded)
+      setState(() {
+        isAdMobLoaded = isLoaded;
+      });
   }
 
   /// init push notifications
@@ -226,6 +263,13 @@ class _DecoNewsState extends State<DecoNews> {
       size: AdSize.smartBanner,
       listener: (MobileAdEvent event) {
         print("BannerAd event is $event");
+        if(event == MobileAdEvent.loaded){
+          ///handle a variable if an ad was loaded to enable bottom padding
+          setAdMobLoaded(true);
+        }else if(event == MobileAdEvent.failedToLoad){
+          ///handle a variable if an ad was not loaded to disable additional bottom padding
+          setAdMobLoaded(false);
+        }
       },
     );
 
@@ -233,5 +277,13 @@ class _DecoNewsState extends State<DecoNews> {
     myBanner
       ..load()
       ..show(anchorType: Config.adMobPosition != 'top' ? AnchorType.bottom : AnchorType.top);
+  }
+
+  _initFacebookAudienceNetwork(){
+    if(Config.adType == 'facebook' && Config.facebookAdsEnabled){
+      FacebookAudienceNetwork.init(
+        testingId: Config.facebookTestingId,
+      );
+    }
   }
 }

@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:deco_news/helpers/helpers.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart';
 import '../helpers/wordpress.dart';
@@ -35,7 +36,10 @@ class _SingleCategoryScreenState extends State<SingleCategoryScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(appBar: DecoNewsAppBar(), body: _buildBody());
+    return Padding(
+      child: Scaffold(appBar: DecoNewsAppBar(), body: _buildBody()),
+      padding: adPadding(context: context),
+    );
   }
 
   Widget _buildBody() {
@@ -162,5 +166,7 @@ class _SingleCategoryScreenState extends State<SingleCategoryScreen> {
     } else {
       throw Exception('Failed to load data');
     }
+
+    //insertAdd(context);
   }
 }
