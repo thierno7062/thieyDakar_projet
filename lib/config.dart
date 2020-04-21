@@ -30,11 +30,14 @@ class Config {
   /// type can be 'banner', 'native banner', 'native'
   /// size can be 'small', 'medium', 'large'
   static final facebookAdsEnabled = true;
-  static final facebookAdType = 'banner';
-  static final facebookAdSize = 'small';
+  static final facebookAdType = 'native banner';
+  static final facebookAdSize = 'large';
   static final facebookTestingId = '2785d4c0-2212-475d-8169-3153fb5c8cae';
-  static final facebookAdPosition = 'top';
+  static final facebookAdPosition = 'bottom';
   static final facebookPlacementId = 'YOUR_PLACEMENT_ID';
+  static final facebookBannerAdPlacementId = '845021802674347_846011962575331';
+  static final facebookNativeBannerAdPlacementId = '845021802674347_847316735778187';
+  static final facebookNativeAdPlacementId = '845021802674347_847322475777613';
 
   /// general ads settings
   /// adType can be adMob or facebook

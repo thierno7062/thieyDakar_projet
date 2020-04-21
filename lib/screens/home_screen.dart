@@ -14,12 +14,16 @@ import 'single_category_slider_screen.dart';
 class HomeScreen extends StatefulWidget {
   @override
   _HomeScreenState createState() => _HomeScreenState();
+
+  static _HomeScreenState of(BuildContext context) => context.findAncestorStateOfType<_HomeScreenState>();
+
 }
 
 class _HomeScreenState extends State<HomeScreen> {
   final SearchDemoSearchDelegate _searchDelegate = SearchDemoSearchDelegate();
   bool isLoading = true;
   List<CategoryModel> categories = [];
+  OverlayEntry facebookAdPlacementWidget;
 
   @override
   void initState() {
@@ -94,6 +98,15 @@ class _HomeScreenState extends State<HomeScreen> {
       throw Exception('Failed to load data');
     }
 
-    addAdWidget(context: context);
+    facebookAdPlacementWidget = addAdWidget(context: context);
+  }
+
+  removeAdPlacementWidget(){
+    if (facebookAdPlacementWidget != null) {
+      setState(() {
+        facebookAdPlacementWidget.remove();
+        facebookAdPlacementWidget = null;
+      });
+    }
   }
 }

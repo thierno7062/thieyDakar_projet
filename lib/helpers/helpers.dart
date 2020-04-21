@@ -1,3 +1,7 @@
+import 'package:deco_news/screens/home_screen.dart';
+import 'package:facebook_audience_network/ad/ad_banner.dart';
+import 'package:facebook_audience_network/ad/ad_native.dart';
+import 'package:facebook_audience_network/facebook_audience_network.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import '../config.dart';
@@ -56,19 +60,19 @@ void showErrorDialog(context, String title, String message) {
 
 
 ///Adds ad widget to the bottom of the screen in case facebook ads are enabled
-void addAdWidget({BuildContext context}){
+OverlayEntry addAdWidget({BuildContext context}){
   if(Config.facebookAdsEnabled){
-
     double height = 50.0;
 
-    if(Config.facebookAdType == 'banner' || Config.facebookAdType == 'native banner'){
+    if(Config.facebookAdType == 'banner'){
       if(Config.facebookAdSize == 'small')
         height = 50.0;
       else if(Config.facebookAdSize == 'medium')
         height = 90.0;
       else if(Config.facebookAdSize == 'large')
         height = 250.0;
-    }else if(Config.facebookAdType == 'native'){
+    }
+    else if(Config.facebookAdType == 'native banner' || Config.facebookAdType == 'native'){
       if(Config.facebookAdSize == 'small')
         height = 50.0;
       else if(Config.facebookAdSize == 'medium')
@@ -77,46 +81,42 @@ void addAdWidget({BuildContext context}){
         height = 120.0;
     }
 
-    Overlay.of(context).insert(
-      OverlayEntry(
+    OverlayEntry adPlacementWidget = OverlayEntry(
         builder: (context){
           if(Config.facebookAdPosition == 'bottom')
             return Positioned(
-              child: SizedBox(
-                height: height,
-                width: 320.0,
-                child: Material(
-                  color: Colors.red,
-                ),
-              ),
+              child: adWidget(context),
               bottom: MediaQuery.of(context).padding.bottom,
               left: 0,
               height: height,
               width: MediaQuery.of(context).size.width,
             );
-          else if(Config.facebookAdPosition == 'top')
-            return Positioned(
-              child: SizedBox(
-                height: height,
-                width: 320.0,
-                child: Material(
-                  color: Colors.red,
-                ),
-              ),
-              top: MediaQuery.of(context).padding.top,
-              left: 0,
-              height: height,
-              width: MediaQuery.of(context).size.width,
-            );
-          else
+
+          return Positioned(
+            child: adWidget(context),
+            top: MediaQuery.of(context).padding.top,
+            left: 0,
+            height: height,
+            width: MediaQuery.of(context).size.width,
+          );
+          /* else
             return Container(
               width: 0,
               height: 0,
             );
+
+          */
         }
-      )
     );
+
+    Overlay.of(context).insert(
+      adPlacementWidget
+    );
+
+    return adPlacementWidget;
   }
+
+  return null;
 
 }
 
@@ -153,3 +153,58 @@ EdgeInsets adPadding({BuildContext context, EdgeInsets defaultPadding}){
   return defaultPadding??EdgeInsets.all(0);
 }
 
+Widget adWidget(BuildContext context){
+
+  if (Config.facebookAdType == 'banner')
+    return FacebookBannerAd(
+      placementId: Config.facebookBannerAdPlacementId,
+      bannerSize: Config.facebookAdSize == 'small'
+          ? BannerSize.STANDARD
+          : Config.facebookAdSize == 'medium'
+          ? BannerSize.LARGE
+          : BannerSize.MEDIUM_RECTANGLE,
+      listener: (result, value){
+        print("Banner add result : $result : $value");
+        if(result == BannerAdResult.ERROR)
+          HomeScreen.of(context).removeAdPlacementWidget();
+      },
+    );
+
+  if (Config.facebookAdType == 'native banner')
+    return FacebookNativeAd(
+      width: double.infinity,
+      placementId: Config.facebookNativeBannerAdPlacementId,
+      adType: NativeAdType.NATIVE_BANNER_AD,
+      bannerAdSize: Config.facebookAdSize == 'small'
+          ? NativeBannerAdSize.HEIGHT_50
+          : Config.facebookAdSize == 'medium'
+          ? NativeBannerAdSize.HEIGHT_100
+          : NativeBannerAdSize.HEIGHT_120,
+      listener: (result, value){
+        print("Banner add result : $result : $value");
+        if(result == NativeAdResult.ERROR)
+          HomeScreen.of(context).removeAdPlacementWidget();
+      },
+    );
+
+  if (Config.facebookAdType == 'native')
+    return FacebookNativeAd(
+      width: double.infinity,
+      placementId: Config.facebookNativeAdPlacementId,
+      adType: NativeAdType.NATIVE_AD,
+      bannerAdSize: Config.facebookAdSize == 'small'
+          ? NativeBannerAdSize.HEIGHT_50
+          : Config.facebookAdSize == 'medium'
+          ? NativeBannerAdSize.HEIGHT_100
+          : NativeBannerAdSize.HEIGHT_120,
+      listener: (result, value){
+        print("Banner add result : $result : $value");
+        if(result == NativeAdResult.ERROR)
+          HomeScreen.of(context).removeAdPlacementWidget();
+      },
+    );
+
+  return Placeholder(
+    color: Colors.amber,
+  );
+}

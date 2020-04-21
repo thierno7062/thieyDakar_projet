@@ -1,6 +1,5 @@
 import 'dart:convert';
 import 'package:deco_news/config.dart';
-import 'package:facebook_audience_network/facebook_audience_network.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:firebase_admob/firebase_admob.dart';
@@ -53,7 +52,7 @@ class _DecoNewsState extends State<DecoNews> {
     _initAdMob();
 
     /// init FacebookAudienceNetwork
-    _initFacebookAudienceNetwork();
+    /// _initFacebookAudienceNetwork();
 
   }
 
@@ -279,11 +278,12 @@ class _DecoNewsState extends State<DecoNews> {
       ..show(anchorType: Config.adMobPosition != 'top' ? AnchorType.bottom : AnchorType.top);
   }
 
+  /*
   _initFacebookAudienceNetwork(){
     if(Config.adType == 'facebook' && Config.facebookAdsEnabled){
       FacebookAudienceNetwork.init(
         testingId: Config.facebookTestingId,
       );
     }
-  }
+  }*/
 }
