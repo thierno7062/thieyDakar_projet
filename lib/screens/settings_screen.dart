@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:intl/intl_standalone.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../helpers/deco_localizations.dart';
 import '../config.dart';
@@ -78,10 +77,9 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   Text(DecoLocalizations.of(context).localizedString("enable_right_to_left")),
 
                   Switch(
-                    onChanged: (bool enabled) async{
-                      String systemLocale = await findSystemLocale();
+                    onChanged: (bool enabled) {
                       setState(() {
-                        if(Config.forcedLocale != 'ar' || (!Config.localeCodes.contains(systemLocale) && Config.defaultLocale != 'ar')) {
+                        if(Config.defaultLocale != 'ar') {
                           _rtlEnabled = enabled;
                           _updateRTL(enabled);
                         }
@@ -147,7 +145,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
     setState(() {
       _rtlEnabled = prefs.getBool('isRTLEnabled');
       if (_rtlEnabled == null) {
-        _rtlEnabled = Config.forcedLocale == 'ar' || Config.defaultLocale == 'ar';
+        _rtlEnabled =  Config.defaultLocale == 'ar';
       }
     });
   }

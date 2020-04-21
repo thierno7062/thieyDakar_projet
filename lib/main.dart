@@ -89,22 +89,22 @@ class _DecoNewsState extends State<DecoNews> {
     Locale locale;
     if (_rtlEnabled) {
       locale = Locale('ar');
-    } else if (Config.forcedLocale != '') {
-      locale = Locale(Config.forcedLocale);
+    } else {
+      locale = Locale(Config.defaultLocale);
     }
 
     return locale;
   }
 
-  /// Turns localeCodes from Config.dart into a list of Locales
+  /// Adds locales to the locale list
   List<Locale> _getLocalesFromLocaleCodes() {
     List<Locale> locales = [];
     locales.add(Locale(Config.defaultLocale));
-    for (String s in Config.localeCodes) {
-      if (s != Config.defaultLocale) {
-        locales.add(Locale(s));
-      }
-    }
+
+    if ( Config.defaultLocale!='ar')
+      locales.add(Locale('ar'));
+    else
+      locales.add(Locale('en'));
 
     return locales;
   }
@@ -147,7 +147,7 @@ class _DecoNewsState extends State<DecoNews> {
     bool isRTLEnabled = (prefs.getBool('isRTLEnabled') ?? null);
 
     if (isRTLEnabled == null) {
-      isRTLEnabled = Config.forcedLocale == 'ar' || Config.defaultLocale == 'ar';
+      isRTLEnabled =  Config.defaultLocale == 'ar';
     }
 
     setRTLSettings(isRTLEnabled);

@@ -2,7 +2,6 @@ import 'dart:async';
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import '../config.dart';
 
 class DecoLocalizations {
 
@@ -41,7 +40,7 @@ class DecoLocalizationsDelegate extends LocalizationsDelegate<DecoLocalizations>
 
   @override
   bool isSupported(Locale locale) {
-    return Config.localeCodes.contains(locale.languageCode);
+    return locale.languageCode=='en' || locale.languageCode=='ar';
   }
 
   @override
