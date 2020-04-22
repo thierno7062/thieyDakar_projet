@@ -12,6 +12,10 @@ class Config {
   // static final defaultColor = 'dark';
   static final defaultColor = 'light';
 
+  ///Define your default locale
+  // static final defaultLocale = 'ar';
+  static final defaultLocale = 'en';
+
   /// Define category IDs which you want to exclude
   // static final excludeCategories = [1, 4, 5];
   static final excludeCategories = [];

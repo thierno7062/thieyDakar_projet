@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:http/http.dart';
+import '../helpers/deco_localizations.dart';
 import '../helpers/wordpress.dart';
 import '../models/category_model.dart';
 import '../models/post_model.dart';
@@ -75,54 +76,50 @@ class _SingleCategorySliderScreenState extends State<SingleCategorySliderScreen>
           return false;
         },
         child: SingleChildScrollView(
-          // padding: EdgeInsets.all(10),
           child: Column(
             children: <Widget>[
-              this.featured.length == 0
-                  ? Container()
-                  : Row(
-                      children: <Widget>[
-                        Padding(
-                          padding: const EdgeInsets.all(10.0),
-                          child: Text(
-                            'Featured News',
-                            style: TextStyle(
-                                fontSize: 18.0,
-                                color:
-                                    isDark ? Colors.white : Color(0xFF1B1E28)),
-                          ),
+              if (this.featured.length > 0)
+                Row(
+                    children: <Widget>[
+                      Padding(
+                        padding: const EdgeInsets.all(10.0),
+                        child: Text(
+                          DecoLocalizations.of(context).localizedString("single_category_slider_screen_featured_news"),
+                          style: TextStyle(
+                              fontSize: 18.0,
+                              color:
+                                  isDark ? Colors.white : Color(0xFF1B1E28)),
                         ),
-                      ],
-                    ),
+                      ),
+                    ],
+                  ),
 
               /// Carousel widget
-              featured.length == 0
-                  ? Container()
-                  : Container(
-                      height: 235,
-                      child: Carousel(
-                        showIndicator: false,
-                        pages: featured
-                            .map((PostModel post) => SliderNews(
-                                  post,
-                                  onTap: () {
-                                    int index = featured.indexOf(post);
-                                    Navigator.of(context)
-                                        .push(MaterialPageRoute(
-                                      builder: (context) =>
-                                          SinglePost(featured[index]),
-                                    ));
-                                  },
-                                ))
-                            .toList(),
-                      ),
-                    ),
+              if (featured.length > 0)
+                Container(
+                  height: 235,
+                  child: Carousel(
+                    showIndicator: false,
+                    pages: featured
+                        .map((PostModel post) => SliderNews(
+                              post,
+                              onTap: () {
+                                int index = featured.indexOf(post);
+                                Navigator.of(context)
+                                    .push(MaterialPageRoute(
+                                  builder: (context) =>
+                                      SinglePost(featured[index]),
+                                ));
+                              },
+                            ))
+                        .toList(),
+                  ),
+                ),
 
               Row(
                 children: <Widget>[
                   Padding(
-                    padding:
-                        const EdgeInsets.only(top: 20, bottom: 10, left: 10),
+                    padding: EdgeInsetsDirectional.fromSTEB(10.0, 20.0, 0.0, 10.0),
                     child: Text(
                       this.widget.category.name,
                       style: TextStyle(

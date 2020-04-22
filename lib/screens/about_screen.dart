@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
+import '../helpers/deco_localizations.dart';
 import '../widgets/deco_appbar.dart';
 import '../widgets/deco_news_drawer.dart';
 
@@ -65,7 +66,7 @@ class AboutScreen extends StatelessWidget {
                     children: <Widget>[
                       Expanded(
                         child: Text(
-                          'Amazing list of features',
+                          DecoLocalizations.of(context).localizedString("about_amazing_list_of_features"),
                           style: TextStyle(
                             color: isDark ? Colors.white : Color(0xFF1B1E28),
                             fontSize: 16.0,
@@ -87,7 +88,7 @@ class AboutScreen extends StatelessWidget {
                         ),
                         Expanded(
                           child: Text(
-                            'No need for development skills',
+                            DecoLocalizations.of(context).localizedString("about_no_need_for_development_skills"),
                             style: TextStyle(
                               color: isDark ? Colors.white : Color(0xFF1B1E28),
                             ),
@@ -109,7 +110,7 @@ class AboutScreen extends StatelessWidget {
                         ),
                         Expanded(
                           child: Text(
-                            'Wordpress as Backend',
+                            DecoLocalizations.of(context).localizedString("about_wordpress_as_backend"),
                             style: TextStyle(
                               color: isDark ? Colors.white : Color(0xFF1B1E28),
                             ),
@@ -131,7 +132,7 @@ class AboutScreen extends StatelessWidget {
                         ),
                         Expanded(
                           child: Text(
-                            'Amazing Documentation & Support',
+                            DecoLocalizations.of(context).localizedString("about_amazing_docs"),
                             style: TextStyle(
                               color: isDark ? Colors.white : Color(0xFF1B1E28),
                             ),
@@ -153,7 +154,7 @@ class AboutScreen extends StatelessWidget {
                         ),
                         Expanded(
                           child: Text(
-                            'Firebased Push Notifications',
+                            DecoLocalizations.of(context).localizedString("about_firebased_pushed_notifications"),
                             style: TextStyle(
                               color: isDark ? Colors.white : Color(0xFF1B1E28),
                             ),
@@ -175,7 +176,7 @@ class AboutScreen extends StatelessWidget {
                         ),
                         Expanded(
                           child: Text(
-                            'AdMob Integration',
+                            DecoLocalizations.of(context).localizedString("about_admob_integration"),
                             style: TextStyle(
                               color: isDark ? Colors.white : Color(0xFF1B1E28),
                             ),
@@ -197,7 +198,7 @@ class AboutScreen extends StatelessWidget {
                         ),
                         Expanded(
                           child: Text(
-                            'Light & Dark theme',
+                            DecoLocalizations.of(context).localizedString("about_light_and_dark_theme"),
                             style: TextStyle(
                               color: isDark ? Colors.white : Color(0xFF1B1E28),
                             ),
@@ -219,7 +220,7 @@ class AboutScreen extends StatelessWidget {
                         ),
                         Expanded(
                           child: Text(
-                            'Design files (Sketch, Adobe Xd & Photoshop)',
+                            DecoLocalizations.of(context).localizedString("about_rtl"),
                             style: TextStyle(
                               color: isDark ? Colors.white : Color(0xFF1B1E28),
                             ),
@@ -241,7 +242,7 @@ class AboutScreen extends StatelessWidget {
                         ),
                         Expanded(
                           child: Text(
-                            'Flutter 1.7',
+                            DecoLocalizations.of(context).localizedString("about_design_files"),
                             style: TextStyle(
                               color: isDark ? Colors.white : Color(0xFF1B1E28),
                             ),
@@ -263,7 +264,29 @@ class AboutScreen extends StatelessWidget {
                         ),
                         Expanded(
                           child: Text(
-                            'Compatible with Android & iOS',
+                            DecoLocalizations.of(context).localizedString("about_flutter_version"),
+                            style: TextStyle(
+                              color: isDark ? Colors.white : Color(0xFF1B1E28),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(top: 10.0),
+                    child: Row(
+                      children: <Widget>[
+                        Icon(
+                          Icons.check_box,
+                          color: Color(0xFFCCCBDA),
+                        ),
+                        SizedBox(
+                          width: 10.0,
+                        ),
+                        Expanded(
+                          child: Text(
+                            DecoLocalizations.of(context).localizedString("about_compatible_with_android_and_ios"),
                             style: TextStyle(
                               color: isDark ? Colors.white : Color(0xFF1B1E28),
                             ),
@@ -282,7 +305,7 @@ class AboutScreen extends StatelessWidget {
         child: Container(
           width: double.infinity,
           height: 55.0,
-          margin: EdgeInsets.fromLTRB(10.0, 0, 10.0, 10.0),
+          margin: EdgeInsetsDirectional.fromSTEB(10.0, 0.0, 10.0, 10.0),
           child: RaisedButton(
             onPressed: () async {
               const url = 'https://devspush.com/';
@@ -297,7 +320,7 @@ class AboutScreen extends StatelessWidget {
             textColor: isDark ? Color(0xFF1B1E28) : Colors.white,
             shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(3.0)),
-            child: Text('Purchase Now'),
+            child: Text(DecoLocalizations.of(context).localizedString("purchase_now")),
           ),
         ),
       ),

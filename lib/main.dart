@@ -1,11 +1,13 @@
 import 'dart:convert';
-import 'package:deco_news/config.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:firebase_admob/firebase_admob.dart';
 import 'package:http/http.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'dart:io' show Platform;
+import 'config.dart';
+import 'helpers/deco_localizations.dart';
 import 'helpers/wordpress.dart';
 import 'models/post_model.dart';
 import 'models/category_model.dart';
@@ -32,6 +34,9 @@ class _DecoNewsState extends State<DecoNews> {
   /// Theme brightness
   Brightness _brightness;
 
+  /// Right to left language support
+  bool _rtlEnabled = false;
+
   /// Firebase messaging
   static FirebaseMessaging firebaseMessaging = new FirebaseMessaging();
 
@@ -41,6 +46,9 @@ class _DecoNewsState extends State<DecoNews> {
 
     /// set default app theme
     _setDefaultBrightness();
+
+    ///init runtime RTL support
+    _setDefaultRTLSupport();
 
     /// init push notifications
     _initPushNotifications();
@@ -52,6 +60,7 @@ class _DecoNewsState extends State<DecoNews> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      locale: _getLocale(),
       navigatorKey: DecoNews.navKey,
       title: Config.appTitle,
       theme: ThemeData(
@@ -64,8 +73,40 @@ class _DecoNewsState extends State<DecoNews> {
             ? Color(0xFF1B1E28)
             : Color(0xFFFFFFFF),
       ),
+      localizationsDelegates: <LocalizationsDelegate>[
+        //add custom localizations delegate
+        const DecoLocalizationsDelegate(),
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate
+      ],
+      supportedLocales: _getLocalesFromLocaleCodes(),
       home: HomeScreen(),
     );
+  }
+
+  Locale _getLocale() {
+    Locale locale;
+    if (_rtlEnabled) {
+      locale = Locale('ar');
+    } else {
+      locale = Locale(Config.defaultLocale);
+    }
+
+    return locale;
+  }
+
+  /// Adds locales to the locale list
+  List<Locale> _getLocalesFromLocaleCodes() {
+    List<Locale> locales = [];
+    locales.add(Locale(Config.defaultLocale));
+
+    if ( Config.defaultLocale!='ar')
+      locales.add(Locale('ar'));
+    else
+      locales.add(Locale('en'));
+
+    return locales;
   }
 
   /// Returns index of selected item in drawer
@@ -98,6 +139,26 @@ class _DecoNewsState extends State<DecoNews> {
 
     SharedPreferences prefs = await SharedPreferences.getInstance();
     await prefs.setString('brightness', brightness == Brightness.dark ? 'dark' : 'light');
+  }
+
+  /// On app launch set correct text and screen direction support
+  void _setDefaultRTLSupport() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    bool isRTLEnabled = (prefs.getBool('isRTLEnabled') ?? null);
+
+    if (isRTLEnabled == null) {
+      isRTLEnabled =  Config.defaultLocale == 'ar';
+    }
+
+    setRTLSettings(isRTLEnabled);
+  }
+
+  /// Change right to left support settings
+  Future<void> setRTLSettings(bool enabled) async {
+    setState(() => _rtlEnabled = enabled);
+
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.setBool('isRTLEnabled', enabled);
   }
 
   /// init push notifications

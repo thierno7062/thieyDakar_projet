@@ -4,6 +4,8 @@ import 'package:http/http.dart';
 import 'package:flutter_html/flutter_html.dart';
 import 'package:flutter_html/image_properties.dart';
 import 'package:share/share.dart';
+import '../helpers/deco_localizations.dart';
+import '../helpers/helpers.dart';
 import '../helpers/wordpress.dart';
 import '../widgets/deco_scroll.dart';
 import '../widgets/news.dart';
@@ -75,7 +77,7 @@ class _SinglePostState extends State<SinglePost> {
         child: Container(
           width: double.infinity,
           height: 55.0,
-          margin: EdgeInsets.fromLTRB(10.0, 0, 10.0, 10.0),
+          margin: EdgeInsetsDirectional.fromSTEB(10.0, 0.0, 10.0, 10.0),
           child: RaisedButton(
             onPressed: () => Navigator.of(context).push(MaterialPageRoute(
               builder: (context) => CommentsScreen(this.widget.post.id),
@@ -85,7 +87,7 @@ class _SinglePostState extends State<SinglePost> {
             textColor: isDark ? Color(0xFF1B1E28) : Colors.white,
             shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(3.0)),
-            child: Text('View all Comments'),
+            child: Text(DecoLocalizations.of(context).localizedString("single_post_view_all_comments")),
           ),
         ),
       ),
@@ -169,8 +171,6 @@ class _SinglePostState extends State<SinglePost> {
 
                 deviceWidth < 360 ? _getSmallDate() : _getDate(),
 
-
-                ///
                 /// post content (HTML)
                 Html(
                   blockSpacing: 8.0,
@@ -181,6 +181,9 @@ class _SinglePostState extends State<SinglePost> {
                     fontWeight: FontWeight.normal,
                     height: 16.0 / 14.0,
                   ),
+                  customTextAlign: (node){
+                    return TextAlign.start;
+                  },
                   imageProperties: ImageProperties(
                       width: double.infinity,
                       fit: BoxFit.cover,
@@ -197,7 +200,7 @@ class _SinglePostState extends State<SinglePost> {
                       Padding(
                         padding: const EdgeInsets.symmetric(vertical: 10.0),
                         child: Text(
-                          'Related News',
+                          DecoLocalizations.of(context).localizedString("single_post_related_posts"),
                           style: TextStyle(
                               fontSize: 18.0,
                               color: isDark ? Colors.white : Color(0xFF1B1E28)),
@@ -241,9 +244,9 @@ class _SinglePostState extends State<SinglePost> {
                 color: Color(0xFFCCCBDA),
               ),
               Padding(
-                padding: EdgeInsets.only(left: 8.0),
+                padding: EdgeInsetsDirectional.fromSTEB(8.0, 0.0, 0.0, 0.0),
                 child: Text(
-                  widget.post.date,
+                  localizedDate(context, widget.post.date),
                   style: TextStyle(
                     color: Color(0xFF7F7E96),
                   ),
@@ -263,9 +266,9 @@ class _SinglePostState extends State<SinglePost> {
                   color: Color(0xFFCCCBDA),
                 ),
                 Padding(
-                  padding: EdgeInsets.only(left: 8.0),
+                  padding: EdgeInsetsDirectional.fromSTEB(8.0, 0.0, 0.0, 0.0),
                   child: Text(
-                    'Comments',
+                    DecoLocalizations.of(context).localizedString("comments"),
                     style: TextStyle(
                       color: Color(0xFF7F7E96),
                     ),
@@ -291,9 +294,9 @@ class _SinglePostState extends State<SinglePost> {
             color: Color(0xFFCCCBDA),
           ),
           Padding(
-            padding: EdgeInsets.only(left: 8.0, right: 15.0),
+            padding: EdgeInsetsDirectional.fromSTEB(8.0, 0.0, 15.0, 0.0),
             child: Text(
-              widget.post.date,
+              localizedDate(context,widget.post.date),
               style: TextStyle(
                 color: Color(0xFF7F7E96),
               ),
@@ -310,9 +313,9 @@ class _SinglePostState extends State<SinglePost> {
                   color: Color(0xFFCCCBDA),
                 ),
                 Padding(
-                  padding: EdgeInsets.only(left: 8.0),
+                  padding: EdgeInsetsDirectional.fromSTEB(8.0, 0.0, 0.0, 0.0),
                   child: Text(
-                    'Comments',
+                    DecoLocalizations.of(context).localizedString("comments"),
                     style: TextStyle(
                       color: Color(0xFF7F7E96),
                     ),

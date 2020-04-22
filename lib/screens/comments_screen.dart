@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart';
+import '../helpers/deco_localizations.dart';
 import '../helpers/wordpress.dart';
 import '../models/comment_model.dart';
 import '../widgets/comment.dart';
@@ -44,7 +45,7 @@ class _CommentsScreenState extends State<CommentsScreen> {
         child: Container(
           width: double.infinity,
           height: 55.0,
-          margin: EdgeInsets.fromLTRB(10.0, 0, 10.0, 10.0),
+          margin: EdgeInsetsDirectional.fromSTEB(10.0, 0.0, 10.0, 10.0),
           child: RaisedButton(
             onPressed: () => Navigator.of(context).push(MaterialPageRoute(
                   builder: (context) => CommentsAddScreen(this.widget.postID),
@@ -54,7 +55,7 @@ class _CommentsScreenState extends State<CommentsScreen> {
             textColor: isDark ? Color(0xFF1B1E28) : Colors.white,
             shape:
                 RoundedRectangleBorder(borderRadius: BorderRadius.circular(3.0)),
-            child: Text('Write a Comment'),
+            child: Text(DecoLocalizations.of(context).localizedString("comments_write_a_comment")),
           ),
         ),
       ),
@@ -88,9 +89,9 @@ class _CommentsScreenState extends State<CommentsScreen> {
             return false;
           },
           child: comments.length == 0
-              ? NoData('Sorry no comments here')
+              ? NoData(DecoLocalizations.of(context).localizedString("comments_sorry_no_comments"))
               : SingleChildScrollView(
-                  padding: EdgeInsets.fromLTRB(10, 10, 10, 0),
+                  padding: EdgeInsetsDirectional.fromSTEB(10.0, 10.0, 10.0, 0.0),
                   child: Column(
                     children: <Widget>[
                       Row(
@@ -99,7 +100,7 @@ class _CommentsScreenState extends State<CommentsScreen> {
                             padding: const EdgeInsets.symmetric(
                                 vertical: 10, horizontal: 15),
                             child: Text(
-                              'Comments',
+                              DecoLocalizations.of(context).localizedString("comments"),
                               style: TextStyle(
                                   fontSize: 18.0,
                                   color: isDark

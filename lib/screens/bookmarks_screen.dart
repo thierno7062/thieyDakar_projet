@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart';
+import '../helpers/deco_localizations.dart';
 import '../helpers/wordpress.dart';
 import '../models/category_model.dart';
 import '../models/post_model.dart';
@@ -42,14 +43,15 @@ class _BookmarksScreenState extends State<BookmarksScreen> {
 
     /// show no data message
     if (posts.length == 0) {
-      return NoData('Add something to bookmarks by taping on bookmark icon');
+      return NoData(DecoLocalizations.of(context).localizedString("add_something_to_bookmarks"));
+
     }
 
     bool isDark = Theme.of(context).brightness == Brightness.dark;
 
     /// list of posts
     return SingleChildScrollView(
-      padding: EdgeInsets.only(left: 10, top: 10, right: 10),
+      padding: EdgeInsetsDirectional.fromSTEB(10.0, 10.0, 10.0, 0.0),
       child: Column(
         children: <Widget>[
           Row(
@@ -59,7 +61,7 @@ class _BookmarksScreenState extends State<BookmarksScreen> {
                 padding:
                     const EdgeInsets.symmetric(vertical: 10.0, horizontal: 15),
                 child: Text(
-                  'Bookmarked News',
+                  DecoLocalizations.of(context).localizedString("bookmarked_news"),
                   style: TextStyle(
                       fontSize: 18.0,
                       color: isDark ? Colors.white : Color(0xFF1B1E28)),
@@ -73,7 +75,7 @@ class _BookmarksScreenState extends State<BookmarksScreen> {
                   });
                 },
                 child: Text(
-                  'Clear all',
+                  DecoLocalizations.of(context).localizedString("clear_all"),
                   style: TextStyle(
                     color: isDark ? Colors.white : Color(0xFF1B1E28),
                   ),

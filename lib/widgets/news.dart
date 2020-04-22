@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../helpers/helpers.dart';
 import '../helpers/wordpress.dart';
 import '../models/post_model.dart';
 import '../deco_news_icons.dart';
@@ -192,9 +193,9 @@ class _NewsState extends State<News> {
           size: 20,
         ),
         Padding(
-          padding: const EdgeInsets.only(left: 5.0),
+          padding: const EdgeInsetsDirectional.fromSTEB(5.0, 0.0, 0.0, 0.0),
           child: Text(
-            this.widget.post.date,
+            localizedDate(context, this.widget.post.date),
             style: TextStyle(
               color: Color(0xff7F7E96),
               fontSize: 14,
