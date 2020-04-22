@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'category_model.dart';
 import 'package:html_unescape/html_unescape.dart';
-import 'package:intl/intl.dart';
 
 class PostModel {
   final CategoryModel category;
@@ -33,7 +32,7 @@ class PostModel {
       _getTitle(json['title']['rendered']),
       json['content']['rendered'],
       _getImage(json),
-      DateFormat('d MMM y').format(DateTime.parse(json['date'])),
+      json['date'],
       Uri.decodeFull(json['link'].toString()),
       bookmarks.indexOf(id) >= 0
     );

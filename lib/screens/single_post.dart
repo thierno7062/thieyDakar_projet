@@ -1,10 +1,11 @@
 import 'dart:convert';
-import 'package:deco_news/helpers/helpers.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart';
 import 'package:flutter_html/flutter_html.dart';
 import 'package:flutter_html/image_properties.dart';
 import 'package:share/share.dart';
+import '../helpers/deco_localizations.dart';
+import '../helpers/helpers.dart';
 import '../helpers/wordpress.dart';
 import '../widgets/deco_scroll.dart';
 import '../widgets/news.dart';
@@ -47,52 +48,49 @@ class _SinglePostState extends State<SinglePost> {
 
     double size = deviceWidth / divider;
 
-    return Padding(
-      child: Scaffold(
-        body: DecoScroll(
-          widget.post.id,
-          widget.post.image,
-          size,
-          [_content(context)],
-          appBar: AppBar(
-            backgroundColor: const Color(0xFF1B1E28).withOpacity(0.25),
-            elevation: 0.0,
-            iconTheme: IconThemeData(color: Colors.white),
+    return Scaffold(
+      body: DecoScroll(
+        widget.post.id,
+        widget.post.image,
+        size,
+        [_content(context)],
+        appBar: AppBar(
+          backgroundColor: const Color(0xFF1B1E28).withOpacity(0.25),
+          elevation: 0.0,
+          iconTheme: IconThemeData(color: Colors.white),
 
-            /// share button
-            actions: <Widget>[
-              FlatButton(
-                onPressed: () {
-                  Share.share(
-                      this.widget.post.title + ' ' + this.widget.post.link);
-                },
-                child: Icon(Icons.share, color: Colors.white),
-              )
-            ],
-          ),
-          padding: 10.0,
-          contentOffset: 30.0,
+          /// share button
+          actions: <Widget>[
+            FlatButton(
+              onPressed: () {
+                Share.share(
+                    this.widget.post.title + ' ' + this.widget.post.link);
+              },
+              child: Icon(Icons.share, color: Colors.white),
+            )
+          ],
         ),
-        bottomNavigationBar: SafeArea(
-          child: Container(
-            width: double.infinity,
-            height: 55.0,
-            margin: EdgeInsets.fromLTRB(10.0, 0, 10.0, 10.0),
-            child: RaisedButton(
-              onPressed: () => Navigator.of(context).push(MaterialPageRoute(
-                builder: (context) => CommentsScreen(this.widget.post.id),
-              )),
-              padding: EdgeInsets.all(0),
-              color: isDark ? Colors.white : Color(0xFF1B1E28),
-              textColor: isDark ? Color(0xFF1B1E28) : Colors.white,
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(3.0)),
-              child: Text('View all Comments'),
-            ),
+        padding: 10.0,
+        contentOffset: 30.0,
+      ),
+      bottomNavigationBar: SafeArea(
+        child: Container(
+          width: double.infinity,
+          height: 55.0,
+          margin: EdgeInsetsDirectional.fromSTEB(10.0, 0.0, 10.0, 10.0),
+          child: RaisedButton(
+            onPressed: () => Navigator.of(context).push(MaterialPageRoute(
+              builder: (context) => CommentsScreen(this.widget.post.id),
+            )),
+            padding: EdgeInsets.all(0),
+            color: isDark ? Colors.white : Color(0xFF1B1E28),
+            textColor: isDark ? Color(0xFF1B1E28) : Colors.white,
+            shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(3.0)),
+            child: Text(DecoLocalizations.of(context).localizedString("single_post_view_all_comments")),
           ),
         ),
       ),
-      padding: adPadding(context: context),
     );
   }
 
@@ -173,8 +171,6 @@ class _SinglePostState extends State<SinglePost> {
 
                 deviceWidth < 360 ? _getSmallDate() : _getDate(),
 
-
-                ///
                 /// post content (HTML)
                 Html(
                   blockSpacing: 8.0,
@@ -185,6 +181,9 @@ class _SinglePostState extends State<SinglePost> {
                     fontWeight: FontWeight.normal,
                     height: 16.0 / 14.0,
                   ),
+                  customTextAlign: (node){
+                    return TextAlign.start;
+                  },
                   imageProperties: ImageProperties(
                       width: double.infinity,
                       fit: BoxFit.cover,
@@ -201,7 +200,7 @@ class _SinglePostState extends State<SinglePost> {
                       Padding(
                         padding: const EdgeInsets.symmetric(vertical: 10.0),
                         child: Text(
-                          'Related News',
+                          DecoLocalizations.of(context).localizedString("single_post_related_posts"),
                           style: TextStyle(
                               fontSize: 18.0,
                               color: isDark ? Colors.white : Color(0xFF1B1E28)),
@@ -245,9 +244,9 @@ class _SinglePostState extends State<SinglePost> {
                 color: Color(0xFFCCCBDA),
               ),
               Padding(
-                padding: EdgeInsets.only(left: 8.0),
+                padding: EdgeInsetsDirectional.fromSTEB(8.0, 0.0, 0.0, 0.0),
                 child: Text(
-                  widget.post.date,
+                  localizedDate(context, widget.post.date),
                   style: TextStyle(
                     color: Color(0xFF7F7E96),
                   ),
@@ -267,9 +266,9 @@ class _SinglePostState extends State<SinglePost> {
                   color: Color(0xFFCCCBDA),
                 ),
                 Padding(
-                  padding: EdgeInsets.only(left: 8.0),
+                  padding: EdgeInsetsDirectional.fromSTEB(8.0, 0.0, 0.0, 0.0),
                   child: Text(
-                    'Comments',
+                    DecoLocalizations.of(context).localizedString("comments"),
                     style: TextStyle(
                       color: Color(0xFF7F7E96),
                     ),
@@ -295,9 +294,9 @@ class _SinglePostState extends State<SinglePost> {
             color: Color(0xFFCCCBDA),
           ),
           Padding(
-            padding: EdgeInsets.only(left: 8.0, right: 15.0),
+            padding: EdgeInsetsDirectional.fromSTEB(8.0, 0.0, 15.0, 0.0),
             child: Text(
-              widget.post.date,
+              localizedDate(context,widget.post.date),
               style: TextStyle(
                 color: Color(0xFF7F7E96),
               ),
@@ -314,9 +313,9 @@ class _SinglePostState extends State<SinglePost> {
                   color: Color(0xFFCCCBDA),
                 ),
                 Padding(
-                  padding: EdgeInsets.only(left: 8.0),
+                  padding: EdgeInsetsDirectional.fromSTEB(8.0, 0.0, 0.0, 0.0),
                   child: Text(
-                    'Comments',
+                    DecoLocalizations.of(context).localizedString("comments"),
                     style: TextStyle(
                       color: Color(0xFF7F7E96),
                     ),
@@ -359,8 +358,5 @@ class _SinglePostState extends State<SinglePost> {
     } else {
       throw Exception('Failed to load data');
     }
-
-    //insertAdd(context);
-
   }
 }

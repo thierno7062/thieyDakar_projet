@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 
 class CommentModel {
   final int id;
@@ -22,7 +21,7 @@ class CommentModel {
       authorName: json['author_name'],
       authorAvatar: _getImage(json['author_avatar_urls']),
       content: json['content']['rendered'],
-      date: DateFormat('d MMM y').format(DateTime.parse(json['date']))
+      date: json['date'].toString(),
     );
   }
 

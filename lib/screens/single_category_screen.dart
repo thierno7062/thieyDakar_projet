@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'package:deco_news/helpers/helpers.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart';
+import '../helpers/deco_localizations.dart';
 import '../helpers/wordpress.dart';
 import '../models/category_model.dart';
 import '../models/post_model.dart';
@@ -77,7 +78,7 @@ class _SingleCategoryScreenState extends State<SingleCategoryScreen> {
                   Padding(
                     padding: const EdgeInsets.symmetric(vertical: 10.0, horizontal: 15),
                     child: Text(
-                      'Recent News',
+                      DecoLocalizations.of(context).localizedString("single_category_recent_news"),
                       style: TextStyle(
                         fontSize: 18.0,
                         color: isDark ? Colors.white : Color(0xFF1B1E28)

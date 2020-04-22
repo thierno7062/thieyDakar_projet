@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../helpers/deco_localizations.dart';
 import '../models/post_model.dart';
 import 'news.dart';
 
@@ -23,7 +24,7 @@ class SearchResults extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.symmetric(vertical: 10.0, horizontal: 15),
                 child: Text(
-                  'Results',
+                  DecoLocalizations.of(context).localizedString("search_results"),
                   style: TextStyle(
                     fontSize: 18.0,
                     color: isDark ? Colors.white : Color(0xFF1B1E28),
