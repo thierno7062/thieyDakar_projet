@@ -220,6 +220,28 @@ class AboutScreen extends StatelessWidget {
                         ),
                         Expanded(
                           child: Text(
+                            DecoLocalizations.of(context).localizedString("about_rtl"),
+                            style: TextStyle(
+                              color: isDark ? Colors.white : Color(0xFF1B1E28),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(top: 10.0),
+                    child: Row(
+                      children: <Widget>[
+                        Icon(
+                          Icons.check_box,
+                          color: Color(0xFFCCCBDA),
+                        ),
+                        SizedBox(
+                          width: 10.0,
+                        ),
+                        Expanded(
+                          child: Text(
                             DecoLocalizations.of(context).localizedString("about_design_files"),
                             style: TextStyle(
                               color: isDark ? Colors.white : Color(0xFF1B1E28),
