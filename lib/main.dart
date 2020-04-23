@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:ui';
 import 'package:deco_news/config.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter/material.dart';
@@ -38,6 +39,9 @@ class _DecoNewsState extends State<DecoNews> {
   /// Right to left language support
   bool _rtlEnabled = false;
 
+  /// Determines if adMob ad is loaded
+  bool isAdMobLoaded = false;
+
   /// Firebase messaging
   static FirebaseMessaging firebaseMessaging = new FirebaseMessaging();
 
@@ -56,53 +60,66 @@ class _DecoNewsState extends State<DecoNews> {
 
     /// init AdMob
     _initAdMob();
+
   }
 
   @override
   Widget build(BuildContext context) {
     return Padding(
-        child: MaterialApp(
-      navigatorKey: DecoNews.navKey,
-      title: Config.appTitle,
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-        brightness: _brightness,
-        canvasColor: _brightness == Brightness.dark
-            ? Color(0xFF282C39)
-            : Color(0xFFFAFAFA),
-        primaryColor: _brightness == Brightness.dark
-            ? Color(0xFF1B1E28)
-            : Color(0xFFFFFFFF),
-      ),
-      localizationsDelegates: <LocalizationsDelegate>[
-        //add custom localizations delegate
-        const DecoLocalizationsDelegate(),
-        GlobalMaterialLocalizations.delegate,
-        GlobalWidgetsLocalizations.delegate,
-        GlobalCupertinoLocalizations.delegate
-      ],
-      supportedLocales: _getLocalesFromLocaleCodes(),
-      home: HomeScreen(),
-            padding: appPadding(),
+      child: MaterialApp(
+          locale: _getLocale(),
+          navigatorKey: DecoNews.navKey,
+          title: Config.appTitle,
+          theme: ThemeData(
+            primarySwatch: Colors.blue,
+            brightness: _brightness,
+            canvasColor: _brightness == Brightness.dark
+                ? Color(0xFF282C39)
+                : Color(0xFFFAFAFA),
+            primaryColor: _brightness == Brightness.dark
+                ? Color(0xFF1B1E28)
+                : Color(0xFFFFFFFF),
+          ),
+          localizationsDelegates: <LocalizationsDelegate>[
+            //add custom localizations delegate
+            const DecoLocalizationsDelegate(),
+            GlobalMaterialLocalizations.delegate,
+            GlobalWidgetsLocalizations.delegate,
+            GlobalCupertinoLocalizations.delegate
+          ],
+          supportedLocales: _getLocalesFromLocaleCodes(),
+          home: HomeScreen()),
+      padding: appPadding(),
     );
   }
 
   /// Returns app padding depending on the type of ads and their position
   EdgeInsets appPadding(){
 
-    EdgeInsets padding;
+    /// Pošto je adSize smartBanner veličina Banner-a je zavisna od visine ekrana
+    /// Ako je ekran manji ili jednak 400px reklama je 32px
+    /// Ako je veći od 400px a manji ili jednak 720px reklama je 50px
+    /// Ako je veći od 720px reklama je veličine 90px
+    /// Shodno tome treba i dodavati padding da reklama ne bi preklopila sadržaj
 
-    if(isAdMobLoaded){
-      if(Config.adMobPosition == 'bottom'){
-        padding = EdgeInsets.only(bottom: 100);
-      }else if(Config.adMobPosition == 'top'){
-        padding = EdgeInsets.only(top: 100);
+    double screenHeight = MediaQueryData.fromWindow(window).size.height;;
+    double adHeight = 32;
+
+    if(screenHeight > 400 && screenHeight <= 720)
+      adHeight = 50;
+    else if(screenHeight > 720)
+      adHeight = 90;
+
+    if(isAdMobLoaded) {
+      if (Config.adMobPosition == 'bottom') {
+        return EdgeInsets.only(bottom: adHeight);
       }
-    }else {
-      padding = EdgeInsets.all(0);
+
+      return EdgeInsets.only(top: adHeight);
     }
 
-    return padding;
+      return EdgeInsets.all(0);
+
   }
 
   Locale _getLocale() {

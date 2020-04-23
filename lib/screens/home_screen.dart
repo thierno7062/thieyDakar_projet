@@ -12,10 +12,11 @@ import '../widgets/deco_news_drawer.dart';
 import 'single_category_slider_screen.dart';
 
 class HomeScreen extends StatefulWidget {
+
   @override
   _HomeScreenState createState() => _HomeScreenState();
 
-  static _HomeScreenState of(BuildContext context) => context.findAncestorStateOfType<_HomeScreenState>();
+   static _HomeScreenState of(BuildContext context) => context.findAncestorStateOfType<_HomeScreenState>();
 
 }
 
@@ -31,10 +32,25 @@ class _HomeScreenState extends State<HomeScreen> {
 
     /// load list of categories
     _loadData();
+
+    /// add ad-space overlay after build
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+      setState(() {
+        facebookAdPlacementWidget = addAdWidget(context: context);
+      });
+    });
+
   }
 
   @override
   Widget build(BuildContext context) {
+    if(facebookAdPlacementWidget==null)
+      print("not added overlay");
+   //   facebookAdPlacementWidget = addAdWidget(context: context);
+
+    if(facebookAdPlacementWidget!=null)
+      print("Added overlay");
+
     bool isDark = Theme.of(context).brightness == Brightness.dark;
 
     /// show loading message
@@ -98,15 +114,17 @@ class _HomeScreenState extends State<HomeScreen> {
       throw Exception('Failed to load data');
     }
 
-    facebookAdPlacementWidget = addAdWidget(context: context);
   }
 
-  removeAdPlacementWidget(){
+ /*  removeAdPlacementWidget(){
     if (facebookAdPlacementWidget != null) {
       setState(() {
+        print("removing add placement widget");
         facebookAdPlacementWidget.remove();
-        facebookAdPlacementWidget = null;
       });
+    } else {
+      print("Add placement widget is a null");
     }
-  }
+  } */
+
 }
