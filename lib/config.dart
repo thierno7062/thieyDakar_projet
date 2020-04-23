@@ -30,7 +30,7 @@ class Config {
   static final adMobAdUnitID = BannerAd.testAdUnitId;
   static final adMobPosition = 'bottom';
 
-  /// Facebook Audience Network (Facebook ads) settings
+  /// Facebook Audience Network (Facebook ads) settings - currently only for Android.
   /// Type can be 'banner', 'native banner', 'native'
   /// For each type PlacementID has to be defined
   /// Size for banners can be 'small' and 'medium'
