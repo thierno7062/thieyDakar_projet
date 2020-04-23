@@ -48,7 +48,6 @@ class _DecoScrollState extends State<DecoScroll> {
                   top: this.widget.height - this.widget.contentOffset,
                   left: this.widget.padding,
                   right: this.widget.padding,
-                //  bottom: Config.adMobEnabled?100:Config.facebookAdsEnabled?50:0,
               ),
               controller: scrollController,
               children: <Widget>[

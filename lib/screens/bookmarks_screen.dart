@@ -1,7 +1,7 @@
 import 'dart:convert';
-import 'package:deco_news/helpers/helpers.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart';
+import '../helpers/helpers.dart';
 import '../helpers/deco_localizations.dart';
 import '../helpers/wordpress.dart';
 import '../models/category_model.dart';
@@ -28,28 +28,17 @@ class _BookmarksScreenState extends State<BookmarksScreen> {
 
     /// load bookmarked posts
     _loadData();
-
-    /*
-    WidgetsBinding.instance.addPersistentFrameCallback((timeStamp) {
-      Overlay.of(context).insert(
-          OverlayEntry(builder: (context){
-            return Container(
-              color: Colors.green,
-              width: 50,
-              height: 50,
-            );
-          })
-      );
-    }); */
-
   }
 
   @override
   Widget build(BuildContext context) {
     return Padding(
-      child: Scaffold(
-          appBar: DecoNewsAppBar(), drawer: DecoNewsDrawer(), body: _buildBody()),
       padding: adPadding(context: context),
+      child: Scaffold(
+          appBar: DecoNewsAppBar(),
+          drawer: DecoNewsDrawer(),
+          body: _buildBody()
+      ),
     );
   }
 
@@ -168,6 +157,5 @@ class _BookmarksScreenState extends State<BookmarksScreen> {
         isLoading = false;
       });
     }
-
   }
 }

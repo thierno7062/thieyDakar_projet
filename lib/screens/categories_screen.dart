@@ -1,7 +1,7 @@
 import 'dart:convert';
-import 'package:deco_news/helpers/helpers.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart';
+import '../helpers/helpers.dart';
 import '../helpers/wordpress.dart';
 import '../models/category_model.dart';
 import '../widgets/category.dart';
@@ -30,12 +30,12 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      child: Scaffold(
-          appBar: DecoNewsAppBar(),
-          drawer: DecoNewsDrawer(),
-          body: _buildBody()
-      ),
       padding: adPadding(context: context),
+      child: Scaffold(
+        appBar: DecoNewsAppBar(),
+        drawer: DecoNewsDrawer(),
+        body: _buildBody()
+      ),
     );
   }
 
@@ -92,7 +92,5 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
     } else {
       throw Exception('Failed to load data');
     }
-
-    //insertAdd(context);
   }
 }

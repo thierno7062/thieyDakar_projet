@@ -2,7 +2,7 @@ import 'package:firebase_admob/firebase_admob.dart';
 
 class Config {
 
-  ///Define your app title here
+  /// Define your app title here
   static const appTitle = 'Deco News';
 
   /// Define your WordPress API url here
@@ -12,7 +12,7 @@ class Config {
   // static final defaultColor = 'dark';
   static final defaultColor = 'light';
 
-  ///Define your default locale
+  /// Define your default locale
   // static final defaultLocale = 'ar';
   static final defaultLocale = 'en';
 
@@ -30,7 +30,7 @@ class Config {
   static final adMobAdUnitID = BannerAd.testAdUnitId;
   static final adMobPosition = 'bottom';
 
-  /// Facebook Audience Network (Facebook ads) settings
+  /// Facebook Audience Network (Facebook ads) settings - Android only for now
   /// type can be 'banner', 'native banner', 'native'
   /// size can be 'small', 'medium', 'large'
   static const facebookAdsEnabled = true;
@@ -45,10 +45,4 @@ class Config {
   static const facebookLargeBannerAdPlacementId = '845021802674347_848282385681622';
   static var facebookAdLoaded = true;
   static var facebookAdOverlay;
-
-  /// general ads settings
-  /// adType can be adMob or facebook
-  /// this is considered only if both facebook and adMob ads are enabled
-  static final adType = 'facebook';
-
 }

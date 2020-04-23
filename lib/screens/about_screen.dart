@@ -1,8 +1,7 @@
-import 'package:deco_news/helpers/helpers.dart';
-
-import '../helpers/deco_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
+import '../helpers/helpers.dart';
+import '../helpers/deco_localizations.dart';
 import '../widgets/deco_appbar.dart';
 import '../widgets/deco_news_drawer.dart';
 

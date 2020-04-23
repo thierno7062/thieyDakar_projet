@@ -49,6 +49,7 @@ class _SinglePostState extends State<SinglePost> {
     double size = deviceWidth / divider;
 
     return Padding(
+      padding: adPadding(context: context),
       child: Scaffold(
         body: DecoScroll(
           widget.post.id,
@@ -93,7 +94,6 @@ class _SinglePostState extends State<SinglePost> {
           ),
         ),
       ),
-      padding: adPadding(context: context),
     );
   }
 
