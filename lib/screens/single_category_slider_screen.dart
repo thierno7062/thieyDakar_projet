@@ -152,15 +152,6 @@ class _SingleCategorySliderScreenState extends State<SingleCategorySliderScreen>
               ),
 
               LoadingInfinite(canLoadMore),
-
-              /*
-              FacebookBannerAd(
-                placementId: "845021802674347_846011962575331",
-                bannerSize: BannerSize.STANDARD,
-                listener: (result, value){
-                  print("FACEBOOK BANNER RESULT $result --> $value");
-                },
-              ), */
             ],
           ),
         ),

@@ -24,31 +24,37 @@ class Config {
   static final pushNotificationsEnabled = true;
 
   /// AdMob settings
-  static final adMobEnabled = false;
+  static final adMobEnabled = true;
   static final adMobiOSAppID = 'ca-app-pub-7868270859526221~2024798504';
   static final adMobAndroidID = 'ca-app-pub-7868270859526221~7198068286';
   static final adMobAdUnitID = BannerAd.testAdUnitId;
   static final adMobPosition = 'bottom';
 
   /// Facebook Audience Network (Facebook ads) settings
-  /// type can be 'banner', 'native banner', 'native'
-  /// size can be 'small', 'medium', 'large'
-  static const facebookAdsEnabled = true;
+  /// Type can be 'banner', 'native banner', 'native'
+  /// For each type PlacementID has to be defined
+  /// Size for banners can be 'small' and 'medium'
+  /// Size for native and native banner ad can be 'small', 'medium' and 'large'
+  /// Replace the placementIds with your own from the https://developers.facebook.com/
+  static const facebookAdsEnabled = false;
   static const facebookAdType = 'banner';
   static const facebookAdSize = 'large';
   static const facebookTestingId = '2785d4c0-2212-475d-8169-3153fb5c8cae';
   static const facebookAdPosition = 'bottom';
   static const facebookPlacementId = 'YOUR_PLACEMENT_ID';
+
+  /// After adding Banner Placement copy the PlacementID here
   static const facebookBannerAdPlacementId = '845021802674347_846011962575331';
+
+  /// After adding Native Banner Placement copy the PlacementID here
   static const facebookNativeBannerAdPlacementId = '845021802674347_847316735778187';
+
+  /// After adding Native Ad Placement copy the PlacementID here
   static const facebookNativeAdPlacementId = '845021802674347_847322475777613';
-  static const facebookLargeBannerAdPlacementId = '845021802674347_848282385681622';
   static var facebookAdLoaded = true;
   static var facebookAdOverlay;
 
-  /// general ads settings
-  /// adType can be adMob or facebook
-  /// this is considered only if both facebook and adMob ads are enabled
-  static final adType = 'facebook';
+  /// You should not have both adMob and Facebook Ads enabled at the same time.
+  /// Although it is possible to show one banner at the top and the other one at the bottom, it is not recommended.
 
 }

@@ -98,11 +98,11 @@ class _DecoNewsState extends State<DecoNews> {
   /// Returns app padding depending on the type of ads and their position
   EdgeInsets appPadding(){
 
-    /// Pošto je adSize smartBanner veličina Banner-a je zavisna od visine ekrana
-    /// Ako je ekran manji ili jednak 400px reklama je 32px
-    /// Ako je veći od 400px a manji ili jednak 720px reklama je 50px
-    /// Ako je veći od 720px reklama je veličine 90px
-    /// Shodno tome treba i dodavati padding da reklama ne bi preklopila sadržaj
+    /// Since banner size for adMob banner is depending on screen height
+    /// If the screen height is lesser or equal to 400px, banner height is 32px
+    /// If the screen height is bigger than 400px and smaller or equal to 720px banner height is 50px
+    /// If the screen height is bigger than 720px banner height is 90px
+    /// Accordingly, screen padding is set, so the content is not covered by the banner.
 
     double screenHeight = MediaQueryData.fromWindow(window).size.height;;
     double adHeight = 32;
