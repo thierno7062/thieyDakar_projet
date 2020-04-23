@@ -1,6 +1,6 @@
-import 'package:deco_news/helpers/helpers.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import '../helpers/helpers.dart';
 import '../helpers/deco_localizations.dart';
 import '../config.dart';
 import '../widgets/deco_appbar.dart';
@@ -28,6 +28,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
   @override
   Widget build(BuildContext context) {
     return Padding(
+      padding: adPadding(context: context),
       child: Scaffold(
         appBar: DecoNewsAppBar(),
         drawer: DecoNewsDrawer(),
@@ -125,7 +126,6 @@ class _SettingsScreenState extends State<SettingsScreen> {
           ),
         ),
       ),
-      padding: adPadding(context: context),
     );
   }
 

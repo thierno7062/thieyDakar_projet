@@ -1,7 +1,7 @@
 import 'dart:convert';
-import 'package:deco_news/helpers/helpers.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart';
+import '../helpers/helpers.dart';
 import '../helpers/deco_localizations.dart';
 import '../helpers/wordpress.dart';
 import '../models/comment_model.dart';
@@ -40,6 +40,7 @@ class _CommentsScreenState extends State<CommentsScreen> {
     bool isDark = Theme.of(context).brightness == Brightness.dark;
 
     return Padding(
+      padding: adPadding(context: context),
       child: Scaffold(
         appBar: DecoNewsAppBar(),
         body: _buildBody(),
@@ -62,7 +63,6 @@ class _CommentsScreenState extends State<CommentsScreen> {
           ),
         ),
       ),
-      padding: adPadding(context: context),
     );
   }
 

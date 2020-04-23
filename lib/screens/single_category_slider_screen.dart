@@ -219,8 +219,5 @@ class _SingleCategorySliderScreenState extends State<SingleCategorySliderScreen>
     } else {
       throw Exception('Failed to load data');
     }
-
-    //insertAdd(context);
-
   }
 }

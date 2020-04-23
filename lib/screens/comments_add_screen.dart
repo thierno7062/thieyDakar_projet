@@ -70,6 +70,7 @@ class _CommentsAddScreenState extends State<CommentsAddScreen> {
     bool isDark = Theme.of(context).brightness == Brightness.dark;
 
     return Padding(
+      padding: adPadding(context: context),
       child: Scaffold(
         appBar: DecoNewsAppBar(),
         body: GestureDetector(
@@ -164,7 +165,6 @@ class _CommentsAddScreenState extends State<CommentsAddScreen> {
           ),
         ),
       ),
-      padding: adPadding(context: context),
     );
   }
 
