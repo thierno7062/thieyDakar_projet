@@ -187,6 +187,7 @@ Widget adWidget(BuildContext context){
         if(result == BannerAdResult.ERROR) {
           Config.facebookAdLoaded = false;
           Config.facebookAdOverlay.remove();
+          Config.facebookAdOverlay = null;
         }
       },
     );
@@ -206,6 +207,7 @@ Widget adWidget(BuildContext context){
         if(result == NativeAdResult.ERROR) {
           Config.facebookAdLoaded = false;
           Config.facebookAdOverlay.remove();
+          Config.facebookAdOverlay = null;
         }
       },
     );
@@ -225,6 +227,7 @@ Widget adWidget(BuildContext context){
         if(result == NativeAdResult.ERROR) {
           Config.facebookAdLoaded = false;
           Config.facebookAdOverlay.remove();
+          Config.facebookAdOverlay = null;
         }
       },
     );

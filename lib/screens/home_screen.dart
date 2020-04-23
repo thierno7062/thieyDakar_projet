@@ -38,6 +38,7 @@ class _HomeScreenState extends State<HomeScreen> {
     /// add ad-space overlay after build
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
       setState(() {
+        if(Config.facebookAdOverlay==null)
         Config.facebookAdOverlay = addAdWidget(context: context);
       });
     });
