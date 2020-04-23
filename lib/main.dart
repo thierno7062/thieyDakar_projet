@@ -88,10 +88,12 @@ class _DecoNewsState extends State<DecoNews> {
             GlobalCupertinoLocalizations.delegate
           ],
           supportedLocales: _getLocalesFromLocaleCodes(),
-          home: HomeScreen()),
+          home: HomeScreen()
+      ),
       padding: appPadding(),
     );
   }
+
 
   /// Returns app padding depending on the type of ads and their position
   EdgeInsets appPadding(){

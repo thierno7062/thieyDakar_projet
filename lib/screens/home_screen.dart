@@ -3,6 +3,7 @@ import 'package:deco_news/helpers/helpers.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart';
+import '../config.dart';
 import '../helpers/wordpress.dart';
 import '../helpers/search.dart';
 import '../widgets/deco_appbar.dart';
@@ -24,7 +25,7 @@ class _HomeScreenState extends State<HomeScreen> {
   final SearchDemoSearchDelegate _searchDelegate = SearchDemoSearchDelegate();
   bool isLoading = true;
   List<CategoryModel> categories = [];
-  OverlayEntry facebookAdPlacementWidget;
+  //OverlayEntry facebookAdPlacementWidget;
 
   @override
   void initState() {
@@ -33,10 +34,11 @@ class _HomeScreenState extends State<HomeScreen> {
     /// load list of categories
     _loadData();
 
+
     /// add ad-space overlay after build
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
       setState(() {
-        facebookAdPlacementWidget = addAdWidget(context: context);
+        Config.facebookAdOverlay = addAdWidget(context: context);
       });
     });
 
@@ -44,12 +46,12 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    if(facebookAdPlacementWidget==null)
-      print("not added overlay");
+   // if(facebookAdPlacementWidget==null)
+   //   print("not added overlay");
    //   facebookAdPlacementWidget = addAdWidget(context: context);
-
-    if(facebookAdPlacementWidget!=null)
-      print("Added overlay");
+//
+   // if(facebookAdPlacementWidget!=null)
+    //  print("Added overlay");
 
     bool isDark = Theme.of(context).brightness == Brightness.dark;
 

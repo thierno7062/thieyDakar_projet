@@ -44,6 +44,7 @@ class Config {
   static const facebookNativeAdPlacementId = '845021802674347_847322475777613';
   static const facebookLargeBannerAdPlacementId = '845021802674347_848282385681622';
   static var facebookAdLoaded = true;
+  static var facebookAdOverlay;
 
   /// general ads settings
   /// adType can be adMob or facebook

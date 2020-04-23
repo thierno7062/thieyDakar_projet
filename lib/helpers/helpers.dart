@@ -1,4 +1,3 @@
-import 'package:deco_news/screens/home_screen.dart';
 import 'package:facebook_audience_network/ad/ad_banner.dart';
 import 'package:facebook_audience_network/ad/ad_native.dart';
 import 'package:flutter/material.dart';
@@ -187,8 +186,7 @@ Widget adWidget(BuildContext context){
         print("Banner add result : $result : $value");
         if(result == BannerAdResult.ERROR) {
           Config.facebookAdLoaded = false;
-          print("Removing from entry");
-          HomeScreen.of(context).facebookAdPlacementWidget.remove();
+          Config.facebookAdOverlay.remove();
         }
       },
     );
@@ -207,8 +205,7 @@ Widget adWidget(BuildContext context){
         print("Banner add result : $result : $value");
         if(result == NativeAdResult.ERROR) {
           Config.facebookAdLoaded = false;
-          print("Removing from entry");
-          //HomeScreen.of(context).removeAdPlacementWidget();
+          Config.facebookAdOverlay.remove();
         }
       },
     );
@@ -227,8 +224,7 @@ Widget adWidget(BuildContext context){
         print("Banner add result : $result : $value");
         if(result == NativeAdResult.ERROR) {
           Config.facebookAdLoaded = false;
-          print("Removing from entry");
-        //  HomeScreen.of(context).removeAdPlacementWidget();
+          Config.facebookAdOverlay.remove();
         }
       },
     );
