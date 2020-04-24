@@ -47,7 +47,8 @@ class _DecoScrollState extends State<DecoScroll> {
               padding: EdgeInsets.only(
                   top: this.widget.height - this.widget.contentOffset,
                   left: this.widget.padding,
-                  right: this.widget.padding),
+                  right: this.widget.padding,
+              ),
               controller: scrollController,
               children: <Widget>[
                 Column(

@@ -1,6 +1,9 @@
 import 'dart:convert';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart';
+import '../config.dart';
+import '../helpers/helpers.dart';
 import '../helpers/wordpress.dart';
 import '../helpers/search.dart';
 import '../widgets/deco_appbar.dart';
@@ -10,8 +13,11 @@ import '../widgets/deco_news_drawer.dart';
 import 'single_category_slider_screen.dart';
 
 class HomeScreen extends StatefulWidget {
+
   @override
   _HomeScreenState createState() => _HomeScreenState();
+
+   static _HomeScreenState of(BuildContext context) => context.findAncestorStateOfType<_HomeScreenState>();
 }
 
 class _HomeScreenState extends State<HomeScreen> {
@@ -25,6 +31,15 @@ class _HomeScreenState extends State<HomeScreen> {
 
     /// load list of categories
     _loadData();
+
+    /// add ad-space overlay after build
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+      setState(() {
+        if (Config.facebookAdOverlay == null) {
+          Config.facebookAdOverlay = addAdWidget(context: context);
+        }
+      });
+    });
   }
 
   @override
@@ -33,33 +48,39 @@ class _HomeScreenState extends State<HomeScreen> {
 
     /// show loading message
     if (isLoading) {
-      return Scaffold(appBar: DecoNewsAppBar(), body: Loading());
+      return Padding(
+        padding: adPadding(context: context),
+        child: Scaffold(appBar: DecoNewsAppBar(), body: Loading()),
+      );
     }
 
     /// show tabs
     return DefaultTabController(
       length: categories.length,
-      child: Scaffold(
-        drawer: DecoNewsDrawer(),
-        appBar: DecoNewsAppBar(
-          bottom: TabBar(
-            isScrollable: true,
-            labelPadding: EdgeInsets.symmetric(horizontal: 20),
-            labelColor: isDark ? Colors.white : Color(0xFF1B1E28),
-            indicatorColor: isDark ? Colors.white : Color(0xFF1B1E28),
-            tabs: categories.map((category) => Tab(text: category.name)).toList(),
+      child: Padding(
+        padding: adPadding(context: context),
+        child: Scaffold(
+          drawer: DecoNewsDrawer(),
+          appBar: DecoNewsAppBar(
+            bottom: TabBar(
+              isScrollable: true,
+              labelPadding: EdgeInsets.symmetric(horizontal: 20),
+              labelColor: isDark ? Colors.white : Color(0xFF1B1E28),
+              indicatorColor: isDark ? Colors.white : Color(0xFF1B1E28),
+              tabs: categories.map((category) => Tab(text: category.name)).toList(),
+            ),
+            actions: <Widget>[
+              IconButton(
+                onPressed: () async {
+                  await showSearch<int>(context: context, delegate: _searchDelegate);
+                },
+                icon: Icon(Icons.search, color: Color(0xFFb3bbbf),),
+              )
+            ],
           ),
-          actions: <Widget>[
-            IconButton(
-              onPressed: () async {
-                await showSearch<int>(context: context, delegate: _searchDelegate);
-              },
-              icon: Icon(Icons.search, color: Color(0xFFb3bbbf),),
-            )
-          ],
-        ),
-        body: TabBarView(
-          children: categories.map((category) => SingleCategorySliderScreen(category)).toList()
+          body: TabBarView(
+              children: categories.map((category) => SingleCategorySliderScreen(category)).toList()
+          ),
         ),
       ),
     );

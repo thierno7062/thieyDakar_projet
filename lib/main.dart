@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:ui';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
@@ -37,6 +38,9 @@ class _DecoNewsState extends State<DecoNews> {
   /// Right to left language support
   bool _rtlEnabled = false;
 
+  /// Determines if adMob ad is loaded
+  bool isAdMobLoaded = false;
+
   /// Firebase messaging
   static FirebaseMessaging firebaseMessaging = new FirebaseMessaging();
 
@@ -55,34 +59,66 @@ class _DecoNewsState extends State<DecoNews> {
 
     /// init AdMob
     _initAdMob();
+
   }
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      locale: _getLocale(),
-      navigatorKey: DecoNews.navKey,
-      title: Config.appTitle,
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-        brightness: _brightness,
-        canvasColor: _brightness == Brightness.dark
-            ? Color(0xFF282C39)
-            : Color(0xFFFAFAFA),
-        primaryColor: _brightness == Brightness.dark
-            ? Color(0xFF1B1E28)
-            : Color(0xFFFFFFFF),
+    return Padding(
+      child: MaterialApp(
+        locale: _getLocale(),
+        navigatorKey: DecoNews.navKey,
+        title: Config.appTitle,
+        theme: ThemeData(
+          primarySwatch: Colors.blue,
+          brightness: _brightness,
+          canvasColor: _brightness == Brightness.dark
+              ? Color(0xFF282C39)
+              : Color(0xFFFAFAFA),
+          primaryColor: _brightness == Brightness.dark
+              ? Color(0xFF1B1E28)
+              : Color(0xFFFFFFFF),
+        ),
+        localizationsDelegates: <LocalizationsDelegate>[
+          //add custom localizations delegate
+          const DecoLocalizationsDelegate(),
+          GlobalMaterialLocalizations.delegate,
+          GlobalWidgetsLocalizations.delegate,
+          GlobalCupertinoLocalizations.delegate
+        ],
+        supportedLocales: _getLocalesFromLocaleCodes(),
+        home: HomeScreen()
       ),
-      localizationsDelegates: <LocalizationsDelegate>[
-        //add custom localizations delegate
-        const DecoLocalizationsDelegate(),
-        GlobalMaterialLocalizations.delegate,
-        GlobalWidgetsLocalizations.delegate,
-        GlobalCupertinoLocalizations.delegate
-      ],
-      supportedLocales: _getLocalesFromLocaleCodes(),
-      home: HomeScreen(),
+      padding: appPadding(),
     );
+  }
+
+  /// Returns app padding depending on the type of ads and their position
+  EdgeInsets appPadding() {
+
+    /// Since banner size for adMob banner is depending on screen height
+    /// If the screen height is lesser or equal to 400px, banner height is 32px
+    /// If the screen height is bigger than 400px and smaller or equal to 720px banner height is 50px
+    /// If the screen height is bigger than 720px banner height is 90px
+    /// Accordingly, screen padding is set, so the content is not covered by the banner.
+
+    double screenHeight = MediaQueryData.fromWindow(window).size.height;
+    double adHeight = 32;
+    if(screenHeight > 400 && screenHeight <= 720) {
+      adHeight = 50;
+    } else if(screenHeight > 720) {
+      adHeight = 90;
+    }
+
+    if (isAdMobLoaded) {
+      if (Config.adMobPosition == 'bottom') {
+        return EdgeInsets.only(bottom: adHeight);
+      }
+
+      return EdgeInsets.only(top: adHeight);
+    }
+
+    return EdgeInsets.all(0);
   }
 
   Locale _getLocale() {
@@ -139,6 +175,14 @@ class _DecoNewsState extends State<DecoNews> {
 
     SharedPreferences prefs = await SharedPreferences.getInstance();
     await prefs.setString('brightness', brightness == Brightness.dark ? 'dark' : 'light');
+  }
+
+  /// Change the app padding if adMob ad loads
+  void setAdMobLoaded(bool isLoaded) async{
+    if(isAdMobLoaded != isLoaded)
+      setState(() {
+        isAdMobLoaded = isLoaded;
+      });
   }
 
   /// On app launch set correct text and screen direction support
@@ -287,6 +331,13 @@ class _DecoNewsState extends State<DecoNews> {
       size: AdSize.smartBanner,
       listener: (MobileAdEvent event) {
         print("BannerAd event is $event");
+        if (event == MobileAdEvent.loaded) {
+          /// handle a variable if an ad was loaded to enable bottom padding
+          setAdMobLoaded(true);
+        } else if(event == MobileAdEvent.failedToLoad) {
+          /// handle a variable if an ad was not loaded to disable additional bottom padding
+          setAdMobLoaded(false);
+        }
       },
     );
 

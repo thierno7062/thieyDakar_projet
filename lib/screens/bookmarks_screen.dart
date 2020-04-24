@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart';
+import '../helpers/helpers.dart';
 import '../helpers/deco_localizations.dart';
 import '../helpers/wordpress.dart';
 import '../models/category_model.dart';
@@ -31,8 +32,14 @@ class _BookmarksScreenState extends State<BookmarksScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        appBar: DecoNewsAppBar(), drawer: DecoNewsDrawer(), body: _buildBody());
+    return Padding(
+      padding: adPadding(context: context),
+      child: Scaffold(
+          appBar: DecoNewsAppBar(),
+          drawer: DecoNewsDrawer(),
+          body: _buildBody()
+      ),
+    );
   }
 
   _buildBody() {

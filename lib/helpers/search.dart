@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:deco_news/helpers/deco_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart';
 import '../helpers/wordpress.dart';
@@ -15,7 +16,7 @@ class SearchDemoSearchDelegate extends SearchDelegate<int> {
   @override
   Widget buildLeading(BuildContext context) {
     return IconButton(
-      tooltip: 'Back',
+      tooltip: DecoLocalizations.of(context).localizedString("search_back"),
       icon: AnimatedIcon(
         icon: AnimatedIcons.menu_arrow,
         progress: transitionAnimation,
@@ -50,7 +51,7 @@ class SearchDemoSearchDelegate extends SearchDelegate<int> {
   List<Widget> buildActions(BuildContext context) {
     return <Widget>[
       query.isEmpty ? Container() : IconButton(
-        tooltip: 'Clear',
+        tooltip: DecoLocalizations.of(context).localizedString("search_clear"),
         icon: const Icon(Icons.clear),
         onPressed: () {
           query = '';

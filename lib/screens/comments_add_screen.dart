@@ -69,96 +69,99 @@ class _CommentsAddScreenState extends State<CommentsAddScreen> {
   Widget build(BuildContext context) {
     bool isDark = Theme.of(context).brightness == Brightness.dark;
 
-    return Scaffold(
-      appBar: DecoNewsAppBar(),
-      body: GestureDetector(
+    return Padding(
+      padding: adPadding(context: context),
+      child: Scaffold(
+        appBar: DecoNewsAppBar(),
+        body: GestureDetector(
 
-        // close keyboard on outside input tap
-        onTap: () {
-          FocusScope.of(context).requestFocus(FocusNode());
-        },
+          // close keyboard on outside input tap
+          onTap: () {
+            FocusScope.of(context).requestFocus(FocusNode());
+          },
 
-        child: SingleChildScrollView(
-          padding: EdgeInsets.all(10),
-          child: Form(
-            key: _formKey,
-            child: Column(
-              children: <Widget>[
+          child: SingleChildScrollView(
+            padding: EdgeInsets.all(10),
+            child: Form(
+              key: _formKey,
+              child: Column(
+                children: <Widget>[
 
-                Input(
-                  hintText: DecoLocalizations.of(context).localizedString("add_comment_name_hint"),
-                  margin: EdgeInsets.only(bottom: 10),
-                  focusNode: _nameFocus,
-                  textInputAction: TextInputAction.next,
-                  textCapitalization: TextCapitalization.words,
-                  showErrorIcon: showNameError,
-                  onFieldSubmitted: (term) {
-                    _nameFocus.unfocus();
-                    FocusScope.of(context).requestFocus(_emailFocus);
-                  },
-                  onSaved: (String value) {
-                    _formData['author_name'] = value;
-                  },
-                ),
+                  Input(
+                    hintText: DecoLocalizations.of(context).localizedString("add_comment_name_hint"),
+                    margin: EdgeInsets.only(bottom: 10),
+                    focusNode: _nameFocus,
+                    textInputAction: TextInputAction.next,
+                    textCapitalization: TextCapitalization.words,
+                    showErrorIcon: showNameError,
+                    onFieldSubmitted: (term) {
+                      _nameFocus.unfocus();
+                      FocusScope.of(context).requestFocus(_emailFocus);
+                    },
+                    onSaved: (String value) {
+                      _formData['author_name'] = value;
+                    },
+                  ),
 
-                Input(
-                  hintText: DecoLocalizations.of(context).localizedString("add_comment_email_hint"),
-                  margin: EdgeInsets.only(bottom: 10),
-                  focusNode: _emailFocus,
-                  textInputAction: TextInputAction.next,
-                  showErrorIcon: showEmailError,
-                  onFieldSubmitted: (term) {
-                    _emailFocus.unfocus();
-                    FocusScope.of(context).requestFocus(_contentFocus);
-                  },
-                  onSaved: (String value) {
-                    _formData['author_email'] = value;
-                  },
-                  keyboardType: TextInputType.emailAddress,
-                ),
+                  Input(
+                    hintText: DecoLocalizations.of(context).localizedString("add_comment_email_hint"),
+                    margin: EdgeInsets.only(bottom: 10),
+                    focusNode: _emailFocus,
+                    textInputAction: TextInputAction.next,
+                    showErrorIcon: showEmailError,
+                    onFieldSubmitted: (term) {
+                      _emailFocus.unfocus();
+                      FocusScope.of(context).requestFocus(_contentFocus);
+                    },
+                    onSaved: (String value) {
+                      _formData['author_email'] = value;
+                    },
+                    keyboardType: TextInputType.emailAddress,
+                  ),
 
-                Input(
-                  hintText: DecoLocalizations.of(context).localizedString("add_comment_comment_hint"),
-                  maxLines: 8,
-                  focusNode: _contentFocus,
-                  textInputAction: TextInputAction.done,
-                  textCapitalization: TextCapitalization.sentences,
-                  showErrorIcon: showContentError,
-                  onFieldSubmitted: (term) {
-                    _contentFocus.unfocus();
-                    FocusScope.of(context).requestFocus(new FocusNode());
-                  },
-                  onSaved: (String value) {
-                    _formData['content'] = value;
-                  },
-                ),
-              ],
-            ),
-          )
+                  Input(
+                    hintText: DecoLocalizations.of(context).localizedString("add_comment_comment_hint"),
+                    maxLines: 8,
+                    focusNode: _contentFocus,
+                    textInputAction: TextInputAction.done,
+                    textCapitalization: TextCapitalization.sentences,
+                    showErrorIcon: showContentError,
+                    onFieldSubmitted: (term) {
+                      _contentFocus.unfocus();
+                      FocusScope.of(context).requestFocus(new FocusNode());
+                    },
+                    onSaved: (String value) {
+                      _formData['content'] = value;
+                    },
+                  ),
+                ],
+              ),
+            )
+          ),
         ),
-      ),
 
-      bottomNavigationBar: SafeArea(
-        child: Container(
-          width: double.infinity,
-          height: 55.0,
-          margin: EdgeInsetsDirectional.fromSTEB(10.0, 0.0, 10.0, 10.0),
-          child: RaisedButton(
-            onPressed: () {
+        bottomNavigationBar: SafeArea(
+          child: Container(
+            width: double.infinity,
+            height: 55.0,
+            margin: EdgeInsetsDirectional.fromSTEB(10.0, 0.0, 10.0, 10.0),
+            child: RaisedButton(
+              onPressed: () {
 
-              // submit form
-              if (_formKey.currentState.validate()) {
-                _formKey.currentState.save();
-                _addComment(context, _formData);
-              }
+                // submit form
+                if (_formKey.currentState.validate()) {
+                  _formKey.currentState.save();
+                  _addComment(context, _formData);
+                }
 
-            },
-            padding: EdgeInsets.all(0),
-            color: isDark ? Colors.white : Color(0xFF1B1E28),
-            textColor: isDark ? Color(0xFF1B1E28) : Colors.white,
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(3.0)),
-            child: Text(DecoLocalizations.of(context).localizedString("add_comment_post")),
+              },
+              padding: EdgeInsets.all(0),
+              color: isDark ? Colors.white : Color(0xFF1B1E28),
+              textColor: isDark ? Color(0xFF1B1E28) : Colors.white,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(3.0)),
+              child: Text(DecoLocalizations.of(context).localizedString("add_comment_post")),
+            ),
           ),
         ),
       ),
