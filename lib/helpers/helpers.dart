@@ -63,18 +63,14 @@ OverlayEntry addAdWidget({ BuildContext context }) {
     return null;
   }
 
+  /// Assuming that ad size is set to 'small'
   double height = 50.0;
-  if (Config.facebookAdType == 'banner') {
-    if (Config.facebookAdSize == 'small') {
-      height = 50.0;
-    } else {
-      height = 90.0;
-    }
-  }
+
+  if (Config.facebookAdType == 'banner' && Config.facebookAdSize != 'small')
+    height = 90.0;
+
   else if(Config.facebookAdType == 'native banner' || Config.facebookAdType == 'native') {
-    if(Config.facebookAdSize == 'small') {
-      height = 50.0;
-    } else if(Config.facebookAdSize == 'medium') {
+    if(Config.facebookAdSize == 'medium') {
       height = 100.0;
     } else if(Config.facebookAdSize == 'large') {
       height = 120.0;
@@ -87,10 +83,7 @@ OverlayEntry addAdWidget({ BuildContext context }) {
         child: Stack(
           children: [
             Container(
-              color: Colors.white,
-            ),
-            Container(
-              color: Colors.black12,
+              color: Config.defaultColor == 'dark'? Color(0xFF1B1E28) : Color(0xFFFFFFFF),
             ),
             adWidget(context),
           ],
@@ -114,21 +107,18 @@ OverlayEntry addAdWidget({ BuildContext context }) {
 /// Adds ad padding to the screen in case the facebook ads are enabled
 EdgeInsets adPadding({ BuildContext context, EdgeInsets defaultPadding }){
   if (Config.facebookAdsEnabled && Config.facebookAdLoaded) {
+
+    /// Assuming that ad size is set to 'small'
     double height = 50.0;
     EdgeInsets size;
 
-    if (Config.facebookAdType == 'banner') {
-      if (Config.facebookAdSize == 'small') {
-        height = 50.0;
-      } else {
-        height = 90.0;
-      }
-    } else if(Config.facebookAdType == 'native banner' || Config.facebookAdType == 'native') {
-      if (Config.facebookAdSize == 'small') {
-        height = 50.0;
-      } else if (Config.facebookAdSize == 'medium') {
+    if (Config.facebookAdType == 'banner' && Config.facebookAdSize != 'small')
+      height = 90.0;
+
+    else if(Config.facebookAdType == 'native banner' || Config.facebookAdType == 'native') {
+      if(Config.facebookAdSize == 'medium') {
         height = 100.0;
-      } else if (Config.facebookAdSize == 'large') {
+      } else if(Config.facebookAdSize == 'large') {
         height = 120.0;
       }
     }
@@ -137,21 +127,12 @@ EdgeInsets adPadding({ BuildContext context, EdgeInsets defaultPadding }){
       defaultPadding = EdgeInsets.all(0);
     }
 
-    if (Config.facebookAdPosition == 'bottom') {
-      size = EdgeInsets.only(
-          bottom: height + defaultPadding?.bottom,
-          top: defaultPadding?.top,
-          right: defaultPadding?.right,
-          left: defaultPadding?.left
-      );
-    } else if(Config.facebookAdPosition == 'top') {
-      size = EdgeInsets.only(
-          bottom: defaultPadding?.bottom,
-          top: height + defaultPadding?.top,
-          right: defaultPadding?.right,
-          left: defaultPadding?.left
-      );
-    }
+    size = EdgeInsets.only(
+        top: Config.facebookAdPosition == 'top'? height + defaultPadding?.top : defaultPadding?.top,
+        bottom: Config.facebookAdPosition == 'bottom'? height + defaultPadding?.bottom : defaultPadding?.bottom,
+        right: defaultPadding?.right,
+        left: defaultPadding?.left
+    );
 
     return size;
   }
@@ -159,6 +140,7 @@ EdgeInsets adPadding({ BuildContext context, EdgeInsets defaultPadding }){
   return defaultPadding ?? EdgeInsets.all(0);
 }
 
+/// Creates the ad widget which is placed according to the Config position
 Widget adWidget(BuildContext context) {
   if (Config.facebookAdType == 'banner') {
     return FacebookBannerAd(
@@ -167,7 +149,6 @@ Widget adWidget(BuildContext context) {
           ? BannerSize.STANDARD
           : BannerSize.LARGE,
       listener: (result, value) {
-        print("Banner add result : $result : $value");
         if (result == BannerAdResult.ERROR) {
           Config.facebookAdLoaded = false;
           Config.facebookAdOverlay.remove();
@@ -188,7 +169,6 @@ Widget adWidget(BuildContext context) {
           ? NativeBannerAdSize.HEIGHT_100
           : NativeBannerAdSize.HEIGHT_120,
       listener: (result, value) {
-        print("Banner add result : $result : $value");
         if (result == NativeAdResult.ERROR) {
           Config.facebookAdLoaded = false;
           Config.facebookAdOverlay.remove();
@@ -209,7 +189,6 @@ Widget adWidget(BuildContext context) {
           ? 100.0
           : 120.0,
       listener: (result, value) {
-        print("Banner add result : $result : $value");
         if (result == NativeAdResult.ERROR) {
           Config.facebookAdLoaded = false;
           Config.facebookAdOverlay.remove();
@@ -220,8 +199,9 @@ Widget adWidget(BuildContext context) {
   }
 
   return Placeholder(
-    color: Colors.amber,
+    color: Colors.blue,
   );
+
 }
 
 String localizedDate(context, String date) {

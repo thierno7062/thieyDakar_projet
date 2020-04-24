@@ -122,22 +122,21 @@ class _DecoNewsState extends State<DecoNews> {
   }
 
   Locale _getLocale() {
-    Locale locale;
-    if (_rtlEnabled) {
+    Locale locale = Locale(Config.defaultLocale);
+
+    if (_rtlEnabled)
       locale = Locale('ar');
-    } else {
-      locale = Locale(Config.defaultLocale);
-    }
 
     return locale;
   }
 
   /// Adds locales to the locale list
   List<Locale> _getLocalesFromLocaleCodes() {
-    List<Locale> locales = [];
-    locales.add(Locale(Config.defaultLocale));
+    List<Locale> locales = [
+      Locale(Config.defaultLocale)
+    ];
 
-    if ( Config.defaultLocale!='ar')
+    if ( Config.defaultLocale != 'ar')
       locales.add(Locale('ar'));
     else
       locales.add(Locale('en'));
