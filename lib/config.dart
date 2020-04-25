@@ -2,7 +2,7 @@ import 'package:firebase_admob/firebase_admob.dart';
 
 class Config {
 
-  ///Define your app title here
+  /// Define your app title here
   static const appTitle = 'Deco News';
 
   /// Define your WordPress API url here
@@ -12,7 +12,7 @@ class Config {
   // static final defaultColor = 'dark';
   static final defaultColor = 'light';
 
-  ///Define your default locale
+  /// Define your default locale
   // static final defaultLocale = 'ar';
   static final defaultLocale = 'en';
 
@@ -35,12 +35,13 @@ class Config {
   /// For each type PlacementID has to be defined
   /// Size for banners can be 'small' and 'medium'
   /// Size for native and native banner ad can be 'small', 'medium' and 'large'
+  /// Position can be 'bottom' or 'top'
   /// Replace the placementIds with your own from the https://developers.facebook.com/
   static const facebookAdsEnabled = false;
   static const facebookAdType = 'banner';
   static const facebookAdSize = 'large';
-  static const facebookTestingId = '2785d4c0-2212-475d-8169-3153fb5c8cae';
   static const facebookAdPosition = 'bottom';
+  static const facebookTestingId = '2785d4c0-2212-475d-8169-3153fb5c8cae';
   static const facebookPlacementId = 'YOUR_PLACEMENT_ID';
 
   /// After adding Banner Placement copy the PlacementID here
@@ -56,5 +57,4 @@ class Config {
 
   /// You should not have both adMob and Facebook Ads enabled at the same time.
   /// Although it is possible to show one banner at the top and the other one at the bottom, it is not recommended.
-
 }
