@@ -45,7 +45,6 @@ class Config {
   static const facebookAdType = 'banner';
   static const facebookAdSize = 'large';
   static const facebookAdPosition = 'bottom';
-  static const facebookTestingId = '2785d4c0-2212-475d-8169-3153fb5c8cae';
   static const facebookPlacementId = 'YOUR_PLACEMENT_ID';
 
   /// After adding Banner Placement copy the PlacementID here
