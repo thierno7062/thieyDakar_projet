@@ -31,6 +31,10 @@ class Config {
   static final adMobPosition = 'bottom';
 
   /// Facebook Audience Network (Facebook ads) settings - currently only for Android.
+  ///
+  /// You should not have both adMob and Facebook Ads enabled at the same time.
+  /// Although it is possible to show one banner at the top and the other one at the bottom, it is not recommended.
+  ///
   /// Type can be 'banner', 'native banner', 'native'
   /// For each type PlacementID has to be defined
   /// Size for banners can be 'small' and 'medium'
@@ -52,9 +56,7 @@ class Config {
 
   /// After adding Native Ad Placement copy the PlacementID here
   static const facebookNativeAdPlacementId = '845021802674347_847322475777613';
+
   static var facebookAdLoaded = true;
   static var facebookAdOverlay;
-
-  /// You should not have both adMob and Facebook Ads enabled at the same time.
-  /// Although it is possible to show one banner at the top and the other one at the bottom, it is not recommended.
 }
