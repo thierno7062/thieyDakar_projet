@@ -198,8 +198,13 @@ class _SingleCategorySliderScreenState extends State<SingleCategorySliderScreen>
 
           /// update featured posts
           if (page == 1) {
-            featured = loadedPosts.sublist(0, 3);
-            loadedPosts = loadedPosts.sublist(3);
+            int max = loadedPosts.length;
+            if (max > 3) {
+              max = 3;
+            }
+
+            featured = loadedPosts.sublist(0, max);
+            loadedPosts = loadedPosts.sublist(max);
           }
 
           /// append loaded posts to existing list

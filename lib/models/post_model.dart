@@ -54,7 +54,7 @@ class PostModel {
         var sizes = firstImage['media_details']['sizes'];
 
         sizes.forEach((index, value) {
-          if (value['width'] < 1200) {
+          if (int.parse(value['width'].toString()) < 1200) {
             image = NetworkImage(value['source_url']);
           }
         });
