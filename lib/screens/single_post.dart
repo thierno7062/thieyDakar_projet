@@ -12,6 +12,7 @@ import '../widgets/news.dart';
 import '../models/post_model.dart';
 import '../deco_news_icons.dart';
 import 'comments_screen.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class SinglePost extends StatefulWidget {
   final PostModel post;
@@ -190,7 +191,15 @@ class _SinglePostState extends State<SinglePost> {
                   imageProperties: ImageProperties(
                       width: double.infinity,
                       fit: BoxFit.cover,
-                      matchTextDirection: true),
+                      matchTextDirection: true
+                  ),
+                  onLinkTap: (url) async {
+                    if (await canLaunch(url)) {
+                      await launch(url);
+                    } else {
+                      throw 'Could not launch $url';
+                    }
+                  },
                 ),
               ],
             )),

@@ -21,10 +21,10 @@ class DecoLocalizations {
 
   String localizedString(String key) {
     if (_localizedValues != null) {
-      return _localizedValues[key] ?? '** $key not found';
+      return _localizedValues[key] ?? key;
     }
 
-    return "*****";
+    return key;
   }
 
   static Future<DecoLocalizations> load(Locale locale) async {
