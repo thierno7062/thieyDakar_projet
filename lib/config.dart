@@ -20,8 +20,11 @@ class Config {
   // static final excludeCategories = [1, 4, 5];
   static final excludeCategories = [];
 
+  /// Define home page category id if you want only one to be displayed instead of category tabs
+  static final homePageCategory = 1;
+
   /// Enable push notifications
-  static final pushNotificationsEnabled = true;
+  static final pushNotificationsEnabled = false;
 
   /// AdMob settings
   static final adMobEnabled = false;

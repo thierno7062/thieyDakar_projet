@@ -24,6 +24,7 @@ class _HomeScreenState extends State<HomeScreen> {
   final SearchDemoSearchDelegate _searchDelegate = SearchDemoSearchDelegate();
   bool isLoading = true;
   List<CategoryModel> categories = [];
+  CategoryModel homePageCategory;
 
   @override
   void initState() {
@@ -53,6 +54,26 @@ class _HomeScreenState extends State<HomeScreen> {
         child: Scaffold(appBar: DecoNewsAppBar(), body: Loading()),
       );
     }
+
+    ///show single category if this setting is set
+    if(Config.homePageCategory!=null && homePageCategory!=null)
+      return Padding(
+        padding: adPadding(context: context),
+        child: Scaffold(
+          drawer: DecoNewsDrawer(),
+          appBar: DecoNewsAppBar(
+            actions: <Widget>[
+              IconButton(
+                onPressed: () async {
+                  await showSearch<int>(context: context, delegate: _searchDelegate);
+                },
+                icon: Icon(Icons.search, color: Color(0xFFb3bbbf),),
+              )
+            ],
+          ),
+          body: SingleCategorySliderScreen(homePageCategory),
+        ),
+      );
 
     /// show tabs
     return DefaultTabController(
@@ -88,6 +109,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   /// load list of categories
   _loadData() async {
+
     Response response = await WordPress.fetchCategories();
 
     if (response.statusCode == 200) {
@@ -101,10 +123,21 @@ class _HomeScreenState extends State<HomeScreen> {
 
           /// disable loading
           isLoading = false;
+
+          /// set data for the homepage category in case this has been enabled
+          if(Config.homePageCategory!=null)
+            for(CategoryModel category in categories)
+              if(category.id == Config.homePageCategory){
+                homePageCategory=category;
+                break;
+              }
         });
       }
     } else {
       throw Exception('Failed to load data');
     }
+
+
+
   }
 }
