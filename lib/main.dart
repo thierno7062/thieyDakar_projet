@@ -87,6 +87,10 @@ class _DecoNewsState extends State<DecoNews> {
           GlobalCupertinoLocalizations.delegate
         ],
         supportedLocales: _getLocalesFromLocaleCodes(),
+        builder: (BuildContext context, Widget child) => MediaQuery(
+          data: MediaQuery.of(context).copyWith(textScaleFactor: 1),
+          child: child,
+        ),
         home: HomeScreen()
       ),
       padding: appPadding(),
