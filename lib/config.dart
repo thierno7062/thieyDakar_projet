@@ -24,7 +24,7 @@ class Config {
   static final homePageCategory = 1;
 
   /// Enable push notifications
-  static final pushNotificationsEnabled = false;
+  static final pushNotificationsEnabled = true;
 
   /// AdMob settings
   static final adMobEnabled = false;
