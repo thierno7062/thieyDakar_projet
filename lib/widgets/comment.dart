@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart';
+import 'package:flutter_html/style.dart';
 import '../helpers/helpers.dart';
 import '../models/comment_model.dart';
 
@@ -77,16 +78,16 @@ class Comment extends StatelessWidget {
                   Padding(
                     padding: const EdgeInsetsDirectional.fromSTEB(10.0, 0.0, 0.0, 0.0),
                     child: Html(
-                      blockSpacing: 8.0,
                       data: comment.content,
-                      defaultTextStyle: TextStyle(
-                        color: Color(0xFF7F7E96),
-                        fontSize: 14.0,
-                        // height: 16.0 / 14.0
-                      ),
-                        customTextAlign: (node){
-                          return TextAlign.start;
-                        }
+                      style: {
+                        "p": Style(
+                          fontSize: FontSize(14),
+                          color: isDark ? Colors.white : Colors.black,
+                          fontWeight: FontWeight.normal,
+                          // height: 16.0 / 14.0,
+                          textAlign: TextAlign.start
+                        ),
+                      }
                     ),
                   ),
                 ],

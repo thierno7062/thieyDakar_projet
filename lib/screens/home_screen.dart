@@ -56,7 +56,7 @@ class _HomeScreenState extends State<HomeScreen> {
     }
 
     ///show single category if this setting is set
-    if(Config.homePageCategory!=null && homePageCategory!=null)
+    if(Config.homePageCategory != null && homePageCategory != null)
       return Padding(
         padding: adPadding(context: context),
         child: Scaffold(
@@ -125,12 +125,14 @@ class _HomeScreenState extends State<HomeScreen> {
           isLoading = false;
 
           /// set data for the homepage category in case this has been enabled
-          if(Config.homePageCategory!=null)
-            for(CategoryModel category in categories)
-              if(category.id == Config.homePageCategory){
-                homePageCategory=category;
+          if (Config.homePageCategory != null) {
+            for (CategoryModel category in categories) {
+              if (category.id == Config.homePageCategory) {
+                homePageCategory = category;
                 break;
               }
+            }
+          }
         });
       }
     } else {

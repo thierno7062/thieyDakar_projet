@@ -1,8 +1,8 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
+import 'package:flutter_html/style.dart';
 import 'package:http/http.dart';
 import 'package:flutter_html/flutter_html.dart';
-import 'package:flutter_html/image_properties.dart';
 import 'package:share/share.dart';
 import '../helpers/deco_localizations.dart';
 import '../helpers/helpers.dart';
@@ -105,139 +105,138 @@ class _SinglePostState extends State<SinglePost> {
     return Column(
       children: <Widget>[
         Container(
-            margin: EdgeInsets.only(bottom: 10.0),
-            padding: EdgeInsets.symmetric(horizontal: 30.0, vertical: 20.0),
-            decoration: BoxDecoration(
-                color: isDark ? Color(0xFF1B1E28) : Colors.white,
-                borderRadius: BorderRadius.circular(3.0),
-                boxShadow: [
-                  BoxShadow(
-                      color: Colors.black.withOpacity(0.15),
-                      blurRadius: 5.0,
-                      offset: Offset(0.0, 0.0))
-                ]),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                Padding(
-                  padding: const EdgeInsets.only(bottom: 15.0, top: 10.0),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: <Widget>[
-                      Container(
-                        padding: EdgeInsets.all(6.0),
-                        decoration: BoxDecoration(
-                          color: Color(0xffCB0000),
-                          borderRadius: BorderRadius.all(
-                            Radius.circular(3),
-                          ),
-                        ),
-                        child: Text(
-                          this.widget.post.category.name.toUpperCase(),
-                          style: TextStyle(
-                            fontSize: 10,
-                            color: Colors.white,
-                          ),
-                          maxLines: 3,
-                          overflow: TextOverflow.ellipsis,
+          margin: EdgeInsets.only(bottom: 10.0),
+          padding: EdgeInsets.symmetric(horizontal: 30.0, vertical: 20.0),
+          decoration: BoxDecoration(
+            color: isDark ? Color(0xFF1B1E28) : Colors.white,
+            borderRadius: BorderRadius.circular(3.0),
+            boxShadow: [
+              BoxShadow(
+                  color: Colors.black.withOpacity(0.15),
+                  blurRadius: 5.0,
+                  offset: Offset(0.0, 0.0),
+              )
+            ]
+          ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              Padding(
+                padding: const EdgeInsets.only(bottom: 15.0, top: 10.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: <Widget>[
+                    Container(
+                      padding: EdgeInsets.all(6.0),
+                      decoration: BoxDecoration(
+                        color: Color(0xffCB0000),
+                        borderRadius: BorderRadius.all(
+                          Radius.circular(3),
                         ),
                       ),
+                      child: Text(
+                        this.widget.post.category.name.toUpperCase(),
+                        style: TextStyle(
+                          fontSize: 10,
+                          color: Colors.white,
+                        ),
+                        maxLines: 3,
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                    ),
 
-                      /// bookmark button
-                      InkWell(
-                        onTap: () {
-                          setState(() {
-                            this.widget.post.bookmarked =
-                                !this.widget.post.bookmarked;
-                            WordPress.updateBookmarks(this.widget.post.id);
-                          });
-                        },
-                        child: Icon(
-                          DecoNewsIcons.add_to_bookmark,
-                          color: this.widget.post.bookmarked
-                              ? Color(0xFFdc3446)
-                              : Color(0xffCCCBDA),
-                          size: 20,
-                        ),
+                    /// bookmark button
+                    InkWell(
+                      onTap: () {
+                        setState(() {
+                          this.widget.post.bookmarked =
+                              !this.widget.post.bookmarked;
+                          WordPress.updateBookmarks(this.widget.post.id);
+                        });
+                      },
+                      child: Icon(
+                        DecoNewsIcons.add_to_bookmark,
+                        color: this.widget.post.bookmarked
+                            ? Color(0xFFdc3446)
+                            : Color(0xffCCCBDA),
+                        size: 20,
                       ),
-                    ],
+                    ),
+                  ],
+                ),
+              ),
+
+              Padding(
+                padding: EdgeInsets.only(bottom: 20.0),
+                child: Text(widget.post.title,
+                  style: TextStyle(
+                    color: isDark ? Colors.white : Color(0xFF1B1E28),
+                    fontSize: 20.0,
                   ),
                 ),
+              ),
 
-                Padding(
-                  padding: EdgeInsets.only(bottom: 20.0),
-                  child: Text(widget.post.title,
-                      style: TextStyle(
-                        color: isDark ? Colors.white : Color(0xFF1B1E28),
-                        fontSize: 20.0,
-                      )),
-                ),
+              deviceWidth < 360 ? _getSmallDate() : _getDate(),
 
-                deviceWidth < 360 ? _getSmallDate() : _getDate(),
-
-                /// post content (HTML)
-                Html(
-                  blockSpacing: 8.0,
-                  data: this.widget.post.body,
-                  defaultTextStyle: TextStyle(
-                    color: isDark ? Colors.white : Color(0xFF7F7E96),
-                    fontSize: 14.0,
+              /// post content (HTML)
+              Html(
+                data: this.widget.post.body,
+                style: {
+                  "p": Style(
+                    fontSize: FontSize(14),
+                    color: isDark ? Colors.white : Colors.black,
                     fontWeight: FontWeight.normal,
-                    height: 16.0 / 14.0,
+                    // height: 16.0 / 14.0,
+                    textAlign: TextAlign.start
                   ),
-                  customTextAlign: (node){
-                    return TextAlign.start;
-                  },
-                  imageProperties: ImageProperties(
-                      width: double.infinity,
-                      fit: BoxFit.cover,
-                      matchTextDirection: true
-                  ),
-                  onLinkTap: (url) async {
-                    if (await canLaunch(url)) {
-                      await launch(url);
-                    } else {
-                      throw 'Could not launch $url';
-                    }
-                  },
-                ),
-              ],
-            )),
-        posts.length == 0
-            ? Container()
-            : Column(
+                  "img": Style(
+                    width: double.infinity,
+                  )
+                },
+                onLinkTap: (url) async {
+                  if (await canLaunch(url)) {
+                    await launch(url);
+                  } else {
+                    throw 'Could not launch $url';
+                  }
+                },
+              ),
+            ],
+          ),
+        ),
+
+        if (posts.length > 0)
+          Column(
+            children: <Widget>[
+              Row(
                 children: <Widget>[
-                  Row(
-                    children: <Widget>[
-                      Padding(
-                        padding: const EdgeInsets.symmetric(vertical: 10.0),
-                        child: Text(
-                          DecoLocalizations.of(context).localizedString("single_post_related_posts"),
-                          style: TextStyle(
-                              fontSize: 18.0,
-                              color: isDark ? Colors.white : Color(0xFF1B1E28)),
-                        ),
-                      ),
-                    ],
+                  Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 10.0),
+                    child: Text(
+                      DecoLocalizations.of(context).localizedString("single_post_related_posts"),
+                      style: TextStyle(
+                          fontSize: 18.0,
+                          color: isDark ? Colors.white : Color(0xFF1B1E28)),
+                    ),
                   ),
-                  ListView.builder(
-                      padding: EdgeInsets.zero,
-                      physics: NeverScrollableScrollPhysics(),
-                      shrinkWrap: true,
-                      itemCount: posts.length,
-                      itemBuilder: (BuildContext context, int index) {
-                        /// return news widget
-                        return News(
-                          posts[index],
-                          onTap: () {
-                            Navigator.of(context).push(MaterialPageRoute(
-                              builder: (context) => SinglePost(posts[index]),
-                            ));
-                          },
-                        );
-                      }),
                 ],
               ),
+              ListView.builder(
+                padding: EdgeInsets.zero,
+                physics: NeverScrollableScrollPhysics(),
+                shrinkWrap: true,
+                itemCount: posts.length,
+
+                /// return news widget
+                itemBuilder: (BuildContext context, int index) => News(
+                  posts[index],
+                  onTap: () => Navigator.of(context).push(MaterialPageRoute(
+                    builder: (context) => SinglePost(posts[index]),
+                  )),
+                ),
+              ),
+            ],
+          ),
       ],
     );
   }
