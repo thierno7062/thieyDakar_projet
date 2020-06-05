@@ -18,6 +18,7 @@ class CategoriesScreen extends StatefulWidget {
 class _CategoriesScreenState extends State<CategoriesScreen> {
   bool isLoading = true;
   List<CategoryModel> categories = [];
+  int index;
 
   @override
   void initState() {
@@ -29,6 +30,8 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
 
   @override
   Widget build(BuildContext context) {
+    index=1;
+
     return Padding(
       padding: adPadding(context: context),
       child: Scaffold(
@@ -65,6 +68,7 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
             builder: (context) => SingleCategoryScreen(category),
           )
         ),
+        index: index++,
       )).toList(),
       mainAxisSpacing: 10,
       crossAxisSpacing: 10,

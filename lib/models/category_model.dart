@@ -16,7 +16,7 @@ class CategoryModel {
     this.link,
     this.name,
     this.parent,
-    this.slug
+    this.slug,
   );
 
   factory CategoryModel.fromJson(Map<String, dynamic> json) {
