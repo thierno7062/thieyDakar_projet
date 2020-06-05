@@ -23,7 +23,7 @@ class SingleCategorySliderScreen extends StatefulWidget {
       _SingleCategorySliderScreenState();
 }
 
-class _SingleCategorySliderScreenState extends State<SingleCategorySliderScreen> {
+class _SingleCategorySliderScreenState extends State<SingleCategorySliderScreen> with AutomaticKeepAliveClientMixin<SingleCategorySliderScreen>{
   bool isLoading = true;
   bool loadingMore = false;
   bool canLoadMore = true;
@@ -39,7 +39,11 @@ class _SingleCategorySliderScreenState extends State<SingleCategorySliderScreen>
   }
 
   @override
+  bool get wantKeepAlive => true;
+
+  @override
   Widget build(BuildContext context) {
+    super.build(context);
     bool isDark = Theme.of(context).brightness == Brightness.dark;
     double deviceWidth = MediaQuery.of(context).size.width;
     int widgetsInRow = 2;
