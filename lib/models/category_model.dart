@@ -7,7 +7,6 @@ class CategoryModel {
   final String link;
   final String name;
   final int parent;
-  final String slug;
 
   CategoryModel(
     this.count,
@@ -15,8 +14,7 @@ class CategoryModel {
     this.id,
     this.link,
     this.name,
-    this.parent,
-    this.slug
+    this.parent
   );
 
   factory CategoryModel.fromJson(Map<String, dynamic> json) {
@@ -27,7 +25,6 @@ class CategoryModel {
       json['link'],
       _getTitle(json['name']),
       int.parse(json['parent'].toString()),
-      json['slug']
     );
   }
 

@@ -58,13 +58,14 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
     /// grid view of categories
     return GridView.count(
       crossAxisCount: widgetsInRow,
-      children: categories.map((CategoryModel category) => Category(
-        category,
+      children: categories.asMap().entries.map((category) => Category(
+        category.value,
         onTap: () => Navigator.of(context).push(
           MaterialPageRoute(
-            builder: (context) => SingleCategoryScreen(category),
+            builder: (context) => SingleCategoryScreen(category.value),
           )
         ),
+        index: category.key + 1,
       )).toList(),
       mainAxisSpacing: 10,
       crossAxisSpacing: 10,
