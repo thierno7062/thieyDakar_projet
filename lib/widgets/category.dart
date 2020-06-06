@@ -8,22 +8,30 @@ class Category extends StatefulWidget {
   final VoidCallback onTap;
   final int index;
 
-  Category(this.cat, { this.onTap, this.index});
+  Category(this.cat, { this.onTap, this.index });
 
   @override
   _CategoryState createState() => _CategoryState();
 }
 
 class _CategoryState extends State<Category> {
-  bool _backExists = true;
-  String _imageName;
+  String _backgroundImage;
+
+  initState() {
+    super.initState();
+
+    Future.delayed(Duration.zero, () async {
+      String backgroundImage = await getImage();
+
+      if (backgroundImage != null) {
+        setState(() => _backgroundImage = backgroundImage);
+      }
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
     bool isDark = Theme.of(context).brightness == Brightness.dark;
-    _imageName = "images/categories/category-${widget.index > 9 ? widget.index : "0${widget.index}"}.jpg";
-    if(_backExists)
-      tryLoadImage(_imageName);
 
     return InkWell(
       onTap: widget.onTap,
@@ -36,12 +44,11 @@ class _CategoryState extends State<Category> {
               offset: Offset(0, 0),
             )
           ],
-          image: (widget.index!=null && _backExists)
-              ?DecorationImage(
-            image: AssetImage(_imageName),
+          image: _backgroundImage != null ? DecorationImage(
+            image: AssetImage(_backgroundImage),
             colorFilter: ColorFilter.mode(Colors.black38, BlendMode.darken),
-            fit: BoxFit.fill,)
-              :null,
+            fit: BoxFit.cover,
+          ) :null,
           borderRadius: BorderRadius.all(Radius.circular(3))
         ),
         child: AspectRatio(
@@ -50,7 +57,7 @@ class _CategoryState extends State<Category> {
             padding: EdgeInsets.symmetric(horizontal: 10),
             decoration: BoxDecoration(
               borderRadius: BorderRadius.all(Radius.circular(3)),
-              color: _backExists ? Colors.transparent : isDark ? Color(0xFF1B1E28) : Colors.white,
+              color: _backgroundImage != null ? Colors.transparent : isDark ? Color(0xFF1B1E28) : Colors.white,
             ),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -58,7 +65,7 @@ class _CategoryState extends State<Category> {
                 Text(
                   widget.cat.name,
                   style: TextStyle(
-                    color: (isDark || _backExists) ? Colors.white : Color(0xFF1B1E28),
+                    color: (isDark || _backgroundImage != null) ? Colors.white : Color(0xFF1B1E28),
                     fontSize: 16.0,
                     fontWeight: FontWeight.w400,
                   ),
@@ -70,7 +77,7 @@ class _CategoryState extends State<Category> {
                 Text(
                   widget.cat.count.toString() + DecoLocalizations.of(context).localizedString("category_posts_num"),
                   style: TextStyle(
-                    color: _backExists? Colors.white : Color(0xFF7F7E96),
+                    color: _backgroundImage != null ? Colors.white : Color(0xFF7F7E96),
                   ),
                 ),
               ],
@@ -81,14 +88,32 @@ class _CategoryState extends State<Category> {
     );
   }
 
-  tryLoadImage(String name) async {
-    try{
-      return await rootBundle.load(name);
-    } catch(_){
-      setState(() {
-        _backExists = false;
-      });
+  Future<String> getImage() async {
+    if (widget.index == null) {
+      return null;
     }
-  }
 
+    String image = widget.index > 9 ? widget.index : '0${widget.index}';
+    String path = 'images/categories/category-';
+    String jpg = path + image + '.jpg';
+
+    try {
+      await rootBundle.load(jpg);
+      return jpg;
+    } catch(exception) {}
+
+    String jpeg = path + image + '.jpeg';
+    try {
+      await rootBundle.load(jpeg);
+      return jpeg;
+    } catch(exception) {}
+
+    String png = path + image + '.png';
+    try {
+      await rootBundle.load(png);
+      return png;
+    } catch(exception) {}
+
+    return null;
+  }
 }

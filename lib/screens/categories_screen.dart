@@ -18,7 +18,6 @@ class CategoriesScreen extends StatefulWidget {
 class _CategoriesScreenState extends State<CategoriesScreen> {
   bool isLoading = true;
   List<CategoryModel> categories = [];
-  int index;
 
   @override
   void initState() {
@@ -30,8 +29,6 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
 
   @override
   Widget build(BuildContext context) {
-    index=1;
-
     return Padding(
       padding: adPadding(context: context),
       child: Scaffold(
@@ -61,14 +58,14 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
     /// grid view of categories
     return GridView.count(
       crossAxisCount: widgetsInRow,
-      children: categories.map((CategoryModel category) => Category(
-        category,
+      children: categories.asMap().entries.map((category) => Category(
+        category.value,
         onTap: () => Navigator.of(context).push(
           MaterialPageRoute(
-            builder: (context) => SingleCategoryScreen(category),
+            builder: (context) => SingleCategoryScreen(category.value),
           )
         ),
-        index: index++,
+        index: category.key + 1,
       )).toList(),
       mainAxisSpacing: 10,
       crossAxisSpacing: 10,
