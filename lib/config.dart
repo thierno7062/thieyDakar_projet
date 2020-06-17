@@ -27,7 +27,8 @@ class Config {
   static final pushNotificationsEnabled = true;
 
   /// AdMob settings
-  static final adMobEnabled = false;
+  static final adMobEnabled = true;
+  static final adMobShowInterstitialAd = false;
   static final adMobiOSAppID = 'ca-app-pub-7868270859526221~2024798504';
   static final adMobAndroidID = 'ca-app-pub-7868270859526221~7198068286';
   static final adMobAdUnitID = BannerAd.testAdUnitId;

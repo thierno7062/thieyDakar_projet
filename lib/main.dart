@@ -348,5 +348,25 @@ class _DecoNewsState extends State<DecoNews> {
           anchorType: Config.adMobPosition != 'top'
               ? AnchorType.bottom
               : AnchorType.top);
+
+    if (Config.adMobShowInterstitialAd) {
+      InterstitialAd myInterstitial = InterstitialAd(
+        // Replace the testAdUnitId with an ad unit id from the AdMob dash.
+        // https://developers.google.com/admob/android/test-ads
+        // https://developers.google.com/admob/ios/test-ads
+        adUnitId: InterstitialAd.testAdUnitId,
+        listener: (MobileAdEvent event) {
+          print("InterstitialAd event is $event");
+        },
+      );
+
+      myInterstitial
+        ..load()
+        ..show(
+          anchorType: AnchorType.bottom,
+          anchorOffset: 0.0,
+          horizontalCenterOffset: 0.0,
+        );
+    }
   }
 }
