@@ -9,7 +9,6 @@ class WordPress {
 
   /// Fetch category by id
   static Future fetchCategory(String categoryID) {
-    print(categoryID);
     String url = '${Config.apiEndpoint}/categories?include=$categoryID';
     return http.get(url);
   }

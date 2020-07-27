@@ -47,7 +47,7 @@ class PostModel {
   /// Returns post image
   static ImageProvider _getImage(json) {
     var image;
-    if (json['_embedded'].containsKey('wp:featuredmedia')) {
+    if (json['_embedded'] != null && json['_embedded'].containsKey('wp:featuredmedia')) {
       var firstImage = json['_embedded']['wp:featuredmedia'][0];
 
       if (!firstImage.containsKey('code')) {
