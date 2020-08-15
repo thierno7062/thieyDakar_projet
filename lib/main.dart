@@ -195,7 +195,7 @@ class _DecoNewsState extends State<DecoNews> {
     bool isRTLEnabled = (prefs.getBool('isRTLEnabled') ?? null);
 
     if (isRTLEnabled == null) {
-      isRTLEnabled =  Config.defaultLocale == 'ar';
+      isRTLEnabled = Config.defaultLocale == 'ar';
     }
 
     setRTLSettings(isRTLEnabled);
@@ -268,7 +268,7 @@ class _DecoNewsState extends State<DecoNews> {
           await WordPress.fetchCategory(categoryID.toString());
       var categoryData = jsonDecode(categoryResponse.body);
 
-      CategoryModel category = CategoryModel.fromJson(categoryData);
+      CategoryModel category = CategoryModel.fromJson(categoryData[0]);
       PostModel post = PostModel.fromJson(postData, category);
 
       // close dialog and open article
@@ -334,7 +334,7 @@ class _DecoNewsState extends State<DecoNews> {
         if (event == MobileAdEvent.loaded) {
           /// handle a variable if an ad was loaded to enable bottom padding
           setAdMobLoaded(true);
-        } else if(event == MobileAdEvent.failedToLoad) {
+        } else if (event == MobileAdEvent.failedToLoad) {
           /// handle a variable if an ad was not loaded to disable additional bottom padding
           setAdMobLoaded(false);
         }
