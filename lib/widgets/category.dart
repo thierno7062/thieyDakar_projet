@@ -93,7 +93,7 @@ class _CategoryState extends State<Category> {
       return null;
     }
 
-    String image = widget.index > 9 ? widget.index : '0${widget.index}';
+    String image = widget.index > 9 ? widget.index.toString() : '0${widget.index}';
     String path = 'images/categories/category-';
     String jpg = path + image + '.jpg';
 

@@ -34,7 +34,9 @@ class Config {
   static final adMobAdUnitID = BannerAd.testAdUnitId;
   static final adMobPosition = 'bottom';
 
-  /// Facebook Audience Network (Facebook ads) settings - currently only for Android.
+  /// Facebook Audience Network (Facebook ads) settings.
+  /// Android supported: Banner, Native, Native Banner and Interstitial Ads
+  /// iOS supported: Banner and Native Ads
   ///
   /// You should not have both adMob and Facebook Ads enabled at the same time.
   /// Although it is possible to show one banner at the top and the other one at the bottom, it is not recommended.
@@ -46,19 +48,24 @@ class Config {
   /// Position can be 'bottom' or 'top'
   /// Replace the placementIds with your own from the https://developers.facebook.com/
   static const facebookAdsEnabled = false;
-  static const facebookAdType = 'banner';
-  static const facebookAdSize = 'large';
+  static const facebookAdType = 'native';
+  static const facebookAdSize = 'small';
   static const facebookAdPosition = 'bottom';
-  static const facebookPlacementId = 'YOUR_PLACEMENT_ID';
 
-  /// After adding Banner Placement copy the PlacementID here
-  static const facebookBannerAdPlacementId = '845021802674347_846011962575331';
+  /// After adding Android Banner Placement copy the PlacementID here
+  static const facebookAndroidBannerAdPlacementId = '845021802674347_846011962575331';
 
-  /// After adding Native Banner Placement copy the PlacementID here
-  static const facebookNativeBannerAdPlacementId = '845021802674347_847316735778187';
+  /// After adding iOS Banner Placement copy the PlacementID here
+  static const facebookIOSBannerAdPlacementId = 'YOUR_PLACEMENT_ID';
 
-  /// After adding Native Ad Placement copy the PlacementID here
-  static const facebookNativeAdPlacementId = '845021802674347_847322475777613';
+  /// After adding Android Native Banner Placement copy the PlacementID here
+  static const facebookAndroidNativeBannerAdPlacementId = '845021802674347_847316735778187';
+
+  /// After adding iOS Native Ad Placement copy the PlacementID here
+  static const facebookIOSNativeAdPlacementId = 'YOUR_PLACEMENT_ID';
+
+  /// After adding Android Native Ad Placement copy the PlacementID here
+  static const facebookAndroidNativeAdPlacementId = '845021802674347_847322475777613';
 
   static var facebookAdLoaded = true;
   static var facebookAdOverlay;

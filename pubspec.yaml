@@ -27,10 +27,7 @@ dependencies:
   #this part is supposed to be changed to official version 1.0.0-pre.1 or the one that comes after that
   #when this fork becomes and official part of the package
   #this is sufficient for testing at the moment
-  flutter_html:
-    git:
-      url: https://github.com/MilosKarakas/flutter_html.git
-      ref: packages-upgrade
+  flutter_html: ^1.0.2
   shared_preferences: ^0.5.8
   share: ^0.6.4+3
   firebase_core: ^0.4.5
@@ -47,9 +44,6 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
-
-dependency_overrides:
-  flutter_svg: ^0.18.0
 
 # For information on the generic Dart part of this file, see the
 # following page: https://www.dartlang.org/tools/pub/pubspec

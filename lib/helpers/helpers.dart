@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:facebook_audience_network/ad/ad_banner.dart';
 import 'package:facebook_audience_network/ad/ad_native.dart';
 import 'package:flutter/material.dart';
@@ -144,7 +146,9 @@ EdgeInsets adPadding({ BuildContext context, EdgeInsets defaultPadding }){
 Widget adWidget(BuildContext context) {
   if (Config.facebookAdType == 'banner') {
     return FacebookBannerAd(
-      placementId: Config.facebookBannerAdPlacementId,
+      placementId: Platform.isIOS
+          ? Config.facebookIOSBannerAdPlacementId
+          : Config.facebookAndroidBannerAdPlacementId,
       bannerSize: Config.facebookAdSize == 'small'
           ? BannerSize.STANDARD
           : BannerSize.LARGE,
@@ -161,7 +165,7 @@ Widget adWidget(BuildContext context) {
   if (Config.facebookAdType == 'native banner') {
     return FacebookNativeAd(
       width: double.infinity,
-      placementId: Config.facebookNativeBannerAdPlacementId,
+      placementId: Config.facebookAndroidNativeBannerAdPlacementId,
       adType: NativeAdType.NATIVE_BANNER_AD,
       bannerAdSize: Config.facebookAdSize == 'small'
           ? NativeBannerAdSize.HEIGHT_50
@@ -181,7 +185,9 @@ Widget adWidget(BuildContext context) {
   if (Config.facebookAdType == 'native') {
     return FacebookNativeAd(
       width: double.infinity,
-      placementId: Config.facebookNativeAdPlacementId,
+      placementId: Platform.isIOS
+          ? Config.facebookIOSNativeAdPlacementId
+          : Config.facebookAndroidNativeAdPlacementId,
       adType: NativeAdType.NATIVE_AD,
       height: Config.facebookAdSize == 'small'
           ? 50.0
