@@ -1,78 +1,35 @@
 {
   "project_info": {
-    "project_number": "790622313198",
-    "firebase_url": "https://deconews-24b20.firebaseio.com",
-    "project_id": "deconews-24b20",
-    "storage_bucket": "deconews-24b20.appspot.com"
+    "project_number": "251556993626",
+    "firebase_url": "https://thieydakar-9b895.firebaseio.com",
+    "project_id": "thieydakar-9b895",
+    "storage_bucket": "thieydakar-9b895.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:790622313198:android:5d3570c0dfd149f3",
+        "mobilesdk_app_id": "1:251556993626:android:958130c6882a0393bbd663",
         "android_client_info": {
-          "package_name": "com.example.deco_news"
+          "package_name": "net.thieydakar.android"
         }
       },
       "oauth_client": [
         {
-          "client_id": "790622313198-ikbvvau191ffda7skl3dqm3t5enc3euj.apps.googleusercontent.com",
+          "client_id": "251556993626-ha7g0hm7rvffdrdrupdm732vqvvvk3u6.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyArDNMmZiVPNa2D-_kF5WaLlFsTHbnWYDI"
+          "current_key": "AIzaSyDP4gvUpZioxWYNELgxrwWdoKnupcGBQ44"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "790622313198-ikbvvau191ffda7skl3dqm3t5enc3euj.apps.googleusercontent.com",
+              "client_id": "251556993626-ha7g0hm7rvffdrdrupdm732vqvvvk3u6.apps.googleusercontent.com",
               "client_type": 3
-            },
-            {
-              "client_id": "790622313198-7n5gpm7ssf4uubr69cs2v3b6cr7oms1n.apps.googleusercontent.com",
-              "client_type": 2,
-              "ios_info": {
-                "bundle_id": "com.example.deconews"
-              }
-            }
-          ]
-        }
-      }
-    },
-    {
-      "client_info": {
-        "mobilesdk_app_id": "1:790622313198:android:ceb3998e6c3864cd",
-        "android_client_info": {
-          "package_name": "ui.deco.com.flutterdeconews"
-        }
-      },
-      "oauth_client": [
-        {
-          "client_id": "790622313198-ikbvvau191ffda7skl3dqm3t5enc3euj.apps.googleusercontent.com",
-          "client_type": 3
-        }
-      ],
-      "api_key": [
-        {
-          "current_key": "AIzaSyArDNMmZiVPNa2D-_kF5WaLlFsTHbnWYDI"
-        }
-      ],
-      "services": {
-        "appinvite_service": {
-          "other_platform_oauth_client": [
-            {
-              "client_id": "790622313198-ikbvvau191ffda7skl3dqm3t5enc3euj.apps.googleusercontent.com",
-              "client_type": 3
-            },
-            {
-              "client_id": "790622313198-7n5gpm7ssf4uubr69cs2v3b6cr7oms1n.apps.googleusercontent.com",
-              "client_type": 2,
-              "ios_info": {
-                "bundle_id": "com.example.deconews"
-              }
             }
           ]
         }

@@ -25,7 +25,7 @@ class AboutScreen extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.only(bottom: 5.0),
                 child: Text(
-                  'Deco News',
+                  'THIEY DAKAR',
                   style: TextStyle(
                     color: isDark ? Colors.white : Color(0xFF1B1E28),
                     fontSize: 20.0,
@@ -38,7 +38,7 @@ class AboutScreen extends StatelessWidget {
                   bottom: 60.0,
                 ),
                 child: Text(
-                  'WordPress to Flutter News App',
+                  'S informer en temps réel',
                   style: TextStyle(
                     color: Color(0xFF7F7E96),
                     fontSize: 14.0,
@@ -46,7 +46,7 @@ class AboutScreen extends StatelessWidget {
                   textAlign: TextAlign.center,
                 ),
               ),
-              Container(
+             /* Container(
                 margin: EdgeInsets.all(10.0),
                 padding: EdgeInsets.symmetric(
                   vertical: 15.0,
@@ -300,7 +300,7 @@ class AboutScreen extends StatelessWidget {
                     ),
                   ],
                 ),
-              ),
+              ),*/
             ],
           ),
         ),

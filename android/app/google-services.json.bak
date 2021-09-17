@@ -1,0 +1,83 @@
+{
+  "project_info": {
+    "project_number": "790622313198",
+    "firebase_url": "https://deconews-24b20.firebaseio.com",
+    "project_id": "deconews-24b20",
+    "storage_bucket": "deconews-24b20.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:790622313198:android:5d3570c0dfd149f3",
+        "android_client_info": {
+          "package_name": "com.example.deco_news"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "790622313198-ikbvvau191ffda7skl3dqm3t5enc3euj.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyArDNMmZiVPNa2D-_kF5WaLlFsTHbnWYDI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "790622313198-ikbvvau191ffda7skl3dqm3t5enc3euj.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "790622313198-7n5gpm7ssf4uubr69cs2v3b6cr7oms1n.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.deconews"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:790622313198:android:ceb3998e6c3864cd",
+        "android_client_info": {
+          "package_name": "ui.deco.com.flutterdeconews"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "790622313198-ikbvvau191ffda7skl3dqm3t5enc3euj.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyArDNMmZiVPNa2D-_kF5WaLlFsTHbnWYDI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "790622313198-ikbvvau191ffda7skl3dqm3t5enc3euj.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "790622313198-7n5gpm7ssf4uubr69cs2v3b6cr7oms1n.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.deconews"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

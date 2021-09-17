@@ -3,10 +3,10 @@ import 'package:firebase_admob/firebase_admob.dart';
 class Config {
 
   /// Define your app title here
-  static const appTitle = 'Deco News';
+  static const appTitle = 'THIEY DAKAR';
 
   /// Define your WordPress API url here
-  static final apiEndpoint = 'https://deconews.decouikit.com/wp-json/wp/v2';
+  static final apiEndpoint = 'https://thieydakar.net/wp-json/wp/v2';
 
   /// Define your default color (light or dark)
   // static final defaultColor = 'dark';
@@ -27,11 +27,11 @@ class Config {
   static final pushNotificationsEnabled = true;
 
   /// AdMob settings
-  static final adMobEnabled = false;
-  static final adMobShowInterstitialAd = false;
-  static final adMobiOSAppID = 'ca-app-pub-7868270859526221~2024798504';
-  static final adMobAndroidID = 'ca-app-pub-7868270859526221~7198068286';
-  static final adMobAdUnitID = BannerAd.testAdUnitId;
+  static final adMobEnabled = true;
+  static final adMobShowInterstitialAd = true;
+  static final adMobiOSAppID = 'ca-app-pub-7606792083684702~1784829195';
+  static final adMobAndroidID = 'ca-app-pub-7606792083684702~7228727565';
+  static final adMobAdUnitID = 'ca-app-pub-7606792083684702/2943187569';
   static final adMobPosition = 'bottom';
 
   /// Facebook Audience Network (Facebook ads) settings.
